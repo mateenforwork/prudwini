@@ -1,0 +1,49 @@
+<ul>
+	<a href="../../locations/index.html"><strong>LOCATIONS</strong></a>
+	<li><a class="bcbsil-nav" href="../../locations/bcbsil.html">Illinois</a></li>
+	<li><a class="bcbsmt-nav" href="../../locations/bcbsmt.html">Montana</a></li>
+	<li><a class="bcbsnm-nav" href="../../locations/bcbsnm.html">New Mexico</a></li>
+	<li><a class="bcbsok-nav" href="../../locations/bcbsok.html">Oklahoma</a></li>
+	<li><a class="bcbstx-nav" href="../../locations/bcbstx.html">Texas</a></li>
+</ul>
+
+<script>
+
+$( document ).ready(function() {
+	var url = window.location.href;
+	//console.log(url);
+	
+	if(url.indexOf("locations") > -1){
+		
+		//console.log("locations!");
+		$("#locations-menu").addClass('active');
+		
+		if(url.indexOf("/bcbsil") > -1){
+			//console.log("bcbsil");
+			$(".bcbsil-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/bcbsmt") > -1){
+			//console.log("bcbsmt");
+			$(".bcbsmt-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/bcbsnm") > -1){
+			//console.log("bcbsnm");
+			$(".bcbsnm-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/bcbsok") > -1){
+			//console.log("bcbsok");
+			$(".bcbsok-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/bcbstx") > -1){
+			//console.log("bcbstx");
+			$(".bcbstx-nav").addClass('active');
+		}
+		
+	}
+});
+
+</script>

@@ -1,0 +1,34 @@
+<ul>
+	<a href="../../total-rewards/index.html"><strong>TOTAL REWARDS</strong></a>
+	<li><a class="benefits-nav" href="../../total-rewards/benefits.html">Benefits</a></li>
+	<li><a class="wellness-nav" href="../../total-rewards/wellness.html">Wellness</a></li>
+	<li><a class="professional-development-nav" href="../../total-rewards/professional-development.html">Professional Development</a></li>
+</ul>
+
+<script>
+$( document ).ready(function() {
+	var url = window.location.href;
+	//console.log(url);
+	
+	if(url.indexOf("total-rewards") > -1){
+		
+		//console.log("tr!");
+		$("#total-rewards-menu").addClass('active');
+		
+		if(url.indexOf("/benefits") > -1){
+			//console.log("benefits");
+			$(".benefits-nav").addClass('active');
+		}
+		if(url.indexOf("/wellness") > -1){
+			//console.log("wellness");
+			$(".wellness-nav").addClass('active');
+		}
+		if(url.indexOf("/professional-development") > -1){
+			//console.log("professional-development");
+			$(".professional-development-nav").addClass('active');
+		}
+		
+	}
+});
+
+</script>

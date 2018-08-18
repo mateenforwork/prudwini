@@ -1,0 +1,91 @@
+<ul>
+	<a href="../../career-areas/index.html"><strong>CAREER AREAS</strong></a>
+	<li><a class="accounting-finance-nav" href="../../career-areas/accounting-finance.html">Accounting &amp; Finance</a></li>
+	<li><a class="actuarial-underwriting-nav" href="../../career-areas/actuarial-underwriting.html">Actuarial &amp; Underwriting</a></li>
+	<li><a class="customer-service-nav" href="../../career-areas/customer-service.html">Customer Service Operations</a></li>
+	<li><a class="data-analytics-nav" href="../../career-areas/data-analytics.html">Data &amp; Analytics</a></li>
+	<li><a class="internships-nav" href="../../career-areas/internships.html">Internships</a></li>
+	<li><a class="marketing-communications-nav" href="../../career-areas/marketing-communications.html">Marketing &amp; Communications</a></li>
+	<li><a class="medicare-medicaid-programs-nav" href="../../career-areas/medicare-medicaid-programs.html">Medicare &amp; Medicaid Programs</a></li>
+	<li><a class="network-management-provider-relations-nav" href="../../career-areas/network-management-provider-relations.html">Network Management &amp; Provider Relations</a></li>
+	<li><a class="nurses-doctors-clinicians-nav" href="../../career-areas/nurses-doctors-clinicians.html">Nurses, Doctors &amp; Clinical</a></li>
+	<li><a class="sales-account-management-nav" href="../../career-areas/sales-account-management.html">Sales &amp; Account Management</a></li>
+	<li><a class="technology-nav" href="../../career-areas/technology.html">Technology</a></li>
+</ul>
+
+<style>
+
+a.section-header-nav:hover{}
+
+</style>
+
+<script>
+$( document ).ready(function() {
+	var url = window.location.href;
+	////console.log(url);
+	
+	if(url.indexOf("career-areas") > -1){
+		
+		//console.log("career-areas!");
+		$("#career-areas-menu").addClass('active');
+		
+		if(url.indexOf("/accounting-finance") > -1){
+			//console.log("accounting-finance");
+			$(".accounting-finance-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/actuarial-underwriting") > -1){
+			//console.log("actuarial-underwriting");
+			$(".actuarial-underwriting-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/customer-service") > -1){
+			//console.log("customer-service");
+			$(".customer-service-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/data-analytics") > -1){
+			//console.log("data-analytics");
+			$(".data-analytics-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/internships") > -1){
+			//console.log("internships");
+			$(".internships-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/marketing-communications") > -1){
+			//console.log("marketing-communications");
+			$(".marketing-communications-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/medicare-medicaid-programs") > -1){
+			//console.log("medicare-medicaid-programs");
+			$(".medicare-medicaid-programs-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/network-management-provider-relations") > -1){
+			//console.log("network-management-provider-relations");
+			$(".network-management-provider-relations-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/nurses-doctors-clinicians") > -1){
+			//console.log("nurses-doctors-clinicians");
+			$(".nurses-doctors-clinicians-nav").addClass('active');
+		}
+		
+		
+		if(url.indexOf("/sales-account-management") > -1){
+			//console.log("sales-account-management");
+			$(".sales-account-management-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/technology") > -1){
+			//console.log("technology");
+			$(".technology-nav").addClass('active');
+		}
+		
+	}
+});
+
+</script>

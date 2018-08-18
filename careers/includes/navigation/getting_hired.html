@@ -1,0 +1,48 @@
+<ul>
+	<a href="../../getting-hired/index.html"><strong>GETTING HIRED</strong></a>
+	<li><a class="career-FAQs-nav" href="../../getting-hired/career-FAQs.html">Career FAQs</a></li>
+	<li><a class="our-hiring-process-nav" href="../../getting-hired/our-hiring-process.html">Our Hiring Process</a></li>
+	<!--<li><a class="career-event-calendar-nav" href="/careers/getting-hired/career-event-calendar.html">Career Event Calendar</a></li>-->
+	<li><a class="campus-nav" href="../../getting-hired/campus.html">Campus</a></li>
+	<!--<li><a class="news-blog-nav" href="/careers/getting-hired/news-blog.html">News/Blog</a></li>-->
+</ul>
+
+<script>
+$( document ).ready(function() {
+	var url = window.location.href;
+	//console.log(url);
+	
+	if(url.indexOf("getting-hired") > -1){
+		
+		//console.log("getting-hired!");
+		$("#getting-hired-menu").addClass('active');
+		
+		if(url.indexOf("/career-FAQs") > -1){
+			//console.log("career-FAQs");
+			$(".career-FAQs-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/our-hiring-process") > -1){
+			//console.log("our-hiring-process");
+			$(".our-hiring-process-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/career-event-calendar") > -1){
+			//console.log("career-event-calendar");
+			$(".career-event-calendar-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/campus") > -1){
+			//console.log("campus");
+			$(".campus-nav").addClass('active');
+		}
+		
+		if(url.indexOf("/news-blog") > -1){
+			//console.log("news-blog");
+			$(".news-blog-nav").addClass('active');
+		}
+		
+	}
+});
+
+</script>
