@@ -82,11 +82,11 @@
 
       this._uuids.splice(this._uuids.indexOf(plugin.uuid), 1);
       plugin.$element.removeAttr('data-' + pluginName).removeData('zfPlugin')
-      /**
-       * Fires when the plugin has been destroyed.
-       * @event Plugin#destroyed
-       */
-      .trigger('destroyed.zf.' + pluginName);
+        /**
+         * Fires when the plugin has been destroyed.
+         * @event Plugin#destroyed
+         */
+        .trigger('destroyed.zf.' + pluginName);
       for (var prop in plugin) {
         plugin[prop] = null; //clean up script to prep for garbage collection.
       }
@@ -108,22 +108,22 @@
           });
         } else {
           var type = typeof plugins,
-              _this = this,
-              fns = {
-            'object': function (plgs) {
-              plgs.forEach(function (p) {
-                p = hyphenate(p);
-                $('[data-' + p + ']').foundation('_init');
-              });
-            },
-            'string': function () {
-              plugins = hyphenate(plugins);
-              $('[data-' + plugins + ']').foundation('_init');
-            },
-            'undefined': function () {
-              this['object'](Object.keys(_this._plugins));
-            }
-          };
+            _this = this,
+            fns = {
+              'object': function (plgs) {
+                plgs.forEach(function (p) {
+                  p = hyphenate(p);
+                  $('[data-' + p + ']').foundation('_init');
+                });
+              },
+              'string': function () {
+                plugins = hyphenate(plugins);
+                $('[data-' + plugins + ']').foundation('_init');
+              },
+              'undefined': function () {
+                this['object'](Object.keys(_this._plugins));
+              }
+            };
           fns[type](plugins);
         }
       } catch (err) {
@@ -158,8 +158,8 @@
       }
       // If plugins is a string, convert it to an array with one item
       else if (typeof plugins === 'string') {
-          plugins = [plugins];
-        }
+        plugins = [plugins];
+      }
 
       var _this = this;
 
@@ -174,7 +174,7 @@
         // For each plugin found, initialize it
         $elem.each(function () {
           var $el = $(this),
-              opts = {};
+            opts = {};
           // Don't double-dip on plugins
           if ($el.data('zfPlugin')) {
             console.warn("Tried to initialize " + name + " on an element that already has a Foundation plugin.");
@@ -208,7 +208,7 @@
         'OTransition': 'otransitionend'
       };
       var elem = document.createElement('div'),
-          end;
+        end;
 
       for (var t in transitions) {
         if (typeof elem.style[t] !== 'undefined') {
@@ -239,7 +239,7 @@
 
       return function () {
         var context = this,
-            args = arguments;
+          args = arguments;
 
         if (timer === null) {
           timer = setTimeout(function () {
@@ -259,8 +259,8 @@
    */
   var foundation = function (method) {
     var type = typeof method,
-        $meta = $('meta.foundation-mq'),
-        $noJS = $('.no-js');
+      $meta = $('meta.foundation-mq'),
+      $noJS = $('.no-js');
 
     if (!$meta.length) {
       $('<meta class="foundation-mq">').appendTo(document.head);
@@ -347,11 +347,11 @@
       }
 
       var aArgs = Array.prototype.slice.call(arguments, 1),
-          fToBind = this,
-          fNOP = function () {},
-          fBound = function () {
-        return fToBind.apply(this instanceof fNOP ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
-      };
+        fToBind = this,
+        fNOP = function () { },
+        fBound = function () {
+          return fToBind.apply(this instanceof fNOP ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
 
       if (this.prototype) {
         // native functions don't have a prototype
@@ -375,7 +375,7 @@
     }
   }
   function parseValue(str) {
-    if (/true/.test(str)) return true;else if (/false/.test(str)) return false;else if (!isNaN(str * 1)) return parseFloat(str);
+    if (/true/.test(str)) return true; else if (/false/.test(str)) return false; else if (!isNaN(str * 1)) return parseFloat(str);
     return str;
   }
   // Convert PascalCase to kebab-case
@@ -498,7 +498,7 @@
 
       $(window).on('resize.zf.mediaquery', function () {
         var newSize = _this._getCurrentSize(),
-            currentSize = _this.current;
+          currentSize = _this.current;
 
         if (newSize !== currentSize) {
           // Change the current media query
@@ -525,8 +525,8 @@
     // For those that don't support matchMedium
     if (!styleMedia) {
       var style = document.createElement('style'),
-          script = document.getElementsByTagName('script')[0],
-          info = null;
+        script = document.getElementsByTagName('script')[0],
+        info = null;
 
       style.type = 'text/css';
       style.id = 'matchmediajs-test';
@@ -622,10 +622,10 @@
    */
   function ImNotTouchingYou(element, parent, lrOnly, tbOnly) {
     var eleDims = GetDimensions(element),
-        top,
-        bottom,
-        left,
-        right;
+      top,
+      bottom,
+      left,
+      right;
 
     if (parent) {
       var parDims = GetDimensions(parent);
@@ -669,10 +669,10 @@
     }
 
     var rect = elem.getBoundingClientRect(),
-        parRect = elem.parentNode.getBoundingClientRect(),
-        winRect = document.body.getBoundingClientRect(),
-        winY = window.pageYOffset,
-        winX = window.pageXOffset;
+      parRect = elem.parentNode.getBoundingClientRect(),
+      winRect = document.body.getBoundingClientRect(),
+      winY = window.pageYOffset,
+      winX = window.pageXOffset;
 
     return {
       width: rect.width,
@@ -714,7 +714,7 @@
    */
   function GetOffsets(element, anchor, position, vOffset, hOffset, isOverflow) {
     var $eleDims = GetDimensions(element),
-        $anchorDims = anchor ? GetDimensions(anchor) : null;
+      $anchorDims = anchor ? GetDimensions(anchor) : null;
 
     switch (position) {
       case 'top':
@@ -820,8 +820,8 @@
 
   function Move(duration, elem, fn) {
     var anim,
-        prog,
-        start = null;
+      prog,
+      start = null;
     // console.log('called');
 
     function move(ts) {
@@ -971,7 +971,7 @@
   //******** only fires this function once on load, if there's something to watch ********
   function closemeListener(pluginName) {
     var yetiBoxes = $('[data-yeti-box]'),
-        plugNames = ['dropdown', 'tooltip', 'reveal'];
+      plugNames = ['dropdown', 'tooltip', 'reveal'];
 
     if (pluginName) {
       if (typeof pluginName === 'string') {
@@ -1002,7 +1002,7 @@
 
   function resizeListener(debounce) {
     var timer = void 0,
-        $nodes = $('[data-resize]');
+      $nodes = $('[data-resize]');
     if ($nodes.length) {
       $(window).off('resize.zf.trigger').on('resize.zf.trigger', function (e) {
         if (timer) {
@@ -1026,7 +1026,7 @@
 
   function scrollListener(debounce) {
     var timer = void 0,
-        $nodes = $('[data-scroll]');
+      $nodes = $('[data-scroll]');
     if ($nodes.length) {
       $(window).off('scroll.zf.trigger').on('scroll.zf.trigger', function (e) {
         if (timer) {
@@ -1187,10 +1187,10 @@
      */
     handleKey: function (event, component, functions) {
       var commandList = commands[component],
-          keyCode = this.parseKey(event),
-          cmds,
-          command,
-          fn;
+        keyCode = this.parseKey(event),
+        cmds,
+        command,
+        fn;
 
       if (!commandList) return console.warn('Component not defined!');
 
@@ -1198,9 +1198,9 @@
         // this component does not differentiate between ltr and rtl
         cmds = commandList; // use plain list
       } else {
-          // merge ltr and rtl: if document is rtl, rtl overwrites ltr and vice versa
-          if (Foundation.rtl()) cmds = $.extend({}, commandList.ltr, commandList.rtl);else cmds = $.extend({}, commandList.rtl, commandList.ltr);
-        }
+        // merge ltr and rtl: if document is rtl, rtl overwrites ltr and vice versa
+        if (Foundation.rtl()) cmds = $.extend({}, commandList.ltr, commandList.rtl); else cmds = $.extend({}, commandList.rtl, commandList.ltr);
+      }
       command = cmds[keyCode];
 
       fn = functions[command];
@@ -1254,7 +1254,7 @@
     var k = {};
     for (var kc in kcs) {
       k[kcs[kc]] = kcs[kc];
-    }return k;
+    } return k;
   }
 
   Foundation.Keyboard = Keyboard;
@@ -1270,15 +1270,15 @@
       menu.attr('role', 'menubar');
 
       var items = menu.find('li').attr({ 'role': 'menuitem' }),
-          subMenuClass = 'is-' + type + '-submenu',
-          subItemClass = subMenuClass + '-item',
-          hasSubClass = 'is-' + type + '-submenu-parent';
+        subMenuClass = 'is-' + type + '-submenu',
+        subItemClass = subMenuClass + '-item',
+        hasSubClass = 'is-' + type + '-submenu-parent';
 
       menu.find('a:first').attr('tabindex', 0);
 
       items.each(function () {
         var $item = $(this),
-            $sub = $item.children('ul');
+          $sub = $item.children('ul');
 
         if ($sub.length) {
           $item.addClass(hasSubClass).attr({
@@ -1303,9 +1303,9 @@
     },
     Burn: function (menu, type) {
       var items = menu.find('li').removeAttr('tabindex'),
-          subMenuClass = 'is-' + type + '-submenu',
-          subItemClass = subMenuClass + '-item',
-          hasSubClass = 'is-' + type + '-submenu-parent';
+        subMenuClass = 'is-' + type + '-submenu',
+        subItemClass = subMenuClass + '-item',
+        hasSubClass = 'is-' + type + '-submenu-parent';
 
       menu.find('>li, .menu, .menu > li').removeClass(subMenuClass + ' ' + subItemClass + ' ' + hasSubClass + ' is-submenu-item submenu is-active').removeAttr('data-submenu').css('display', '');
 
@@ -1334,12 +1334,12 @@
 
   function Timer(elem, options, cb) {
     var _this = this,
-        duration = options.duration,
-        //options is an object for easily adding features later.
-    nameSpace = Object.keys(elem.data())[0] || 'timer',
-        remain = -1,
-        start,
-        timer;
+      duration = options.duration,
+      //options is an object for easily adding features later.
+      nameSpace = Object.keys(elem.data())[0] || 'timer',
+      remain = -1,
+      start,
+      timer;
 
     this.isPaused = false;
 
@@ -1385,7 +1385,7 @@
    */
   function onImagesLoaded(images, callback) {
     var self = this,
-        unloaded = images.length;
+      unloaded = images.length;
 
     if (unloaded === 0) {
       callback();
@@ -1420,119 +1420,121 @@
 //**************************************************
 (function ($) {
 
-	$.spotSwipe = {
-		version: '1.0.0',
-		enabled: 'ontouchstart' in document.documentElement,
-		preventDefault: false,
-		moveThreshold: 75,
-		timeThreshold: 200
-	};
+  $.spotSwipe = {
+    version: '1.0.0',
+    enabled: 'ontouchstart' in document.documentElement,
+    preventDefault: false,
+    moveThreshold: 75,
+    timeThreshold: 200
+  };
 
-	var startPosX,
-	    startPosY,
-	    startTime,
-	    elapsedTime,
-	    isMoving = false;
+  var startPosX,
+    startPosY,
+    startTime,
+    elapsedTime,
+    isMoving = false;
 
-	function onTouchEnd() {
-		//  alert(this);
-		this.removeEventListener('touchmove', onTouchMove);
-		this.removeEventListener('touchend', onTouchEnd);
-		isMoving = false;
-	}
+  function onTouchEnd() {
+    //  alert(this);
+    this.removeEventListener('touchmove', onTouchMove);
+    this.removeEventListener('touchend', onTouchEnd);
+    isMoving = false;
+  }
 
-	function onTouchMove(e) {
-		if ($.spotSwipe.preventDefault) {
-			e.preventDefault();
-		}
-		if (isMoving) {
-			var x = e.touches[0].pageX;
-			var y = e.touches[0].pageY;
-			var dx = startPosX - x;
-			var dy = startPosY - y;
-			var dir;
-			elapsedTime = new Date().getTime() - startTime;
-			if (Math.abs(dx) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
-				dir = dx > 0 ? 'left' : 'right';
-			}
-			// else if(Math.abs(dy) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
-			//   dir = dy > 0 ? 'down' : 'up';
-			// }
-			if (dir) {
-				e.preventDefault();
-				onTouchEnd.call(this);
-				$(this).trigger('swipe', dir).trigger('swipe' + dir);
-			}
-		}
-	}
+  function onTouchMove(e) {
+    if ($.spotSwipe.preventDefault) {
+      e.preventDefault();
+    }
+    if (isMoving) {
+      var x = e.touches[0].pageX;
+      var y = e.touches[0].pageY;
+      var dx = startPosX - x;
+      var dy = startPosY - y;
+      var dir;
+      elapsedTime = new Date().getTime() - startTime;
+      if (Math.abs(dx) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
+        dir = dx > 0 ? 'left' : 'right';
+      }
+      // else if(Math.abs(dy) >= $.spotSwipe.moveThreshold && elapsedTime <= $.spotSwipe.timeThreshold) {
+      //   dir = dy > 0 ? 'down' : 'up';
+      // }
+      if (dir) {
+        e.preventDefault();
+        onTouchEnd.call(this);
+        $(this).trigger('swipe', dir).trigger('swipe' + dir);
+      }
+    }
+  }
 
-	function onTouchStart(e) {
-		if (e.touches.length == 1) {
-			startPosX = e.touches[0].pageX;
-			startPosY = e.touches[0].pageY;
-			isMoving = true;
-			startTime = new Date().getTime();
-			this.addEventListener('touchmove', onTouchMove, false);
-			this.addEventListener('touchend', onTouchEnd, false);
-		}
-	}
+  function onTouchStart(e) {
+    if (e.touches.length == 1) {
+      startPosX = e.touches[0].pageX;
+      startPosY = e.touches[0].pageY;
+      isMoving = true;
+      startTime = new Date().getTime();
+      this.addEventListener('touchmove', onTouchMove, false);
+      this.addEventListener('touchend', onTouchEnd, false);
+    }
+  }
 
-	function init() {
-		this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
-	}
+  function init() {
+    this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
+  }
 
-	function teardown() {
-		this.removeEventListener('touchstart', onTouchStart);
-	}
+  function teardown() {
+    this.removeEventListener('touchstart', onTouchStart);
+  }
 
-	$.event.special.swipe = { setup: init };
+  $.event.special.swipe = { setup: init };
 
-	$.each(['left', 'up', 'down', 'right'], function () {
-		$.event.special['swipe' + this] = { setup: function () {
-				$(this).on('swipe', $.noop);
-			} };
-	});
+  $.each(['left', 'up', 'down', 'right'], function () {
+    $.event.special['swipe' + this] = {
+      setup: function () {
+        $(this).on('swipe', $.noop);
+      }
+    };
+  });
 })(jQuery);
 /****************************************************
  * Method for adding psuedo drag events to elements *
  ***************************************************/
 !function ($) {
-	$.fn.addTouch = function () {
-		this.each(function (i, el) {
-			$(el).bind('touchstart touchmove touchend touchcancel', function () {
-				//we pass the original event object because the jQuery event
-				//object is normalized to w3c specs and does not provide the TouchList
-				handleTouch(event);
-			});
-		});
+  $.fn.addTouch = function () {
+    this.each(function (i, el) {
+      $(el).bind('touchstart touchmove touchend touchcancel', function () {
+        //we pass the original event object because the jQuery event
+        //object is normalized to w3c specs and does not provide the TouchList
+        handleTouch(event);
+      });
+    });
 
-		var handleTouch = function (event) {
-			var touches = event.changedTouches,
-			    first = touches[0],
-			    eventTypes = {
-				touchstart: 'mousedown',
-				touchmove: 'mousemove',
-				touchend: 'mouseup'
-			},
-			    type = eventTypes[event.type],
-			    simulatedEvent;
+    var handleTouch = function (event) {
+      var touches = event.changedTouches,
+        first = touches[0],
+        eventTypes = {
+          touchstart: 'mousedown',
+          touchmove: 'mousemove',
+          touchend: 'mouseup'
+        },
+        type = eventTypes[event.type],
+        simulatedEvent;
 
-			if ('MouseEvent' in window && typeof window.MouseEvent === 'function') {
-				simulatedEvent = new window.MouseEvent(type, {
-					'bubbles': true,
-					'cancelable': true,
-					'screenX': first.screenX,
-					'screenY': first.screenY,
-					'clientX': first.clientX,
-					'clientY': first.clientY
-				});
-			} else {
-				simulatedEvent = document.createEvent('MouseEvent');
-				simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0 /*left*/, null);
-			}
-			first.target.dispatchEvent(simulatedEvent);
-		};
-	};
+      if ('MouseEvent' in window && typeof window.MouseEvent === 'function') {
+        simulatedEvent = new window.MouseEvent(type, {
+          'bubbles': true,
+          'cancelable': true,
+          'screenX': first.screenX,
+          'screenY': first.screenY,
+          'clientX': first.clientX,
+          'clientY': first.clientY
+        });
+      } else {
+        simulatedEvent = document.createEvent('MouseEvent');
+        simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0 /*left*/, null);
+      }
+      first.target.dispatchEvent(simulatedEvent);
+    };
+  };
 }(jQuery);
 
 //**********************************
@@ -1838,7 +1840,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$fill = this.$element.find('[data-slider-fill]').css(this.options.vertical ? 'height' : 'width', 0);
 
         var isDbl = false,
-            _this = this;
+          _this = this;
         if (this.options.disabled || this.$element.hasClass(this.options.disabledClass)) {
           this.options.disabled = true;
           this.$element.addClass(this.options.disabledClass);
@@ -1922,20 +1924,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         var _this = this,
-            vert = this.options.vertical,
-            hOrW = vert ? 'height' : 'width',
-            lOrT = vert ? 'top' : 'left',
-            handleDim = $hndl[0].getBoundingClientRect()[hOrW],
-            elemDim = this.$element[0].getBoundingClientRect()[hOrW],
+          vert = this.options.vertical,
+          hOrW = vert ? 'height' : 'width',
+          lOrT = vert ? 'top' : 'left',
+          handleDim = $hndl[0].getBoundingClientRect()[hOrW],
+          elemDim = this.$element[0].getBoundingClientRect()[hOrW],
 
-        //percentage of bar min/max value based on click or drag point
-        pctOfBar = percent(location - this.options.start, this.options.end - this.options.start).toFixed(2),
+          //percentage of bar min/max value based on click or drag point
+          pctOfBar = percent(location - this.options.start, this.options.end - this.options.start).toFixed(2),
 
-        //number of actual pixels to shift the handle, based on the percentage obtained above
-        pxToMove = (elemDim - handleDim) * pctOfBar,
+          //number of actual pixels to shift the handle, based on the percentage obtained above
+          pxToMove = (elemDim - handleDim) * pctOfBar,
 
-        //percentage of bar to shift the handle
-        movement = (percent(pxToMove, elemDim) * 100).toFixed(this.options.decimal);
+          //percentage of bar to shift the handle
+          movement = (percent(pxToMove, elemDim) * 100).toFixed(this.options.decimal);
         //fixing the decimal value for the location number, is passed to other methods as a fixed floating-point value
         location = parseFloat(location.toFixed(this.options.decimal));
         // declare empty object for css adjustments, only used with 2 handled-sliders
@@ -1947,11 +1949,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (isDbl) {
           var isLeftHndl = this.handles.index($hndl) === 0,
 
-          //empty variable, will be used for min-height/width for fill bar
-          dim,
+            //empty variable, will be used for min-height/width for fill bar
+            dim,
 
-          //percentage w/h of the handle compared to the slider bar
-          handlePct = ~ ~(percent(handleDim, elemDim) * 100);
+            //percentage w/h of the handle compared to the slider bar
+            handlePct = ~ ~(percent(handleDim, elemDim) * 100);
           //if left handle, the math is slightly different than if it's the right handle, and the left/top property needs to be changed for the fill bar
           if (isLeftHndl) {
             //left or top percentage value to apply to the fill bar.
@@ -1964,12 +1966,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               cb();
             } //this is only needed for the initialization of 2 handled sliders
           } else {
-              //just caching the value of the left/bottom handle's left/top property
-              var handlePos = parseFloat(this.$handle[0].style[lOrT]);
-              //calculate the new min-height/width for the fill bar. Use isNaN to prevent false positives for numbers <= 0
-              //based on the percentage of movement of the handle being manipulated, less the opposing handle's left/top position, plus the percentage w/h of the handle itself
-              dim = movement - (isNaN(handlePos) ? this.options.initialStart / ((this.options.end - this.options.start) / 100) : handlePos) + handlePct;
-            }
+            //just caching the value of the left/bottom handle's left/top property
+            var handlePos = parseFloat(this.$handle[0].style[lOrT]);
+            //calculate the new min-height/width for the fill bar. Use isNaN to prevent false positives for numbers <= 0
+            //based on the percentage of movement of the handle being manipulated, less the opposing handle's left/top position, plus the percentage w/h of the handle itself
+            dim = movement - (isNaN(handlePos) ? this.options.initialStart / ((this.options.end - this.options.start) / 100) : handlePos) + handlePct;
+          }
           // assign the min-height/width to our css object
           css['min-' + hOrW] = dim + '%';
         }
@@ -2072,13 +2074,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           //click or drag events
           e.preventDefault();
           var _this = this,
-              vertical = this.options.vertical,
-              param = vertical ? 'height' : 'width',
-              direction = vertical ? 'top' : 'left',
-              eventOffset = vertical ? e.pageY : e.pageX,
-              halfOfHandle = this.$handle[0].getBoundingClientRect()[param] / 2,
-              barDim = this.$element[0].getBoundingClientRect()[param],
-              windowScroll = vertical ? $(window).scrollTop() : $(window).scrollLeft();
+            vertical = this.options.vertical,
+            param = vertical ? 'height' : 'width',
+            direction = vertical ? 'top' : 'left',
+            eventOffset = vertical ? e.pageY : e.pageX,
+            halfOfHandle = this.$handle[0].getBoundingClientRect()[param] / 2,
+            barDim = this.$element[0].getBoundingClientRect()[param],
+            windowScroll = vertical ? $(window).scrollTop() : $(window).scrollLeft();
 
           var elemOffset = this.$element.offset()[direction];
 
@@ -2112,7 +2114,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (!$handle) {
             //figure out which handle it is, pass it to the next function.
             var firstHndlPos = absPosition(this.$handle, direction, barXY, param),
-                secndHndlPos = absPosition(this.$handle2, direction, barXY, param);
+              secndHndlPos = absPosition(this.$handle2, direction, barXY, param);
             $handle = firstHndlPos <= secndHndlPos ? this.$handle : this.$handle2;
           }
         } else {
@@ -2136,11 +2138,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_adjustValue',
       value: function _adjustValue($handle, value) {
         var val,
-            step = this.options.step,
-            div = parseFloat(step / 2),
-            left,
-            prev_val,
-            next_val;
+          step = this.options.step,
+          div = parseFloat(step / 2),
+          left,
+          prev_val,
+          next_val;
         if (!!$handle) {
           val = parseFloat($handle.attr('aria-valuenow'));
         } else {
@@ -2167,8 +2169,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_events',
       value: function _events($handle) {
         var _this = this,
-            curHandle,
-            timer;
+          curHandle,
+          timer;
 
         this.inputs.off('change.zf.slider').on('change.zf.slider', function (e) {
           var idx = _this.inputs.index($(this));
@@ -2215,17 +2217,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               $body.off('mousemove.zf.slider mouseup.zf.slider');
             });
           })
-          // prevent events triggered by touch
-          .on('selectstart.zf.slider touchmove.zf.slider', function (e) {
-            e.preventDefault();
-          });
+            // prevent events triggered by touch
+            .on('selectstart.zf.slider touchmove.zf.slider', function (e) {
+              e.preventDefault();
+            });
         }
 
         $handle.off('keydown.zf.slider').on('keydown.zf.slider', function (e) {
           var _$handle = $(this),
-              idx = _this.options.doubleSided ? _this.handles.index(_$handle) : 0,
-              oldValue = parseFloat(_this.inputs.eq(idx).val()),
-              newValue;
+            idx = _this.options.doubleSided ? _this.handles.index(_$handle) : 0,
+            oldValue = parseFloat(_this.inputs.eq(idx).val()),
+            newValue;
 
           // handle keyboard event with keyboard util
           Foundation.Keyboard.handleKey(e, 'Slider', {
@@ -2511,7 +2513,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
         this.$submenus.each(function () {
           var $menu = $(this),
-              $back = $menu.find('.js-drilldown-back');
+            $back = $menu.find('.js-drilldown-back');
           if (!$back.length) {
             $menu.prepend(_this.options.backButton);
           }
@@ -2573,9 +2575,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$menuItems.add(this.$element.find('.js-drilldown-back > a')).on('keydown.zf.drilldown', function (e) {
 
           var $element = $(this),
-              $elements = $element.parent('li').parent('ul').children('li').children('a'),
-              $prevElement,
-              $nextElement;
+            $elements = $element.parent('li').parent('ul').children('li').children('a'),
+            $prevElement,
+            $nextElement;
 
           $elements.each(function (i) {
             if ($(this).is($element)) {
@@ -2899,10 +2901,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$menuLinks = this.$element.find('.is-accordion-submenu-parent');
         this.$menuLinks.each(function () {
           var linkId = this.id || Foundation.GetYoDigits(6, 'acc-menu-link'),
-              $elem = $(this),
-              $sub = $elem.children('[data-submenu]'),
-              subId = $sub[0].id || Foundation.GetYoDigits(6, 'acc-menu'),
-              isActive = $sub.hasClass('is-active');
+            $elem = $(this),
+            $sub = $elem.children('[data-submenu]'),
+            subId = $sub[0].id || Foundation.GetYoDigits(6, 'acc-menu'),
+            isActive = $sub.hasClass('is-active');
           $elem.attr({
             'aria-controls': subId,
             'aria-expanded': isActive,
@@ -2948,10 +2950,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }).on('keydown.zf.accordionmenu', function (e) {
           var $element = $(this),
-              $elements = $element.parent('ul').children('li'),
-              $prevElement,
-              $nextElement,
-              $target = $element.children('[data-submenu]');
+            $elements = $element.parent('ul').children('li'),
+            $prevElement,
+            $nextElement,
+            $target = $element.children('[data-submenu]');
 
           $elements.each(function (i) {
             if ($(this).is($element)) {
@@ -3228,15 +3230,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_events',
       value: function _events() {
         var _this = this,
-            hasTouch = 'ontouchstart' in window || typeof window.ontouchstart !== 'undefined',
-            parClass = 'is-dropdown-submenu-parent';
+          hasTouch = 'ontouchstart' in window || typeof window.ontouchstart !== 'undefined',
+          parClass = 'is-dropdown-submenu-parent';
 
         // used for onClick and in the keyboard handlers
         var handleClickFn = function (e) {
           var $elem = $(e.target).parentsUntil('ul', '.' + parClass),
-              hasSub = $elem.hasClass(parClass),
-              hasClicked = $elem.attr('data-is-click') === 'true',
-              $sub = $elem.children('.is-dropdown-submenu');
+            hasSub = $elem.hasClass(parClass),
+            hasClicked = $elem.attr('data-is-click') === 'true',
+            $sub = $elem.children('.is-dropdown-submenu');
 
           if (hasSub) {
             if (hasClicked) {
@@ -3268,7 +3270,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (!this.options.disableHover) {
           this.$menuItems.on('mouseenter.zf.dropdownmenu', function (e) {
             var $elem = $(this),
-                hasSub = $elem.hasClass(parClass);
+              hasSub = $elem.hasClass(parClass);
 
             if (hasSub) {
               clearTimeout(_this.delay);
@@ -3278,7 +3280,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }).on('mouseleave.zf.dropdownmenu', function (e) {
             var $elem = $(this),
-                hasSub = $elem.hasClass(parClass);
+              hasSub = $elem.hasClass(parClass);
             if (hasSub && _this.options.autoclose) {
               if ($elem.attr('data-is-click') === 'true' && _this.options.clickOpen) {
                 return false;
@@ -3293,10 +3295,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         this.$menuItems.on('keydown.zf.dropdownmenu', function (e) {
           var $element = $(e.target).parentsUntil('ul', '[role="menuitem"]'),
-              isTab = _this.$tabs.index($element) > -1,
-              $elements = isTab ? _this.$tabs : $element.siblings('li').add($element),
-              $prevElement,
-              $nextElement;
+            isTab = _this.$tabs.index($element) > -1,
+            $elements = isTab ? _this.$tabs : $element.siblings('li').add($element),
+            $prevElement,
+            $nextElement;
 
           $elements.each(function (i) {
             if ($(this).is($element)) {
@@ -3312,28 +3314,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               e.preventDefault();
             }
           },
-              prevSibling = function () {
-            $prevElement.children('a:first').focus();
-            e.preventDefault();
-          },
-              openSub = function () {
-            var $sub = $element.children('ul.is-dropdown-submenu');
-            if ($sub.length) {
-              _this._show($sub);
-              $element.find('li > a:first').focus();
+            prevSibling = function () {
+              $prevElement.children('a:first').focus();
               e.preventDefault();
-            } else {
-              return;
-            }
-          },
-              closeSub = function () {
-            //if ($element.is(':first-child')) {
-            var close = $element.parent('ul').parent('li');
-            close.children('a:first').focus();
-            _this._hide(close);
-            e.preventDefault();
-            //}
-          };
+            },
+            openSub = function () {
+              var $sub = $element.children('ul.is-dropdown-submenu');
+              if ($sub.length) {
+                _this._show($sub);
+                $element.find('li > a:first').focus();
+                e.preventDefault();
+              } else {
+                return;
+              }
+            },
+            closeSub = function () {
+              //if ($element.is(':first-child')) {
+              var close = $element.parent('ul').parent('li');
+              close.children('a:first').focus();
+              _this._hide(close);
+              e.preventDefault();
+              //}
+            };
           var functions = {
             open: openSub,
             close: function () {
@@ -3420,7 +3422,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_addBodyHandler',
       value: function _addBodyHandler() {
         var $body = $(document.body),
-            _this = this;
+          _this = this;
         $body.off('mouseup.zf.dropdownmenu touchend.zf.dropdownmenu').on('mouseup.zf.dropdownmenu touchend.zf.dropdownmenu', function (e) {
           var $link = _this.$element.find(e.target);
           if ($link.length) {
@@ -3452,7 +3454,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var clear = Foundation.Box.ImNotTouchingYou($sub, null, true);
         if (!clear) {
           var oldClass = this.options.alignment === 'left' ? '-right' : '-left',
-              $parentLi = $sub.parent('.is-dropdown-submenu-parent');
+            $parentLi = $sub.parent('.is-dropdown-submenu-parent');
           $parentLi.removeClass('opens' + oldClass).addClass('opens-' + this.options.alignment);
           clear = Foundation.Box.ImNotTouchingYou($sub, null, true);
           if (!clear) {
@@ -3680,8 +3682,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'calcPoints',
       value: function calcPoints() {
         var _this = this,
-            body = document.body,
-            html = document.documentElement;
+          body = document.body,
+          html = document.documentElement;
 
         this.points = [];
         this.winHeight = Math.round(Math.max(window.innerHeight, html.clientHeight));
@@ -3689,7 +3691,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.$targets.each(function () {
           var $tar = $(this),
-              pt = Math.round($tar.offset().top - _this.options.threshold);
+            pt = Math.round($tar.offset().top - _this.options.threshold);
           $tar.targetPoint = pt;
           _this.points.push(pt);
         });
@@ -3704,11 +3706,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_events',
       value: function _events() {
         var _this = this,
-            $body = $('html, body'),
-            opts = {
-          duration: _this.options.animationDuration,
-          easing: _this.options.animationEasing
-        };
+          $body = $('html, body'),
+          opts = {
+            duration: _this.options.animationDuration,
+            easing: _this.options.animationEasing
+          };
         $(window).one('load', function () {
           if (_this.options.deepLinking) {
             if (location.hash) {
@@ -3768,9 +3770,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     }, {
       key: '_updateActive',
-      value: function _updateActive() /*evt, elem, scrollPos*/{
+      value: function _updateActive() /*evt, elem, scrollPos*/ {
         var winPos = /*scrollPos ||*/parseInt(window.pageYOffset, 10),
-            curIdx;
+          curIdx;
 
         if (winPos + this.winHeight === this.docHeight) {
           curIdx = this.points.length - 1;
@@ -3778,10 +3780,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           curIdx = 0;
         } else {
           var isDown = this.scrollPos < winPos,
-              _this = this,
-              curVisible = this.points.filter(function (p, i) {
-            return isDown ? p - _this.options.barOffset <= winPos : p - _this.options.barOffset - _this.options.threshold <= winPos;
-          });
+            _this = this,
+            curVisible = this.points.filter(function (p, i) {
+              return isDown ? p - _this.options.barOffset <= winPos : p - _this.options.barOffset - _this.options.threshold <= winPos;
+            });
           curIdx = curVisible.length ? curVisible.length - 1 : 0;
         }
 
@@ -3980,7 +3982,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_checkMediaQueries',
       value: function _checkMediaQueries() {
         var matchedMq,
-            _this = this;
+          _this = this;
         // Iterate through each rule and find the last matching rule
         $.each(this.rules, function (key) {
           if (Foundation.MediaQuery.atLeast(key)) {
@@ -4100,9 +4102,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.$tabs.each(function (idx, el) {
           var $el = $(el),
-              $content = $el.children('[data-tab-content]'),
-              id = $content[0].id || Foundation.GetYoDigits(6, 'accordion'),
-              linkId = el.id || id + '-label';
+            $content = $el.children('[data-tab-content]'),
+            id = $content[0].id || Foundation.GetYoDigits(6, 'accordion'),
+            linkId = el.id || id + '-label';
 
           $el.find('a:first').attr({
             'aria-controls': id,
@@ -4228,7 +4230,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'up',
       value: function up($target) {
         var $aunts = $target.parent().siblings(),
-            _this = this;
+          _this = this;
 
         if (!this.options.allowAllClosed && !$aunts.hasClass('is-active') || !$target.parent().hasClass('is-active')) {
           return;
@@ -4413,18 +4415,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         //if default change didn't work, try bottom or left first
         else if (!position && this.usedPositions.indexOf('top') > -1 && this.usedPositions.indexOf('left') < 0) {
-            this.$element.addClass('left');
-          } else if (position === 'top' && this.usedPositions.indexOf('bottom') > -1 && this.usedPositions.indexOf('left') < 0) {
-            this.$element.removeClass(position).addClass('left');
-          } else if (position === 'left' && this.usedPositions.indexOf('right') > -1 && this.usedPositions.indexOf('bottom') < 0) {
-            this.$element.removeClass(position);
-          } else if (position === 'right' && this.usedPositions.indexOf('left') > -1 && this.usedPositions.indexOf('bottom') < 0) {
-            this.$element.removeClass(position);
-          }
-          //if nothing cleared, set to bottom
-          else {
-              this.$element.removeClass(position);
-            }
+          this.$element.addClass('left');
+        } else if (position === 'top' && this.usedPositions.indexOf('bottom') > -1 && this.usedPositions.indexOf('left') < 0) {
+          this.$element.removeClass(position).addClass('left');
+        } else if (position === 'left' && this.usedPositions.indexOf('right') > -1 && this.usedPositions.indexOf('bottom') < 0) {
+          this.$element.removeClass(position);
+        } else if (position === 'right' && this.usedPositions.indexOf('left') > -1 && this.usedPositions.indexOf('bottom') < 0) {
+          this.$element.removeClass(position);
+        }
+        //if nothing cleared, set to bottom
+        else {
+          this.$element.removeClass(position);
+        }
         this.classChanged = true;
         this.counter--;
       }
@@ -4443,12 +4445,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return false;
         }
         var position = this.getPositionClass(),
-            $eleDims = Foundation.Box.GetDimensions(this.$element),
-            $anchorDims = Foundation.Box.GetDimensions(this.$anchor),
-            _this = this,
-            direction = position === 'left' ? 'left' : position === 'right' ? 'left' : 'top',
-            param = direction === 'top' ? 'height' : 'width',
-            offset = param === 'height' ? this.options.vOffset : this.options.hOffset;
+          $eleDims = Foundation.Box.GetDimensions(this.$element),
+          $anchorDims = Foundation.Box.GetDimensions(this.$anchor),
+          _this = this,
+          direction = position === 'left' ? 'left' : position === 'right' ? 'left' : 'top',
+          param = direction === 'top' ? 'height' : 'width',
+          offset = param === 'height' ? this.options.vOffset : this.options.hOffset;
 
         if ($eleDims.width >= $eleDims.windowDims.width || !this.counter && !Foundation.Box.ImNotTouchingYou(this.$element)) {
           this.$element.offset(Foundation.Box.GetOffsets(this.$element, this.$anchor, 'center bottom', this.options.vOffset, this.options.hOffset, true)).css({
@@ -4515,7 +4517,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$anchor.add(this.$element).on('keydown.zf.dropdown', function (e) {
 
           var $target = $(this),
-              visibleFocusableElements = Foundation.Keyboard.findFocusable(_this.$element);
+            visibleFocusableElements = Foundation.Keyboard.findFocusable(_this.$element);
 
           Foundation.Keyboard.handleKey(e, 'Dropdown', {
             tab_forward: function () {
@@ -4569,7 +4571,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_addBodyHandler',
       value: function _addBodyHandler() {
         var $body = $(document.body).not(this.$element),
-            _this = this;
+          _this = this;
         $body.off('click.zf.dropdown').on('click.zf.dropdown', function (e) {
           if (_this.$anchor.is(e.target) || _this.$anchor.find(e.target).length) {
             return;
@@ -4925,7 +4927,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return;
         }
         var _this = this,
-            $body = $(document.body);
+          $body = $(document.body);
 
         if (this.options.forceTop) {
           $('body').scrollTop(0);
@@ -4994,8 +4996,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_trapFocus',
       value: function _trapFocus() {
         var focusable = Foundation.Keyboard.findFocusable(this.$element),
-            first = focusable.eq(0),
-            last = focusable.eq(-1);
+          first = focusable.eq(0),
+          last = focusable.eq(-1);
 
         focusable.off('.zf.offcanvas').on('keydown.zf.offcanvas', function (e) {
           var key = Foundation.Keyboard.parseKey(e);
@@ -5051,11 +5053,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // Foundation._reflow();
         // });
         this.$element.attr('aria-hidden', 'true')
-        /**
-         * Fires when the off-canvas menu opens.
-         * @event OffCanvas#closed
-         */
-        .trigger('closed.zf.offcanvas');
+          /**
+           * Fires when the off-canvas menu opens.
+           * @event OffCanvas#closed
+           */
+          .trigger('closed.zf.offcanvas');
         // if (_this.options.isSticky || !_this.options.forceTop) {
         //   setTimeout(function() {
         //     _this.$element[0].style.transform = '';
@@ -5261,11 +5263,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.$tabTitles.each(function () {
           var $elem = $(this),
-              $link = $elem.find('a'),
-              isActive = $elem.hasClass('is-active'),
-              hash = $link[0].hash.slice(1),
-              linkId = $link[0].id ? $link[0].id : hash + '-label',
-              $tabContent = $('#' + hash);
+            $link = $elem.find('a'),
+            isActive = $elem.hasClass('is-active'),
+            hash = $link[0].hash.slice(1),
+            linkId = $link[0].id ? $link[0].id : hash + '-label',
+            $tabContent = $('#' + hash);
 
           $elem.attr({ 'role': 'presentation' });
 
@@ -5355,9 +5357,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (e.which === 9) return;
 
           var $element = $(this),
-              $elements = $element.parent('ul').children('li'),
-              $prevElement,
-              $nextElement;
+            $elements = $element.parent('ul').children('li'),
+            $prevElement,
+            $nextElement;
 
           $elements.each(function (i) {
             if ($(this).is($element)) {
@@ -5405,9 +5407,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_handleTabChange',
       value: function _handleTabChange($target) {
         var $tabLink = $target.find('[role="tab"]'),
-            hash = $tabLink[0].hash,
-            $targetContent = this.$tabContent.find(hash),
-            $oldTab = this.$element.find('.' + this.options.linkClass + '.is-active').removeClass('is-active').find('[role="tab"]').attr({ 'aria-selected': 'false' });
+          hash = $tabLink[0].hash,
+          $targetContent = this.$tabContent.find(hash),
+          $oldTab = this.$element.find('.' + this.options.linkClass + '.is-active').removeClass('is-active').find('[role="tab"]').attr({ 'aria-selected': 'false' });
 
         $('#' + $oldTab.attr('aria-controls')).removeClass('is-active').attr({ 'aria-hidden': 'true' });
 
@@ -5463,7 +5465,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var max = 0;
         this.$tabContent.find('.' + this.options.panelClass).css('height', '').each(function () {
           var panel = $(this),
-              isActive = panel.hasClass('is-active');
+            isActive = panel.hasClass('is-active');
 
           if (!isActive) {
             panel.css({ 'visibility': 'hidden', 'display': 'block' });
@@ -5829,11 +5831,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         // jQuery method of reveal
         else {
-            if (this.options.overlay) {
-              this.$overlay.show(0);
-            }
-            this.$element.show(this.options.showDelay);
+          if (this.options.overlay) {
+            this.$overlay.show(0);
           }
+          this.$element.show(this.options.showDelay);
+        }
 
         // handle accessibility
         this.$element.attr({
@@ -5973,14 +5975,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         // jQuery method of hiding
         else {
-            if (this.options.overlay) {
-              this.$overlay.hide(0, finishUp);
-            } else {
-              finishUp();
-            }
-
-            this.$element.hide(this.options.hideDelay);
+          if (this.options.overlay) {
+            this.$overlay.hide(0, finishUp);
+          } else {
+            finishUp();
           }
+
+          this.$element.hide(this.options.hideDelay);
+        }
 
         // Conditionals to remove extra event listeners added on open
         if (this.options.closeOnEsc) {
@@ -6303,18 +6305,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         //if default change didn't work, try bottom or left first
         else if (!position && this.usedPositions.indexOf('top') > -1 && this.usedPositions.indexOf('left') < 0) {
-            this.template.addClass('left');
-          } else if (position === 'top' && this.usedPositions.indexOf('bottom') > -1 && this.usedPositions.indexOf('left') < 0) {
-            this.template.removeClass(position).addClass('left');
-          } else if (position === 'left' && this.usedPositions.indexOf('right') > -1 && this.usedPositions.indexOf('bottom') < 0) {
-            this.template.removeClass(position);
-          } else if (position === 'right' && this.usedPositions.indexOf('left') > -1 && this.usedPositions.indexOf('bottom') < 0) {
-            this.template.removeClass(position);
-          }
-          //if nothing cleared, set to bottom
-          else {
-              this.template.removeClass(position);
-            }
+          this.template.addClass('left');
+        } else if (position === 'top' && this.usedPositions.indexOf('bottom') > -1 && this.usedPositions.indexOf('left') < 0) {
+          this.template.removeClass(position).addClass('left');
+        } else if (position === 'left' && this.usedPositions.indexOf('right') > -1 && this.usedPositions.indexOf('bottom') < 0) {
+          this.template.removeClass(position);
+        } else if (position === 'right' && this.usedPositions.indexOf('left') > -1 && this.usedPositions.indexOf('bottom') < 0) {
+          this.template.removeClass(position);
+        }
+        //if nothing cleared, set to bottom
+        else {
+          this.template.removeClass(position);
+        }
         this.classChanged = true;
         this.counter--;
       }
@@ -6329,12 +6331,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_setPosition',
       value: function _setPosition() {
         var position = this._getPositionClass(this.template),
-            $tipDims = Foundation.Box.GetDimensions(this.template),
-            $anchorDims = Foundation.Box.GetDimensions(this.$element),
-            direction = position === 'left' ? 'left' : position === 'right' ? 'left' : 'top',
-            param = direction === 'top' ? 'height' : 'width',
-            offset = param === 'height' ? this.options.vOffset : this.options.hOffset,
-            _this = this;
+          $tipDims = Foundation.Box.GetDimensions(this.template),
+          $anchorDims = Foundation.Box.GetDimensions(this.$element),
+          direction = position === 'left' ? 'left' : position === 'right' ? 'left' : 'top',
+          param = direction === 'top' ? 'height' : 'width',
+          offset = param === 'height' ? this.options.vOffset : this.options.hOffset,
+          _this = this;
 
         if ($tipDims.width >= $tipDims.windowDims.width || !this.counter && !Foundation.Box.ImNotTouchingYou(this.template)) {
           this.template.offset(Foundation.Box.GetOffsets(this.template, this.$element, 'center bottom', this.options.vOffset, this.options.hOffset, true)).css({
@@ -6462,11 +6464,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               //_this.hide();
               // _this.isClick = false;
             } else {
-                _this.isClick = true;
-                if ((_this.options.disableHover || !_this.$element.attr('tabindex')) && !_this.isActive) {
-                  _this.show();
-                }
+              _this.isClick = true;
+              if ((_this.options.disableHover || !_this.$element.attr('tabindex')) && !_this.isActive) {
+                _this.show();
               }
+            }
           });
         } else {
           this.$element.on('mousedown.zf.tooltip', function (e) {
@@ -6534,8 +6536,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'destroy',
       value: function destroy() {
         this.$element.attr('title', this.template.text()).off('.zf.trigger .zf.tootip')
-        //  .removeClass('has-tip')
-        .removeAttr('aria-describedby').removeAttr('data-yeti-box').removeAttr('data-toggle').removeAttr('data-resize');
+          //  .removeClass('has-tip')
+          .removeAttr('aria-describedby').removeAttr('data-yeti-box').removeAttr('data-toggle').removeAttr('data-resize');
 
         this.template.remove();
 
@@ -6701,7 +6703,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$wrapper = this.$element.find('.' + this.options.containerClass);
         this.$slides = this.$element.find('.' + this.options.slideClass);
         var $images = this.$element.find('img'),
-            initActive = this.$slides.filter('.is-active');
+          initActive = this.$slides.filter('.is-active');
 
         if (!initActive.length) {
           this.$slides.eq(0).addClass('is-active');
@@ -6790,8 +6792,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _setWrapperHeight(cb) {
         //rewrite this to `for` loop
         var max = 0,
-            temp,
-            counter = 0;
+          temp,
+          counter = 0;
 
         this.$slides.each(function () {
           temp = this.getBoundingClientRect().height;
@@ -6873,11 +6875,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           if (this.options.navButtons) {
             var $controls = this.$element.find('.' + this.options.nextClass + ', .' + this.options.prevClass);
             $controls.attr('tabindex', 0)
-            //also need to handle enter/return and spacebar key presses
-            .on('click.zf.orbit touchend.zf.orbit', function (e) {
-              e.preventDefault();
-              _this.changeSlide($(this).hasClass(_this.options.nextClass));
-            });
+              //also need to handle enter/return and spacebar key presses
+              .on('click.zf.orbit touchend.zf.orbit', function (e) {
+                e.preventDefault();
+                _this.changeSlide($(this).hasClass(_this.options.nextClass));
+              });
           }
 
           if (this.options.bullets) {
@@ -6886,8 +6888,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 return false;
               } //if this is active, kick out of function.
               var idx = $(this).data('slide'),
-                  ltr = idx > _this.$slides.filter('.is-active').data('slide'),
-                  $slide = _this.$slides.eq(idx);
+                ltr = idx > _this.$slides.filter('.is-active').data('slide'),
+                $slide = _this.$slides.eq(idx);
 
               _this.changeSlide(ltr, $slide, idx);
             });
@@ -6934,20 +6936,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         } //if the slide is currently animating, kick out of the function
 
         var $firstSlide = this.$slides.first(),
-            $lastSlide = this.$slides.last(),
-            dirIn = isLTR ? 'Right' : 'Left',
-            dirOut = isLTR ? 'Left' : 'Right',
-            _this = this,
-            $newSlide;
+          $lastSlide = this.$slides.last(),
+          dirIn = isLTR ? 'Right' : 'Left',
+          dirOut = isLTR ? 'Left' : 'Right',
+          _this = this,
+          $newSlide;
 
         if (!chosenSlide) {
           //most of the time, this will be auto played or clicked from the navButtons.
           $newSlide = isLTR ? //if wrapping enabled, check to see if there is a `next` or `prev` sibling, if not, select the first or last slide to fill in. if wrapping not enabled, attempt to select `next` or `prev`, if there's nothing there, the function will kick out on next step. CRAZY NESTED TERNARIES!!!!!
-          this.options.infiniteWrap ? $curSlide.next('.' + this.options.slideClass).length ? $curSlide.next('.' + this.options.slideClass) : $firstSlide : $curSlide.next('.' + this.options.slideClass) : //pick next slide if moving left to right
-          this.options.infiniteWrap ? $curSlide.prev('.' + this.options.slideClass).length ? $curSlide.prev('.' + this.options.slideClass) : $lastSlide : $curSlide.prev('.' + this.options.slideClass); //pick prev slide if moving right to left
+            this.options.infiniteWrap ? $curSlide.next('.' + this.options.slideClass).length ? $curSlide.next('.' + this.options.slideClass) : $firstSlide : $curSlide.next('.' + this.options.slideClass) : //pick next slide if moving left to right
+            this.options.infiniteWrap ? $curSlide.prev('.' + this.options.slideClass).length ? $curSlide.prev('.' + this.options.slideClass) : $lastSlide : $curSlide.prev('.' + this.options.slideClass); //pick prev slide if moving right to left
         } else {
-            $newSlide = chosenSlide;
-          }
+          $newSlide = chosenSlide;
+        }
 
         if ($newSlide.length) {
           /**
@@ -6974,12 +6976,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               //do stuff?
             });
           } else {
-              $curSlide.removeClass('is-active is-in').removeAttr('aria-live').hide();
-              $newSlide.addClass('is-active is-in').attr('aria-live', 'polite').show();
-              if (this.options.autoPlay && !this.timer.isPaused) {
-                this.timer.restart();
-              }
+            $curSlide.removeClass('is-active is-in').removeAttr('aria-live').hide();
+            $newSlide.addClass('is-active is-in').attr('aria-live', 'polite').show();
+            if (this.options.autoPlay && !this.timer.isPaused) {
+              this.timer.restart();
             }
+          }
           /**
           * Triggers when the slide has finished animating in.
           * @event Orbit#slidechange
@@ -6999,8 +7001,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_updateBullets',
       value: function _updateBullets(idx) {
         var $oldBullet = this.$element.find('.' + this.options.boxOfBullets).find('.is-active').removeClass('is-active').blur(),
-            span = $oldBullet.find('span:last').detach(),
-            $newBullet = this.$bullets.eq(idx).addClass('is-active').append(span);
+          span = $oldBullet.find('span:last').detach(),
+          $newBullet = this.$bullets.eq(idx).addClass('is-active').append(span);
       }
 
       /**
@@ -7179,8 +7181,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_init',
       value: function _init() {
         var $parent = this.$element.parent('[data-sticky-container]'),
-            id = this.$element[0].id || Foundation.GetYoDigits(6, 'sticky'),
-            _this = this;
+          id = this.$element[0].id || Foundation.GetYoDigits(6, 'sticky'),
+          _this = this;
 
         if (!$parent.length) {
           this.wasWrapped = true;
@@ -7220,16 +7222,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_parsePoints',
       value: function _parsePoints() {
         var top = this.options.topAnchor == "" ? 1 : this.options.topAnchor,
-            btm = this.options.btmAnchor == "" ? document.documentElement.scrollHeight : this.options.btmAnchor,
-            pts = [top, btm],
-            breaks = {};
+          btm = this.options.btmAnchor == "" ? document.documentElement.scrollHeight : this.options.btmAnchor,
+          pts = [top, btm],
+          breaks = {};
         for (var i = 0, len = pts.length; i < len && pts[i]; i++) {
           var pt;
           if (typeof pts[i] === 'number') {
             pt = pts[i];
           } else {
             var place = pts[i].split(':'),
-                anchor = $('#' + place[0]);
+              anchor = $('#' + place[0]);
 
             pt = anchor.offset().top;
             if (place[1] && place[1].toLowerCase() === 'bottom') {
@@ -7253,7 +7255,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_events',
       value: function _events(id) {
         var _this = this,
-            scrollListener = this.scrollListener = 'scroll.zf.' + id;
+          scrollListener = this.scrollListener = 'scroll.zf.' + id;
         if (this.isOn) {
           return;
         }
@@ -7360,10 +7362,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_setSticky',
       value: function _setSticky() {
         var _this = this,
-            stickTo = this.options.stickTo,
-            mrgn = stickTo === 'top' ? 'marginTop' : 'marginBottom',
-            notStuckTo = stickTo === 'top' ? 'bottom' : 'top',
-            css = {};
+          stickTo = this.options.stickTo,
+          mrgn = stickTo === 'top' ? 'marginTop' : 'marginBottom',
+          notStuckTo = stickTo === 'top' ? 'bottom' : 'top',
+          css = {};
 
         css[mrgn] = this.options[mrgn] + 'em';
         css[stickTo] = 0;
@@ -7371,12 +7373,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         css['left'] = this.$container.offset().left + parseInt(window.getComputedStyle(this.$container[0])["padding-left"], 10);
         this.isStuck = true;
         this.$element.removeClass('is-anchored is-at-' + notStuckTo).addClass('is-stuck is-at-' + stickTo).css(css)
-        /**
-         * Fires when the $element has become `position: fixed;`
-         * Namespaced to `top` or `bottom`, e.g. `sticky.zf.stuckto:top`
-         * @event Sticky#stuckto
-         */
-        .trigger('sticky.zf.stuckto:' + stickTo);
+          /**
+           * Fires when the $element has become `position: fixed;`
+           * Namespaced to `top` or `bottom`, e.g. `sticky.zf.stuckto:top`
+           * @event Sticky#stuckto
+           */
+          .trigger('sticky.zf.stuckto:' + stickTo);
         this.$element.on("transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd", function () {
           _this._setSizes();
         });
@@ -7395,12 +7397,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '_removeSticky',
       value: function _removeSticky(isTop) {
         var stickTo = this.options.stickTo,
-            stickToTop = stickTo === 'top',
-            css = {},
-            anchorPt = (this.points ? this.points[1] - this.points[0] : this.anchorHeight) - this.elemHeight,
-            mrgn = stickToTop ? 'marginTop' : 'marginBottom',
-            notStuckTo = stickToTop ? 'bottom' : 'top',
-            topOrBottom = isTop ? 'top' : 'bottom';
+          stickToTop = stickTo === 'top',
+          css = {},
+          anchorPt = (this.points ? this.points[1] - this.points[0] : this.anchorHeight) - this.elemHeight,
+          mrgn = stickToTop ? 'marginTop' : 'marginBottom',
+          notStuckTo = stickToTop ? 'bottom' : 'top',
+          topOrBottom = isTop ? 'top' : 'bottom';
 
         css[mrgn] = 0;
 
@@ -7414,12 +7416,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         css['left'] = '';
         this.isStuck = false;
         this.$element.removeClass('is-stuck is-at-' + stickTo).addClass('is-anchored is-at-' + topOrBottom).css(css)
-        /**
-         * Fires when the $element has become anchored.
-         * Namespaced to `top` or `bottom`, e.g. `sticky.zf.unstuckfrom:bottom`
-         * @event Sticky#unstuckfrom
-         */
-        .trigger('sticky.zf.unstuckfrom:' + topOrBottom);
+          /**
+           * Fires when the $element has become anchored.
+           * Namespaced to `top` or `bottom`, e.g. `sticky.zf.unstuckfrom:bottom`
+           * @event Sticky#unstuckfrom
+           */
+          .trigger('sticky.zf.unstuckfrom:' + topOrBottom);
       }
 
       /**
@@ -7439,9 +7441,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
         var _this = this,
-            newElemWidth = this.$container[0].getBoundingClientRect().width,
-            comp = window.getComputedStyle(this.$container[0]),
-            pdng = parseInt(comp['padding-right'], 10);
+          newElemWidth = this.$container[0].getBoundingClientRect().width,
+          comp = window.getComputedStyle(this.$container[0]),
+          pdng = parseInt(comp['padding-right'], 10);
 
         if (this.$anchor && this.$anchor.length) {
           this.anchorHeight = this.$anchor[0].getBoundingClientRect().height;
@@ -7497,13 +7499,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
         var mTop = emCalc(this.options.marginTop),
-            mBtm = emCalc(this.options.marginBottom),
-            topPoint = this.points ? this.points[0] : this.$anchor.offset().top,
-            bottomPoint = this.points ? this.points[1] : topPoint + this.anchorHeight,
+          mBtm = emCalc(this.options.marginBottom),
+          topPoint = this.points ? this.points[0] : this.$anchor.offset().top,
+          bottomPoint = this.points ? this.points[1] : topPoint + this.anchorHeight,
 
-        // topPoint = this.$anchor.offset().top || this.points[0],
-        // bottomPoint = topPoint + this.anchorHeight || this.points[1],
-        winHeight = window.innerHeight;
+          // topPoint = this.$anchor.offset().top || this.points[0],
+          // bottomPoint = topPoint + this.anchorHeight || this.points[1],
+          winHeight = window.innerHeight;
 
         if (this.options.stickTo === 'top') {
           topPoint -= mTop;
@@ -7802,7 +7804,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (this.currentPath === path) return;
 
         var _this = this,
-            trigger = 'replaced.zf.interchange';
+          trigger = 'replaced.zf.interchange';
 
         // Replacing images
         if (this.$element[0].nodeName === 'IMG') {
@@ -7812,16 +7814,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         // Replacing background images
         else if (path.match(/\.(gif|jpg|jpeg|png|svg|tiff)([?#].*)?/i)) {
-            this.$element.css({ 'background-image': 'url(' + path + ')' }).trigger(trigger);
-          }
-          // Replacing HTML
-          else {
-              $.get(path, function (response) {
-                _this.$element.html(response).trigger(trigger);
-                $(response).foundation();
-                _this.currentPath = path;
-              });
-            }
+          this.$element.css({ 'background-image': 'url(' + path + ')' }).trigger(trigger);
+        }
+        // Replacing HTML
+        else {
+          $.get(path, function (response) {
+            _this.$element.html(response).trigger(trigger);
+            $(response).foundation();
+            _this.currentPath = path;
+          });
+        }
 
         /**
          * Fires when content in an Interchange element is done being loaded.
@@ -7958,9 +7960,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         // Desktop
         else {
-            this.$element.hide();
-            this.$targetMenu.show();
-          }
+          this.$element.hide();
+          this.$targetMenu.show();
+        }
       }
 
       /**
@@ -8066,10 +8068,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         // Otherwise, parse toggle class
         else {
-            input = this.$element.data('toggler');
-            // Allow for a . at the beginning of the string
-            this.className = input[0] === '.' ? input.slice(1) : input;
-          }
+          input = this.$element.data('toggler');
+          // Allow for a . at the beginning of the string
+          this.className = input[0] === '.' ? input.slice(1) : input;
+        }
 
         // Add ARIA attributes to triggers
         var id = this.$element[0].id;
@@ -8453,10 +8455,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'validateInput',
       value: function validateInput($el) {
         var clearRequire = this.requiredCheck($el),
-            validated = false,
-            customValidator = true,
-            validator = $el.attr('data-validator'),
-            equalTo = true;
+          validated = false,
+          customValidator = true,
+          validator = $el.attr('data-validator'),
+          equalTo = true;
 
         // don't validate ignored inputs or hidden inputs
         if ($el.is('[data-abide-ignore]') || $el.is('[type="hidden"]')) {
@@ -8560,15 +8562,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
           // If the pattern name isn't also the type attribute of the field, then test it as a regexp
           else if (pattern !== $el.attr('type')) {
-              valid = new RegExp(pattern).test(inputText);
-            } else {
-              valid = true;
-            }
+            valid = new RegExp(pattern).test(inputText);
+          } else {
+            valid = true;
+          }
         }
         // An empty field is valid if it's not required
         else if (!$el.prop('required')) {
-            valid = true;
-          }
+          valid = true;
+        }
 
         return valid;
       }
@@ -8586,7 +8588,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         // Per W3C spec, all radio buttons in a group should have `required`, but we're being nice
         var $group = this.$element.find(':radio[name="' + groupName + '"]');
         var valid = false,
-            required = false;
+          required = false;
 
         // For the group to be required, at least one radio needs to be required
         $group.each(function (i, e) {
@@ -8638,7 +8640,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'resetForm',
       value: function resetForm() {
         var $form = this.$element,
-            opts = this.options;
+          opts = this.options;
 
         $('.' + opts.labelErrorClass, $form).not('small').removeClass(opts.labelErrorClass);
         $('.' + opts.inputErrorClass, $form).not('small').removeClass(opts.inputErrorClass);
@@ -8999,8 +9001,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: 'getHeightsByRow',
       value: function getHeightsByRow(cb) {
         var lastElTopOffset = this.$watched.length ? this.$watched.first().offset().top : 0,
-            groups = [],
-            group = 0;
+          groups = [],
+          group = 0;
         //group by Row
         groups[group] = [];
         for (var i = 0, len = this.$watched.length; i < len; i++) {
@@ -9069,7 +9071,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$element.trigger('preequalized.zf.equalizer');
         for (var i = 0, len = groups.length; i < len; i++) {
           var groupsILength = groups[i].length,
-              max = groups[i][groupsILength - 1];
+            max = groups[i][groupsILength - 1];
           if (groupsILength <= 2) {
             $(groups[i][0][0]).css({ 'height': 'auto' });
             continue;

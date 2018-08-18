@@ -1,4 +1,4 @@
-window.whatInput = (function() {
+window.whatInput = (function () {
 
   'use strict';
 
@@ -100,7 +100,7 @@ window.whatInput = (function() {
     setInput(event);
 
     buffer = true;
-    timer = window.setTimeout(function() {
+    timer = window.setTimeout(function () {
       buffer = false;
     }, 650);
   }
@@ -131,23 +131,23 @@ window.whatInput = (function() {
 
       if (
         (// only if the user flag to allow typing in form fields isn't set
-        !body.hasAttribute('data-whatinput-formtyping') &&
+          !body.hasAttribute('data-whatinput-formtyping') &&
 
-        // only if currentInput has a value
-        currentInput &&
+          // only if currentInput has a value
+          currentInput &&
 
-        // only if the input is `keyboard`
-        value === 'keyboard' &&
+          // only if the input is `keyboard`
+          value === 'keyboard' &&
 
-        // not if the key is `TAB`
-        keyMap[eventKey] !== 'tab' &&
+          // not if the key is `TAB`
+          keyMap[eventKey] !== 'tab' &&
 
-        // only if the target is a form input that accepts text
-        (
-           eventTargetNode === 'textarea' ||
-           eventTargetNode === 'select' ||
-           (eventTargetNode === 'input' && nonTypingInputs.indexOf(eventTargetType) < 0)
-        )) || (
+          // only if the target is a form input that accepts text
+          (
+            eventTargetNode === 'textarea' ||
+            eventTargetNode === 'select' ||
+            (eventTargetNode === 'input' && nonTypingInputs.indexOf(eventTargetType) < 0)
+          )) || (
           // ignore modifier keys
           ignoreMap.indexOf(eventKey) > -1
         )
@@ -264,7 +264,7 @@ window.whatInput = (function() {
     if (document.body) {
       bindEvents();
 
-    // otherwise wait for the dom to load (script was placed in the <head>)
+      // otherwise wait for the dom to load (script was placed in the <head>)
     } else {
       document.addEventListener('DOMContentLoaded', bindEvents);
     }
@@ -280,13 +280,13 @@ window.whatInput = (function() {
   return {
 
     // returns string: the current input type
-    ask: function() { return currentInput; },
+    ask: function () { return currentInput; },
 
     // returns array: currently pressed keys
-    keys: function() { return activeKeys; },
+    keys: function () { return activeKeys; },
 
     // returns array: all the detected input types
-    types: function() { return inputTypes; },
+    types: function () { return inputTypes; },
 
     // accepts string: manually set the input type
     set: switchInput
