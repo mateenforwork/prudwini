@@ -1720,3 +1720,7 @@ padding-bottom:1em;
 .has-tip {
     font-weight: normal
 }
+
+.overview-padding{
+	padding: 40px 0px;
+}
