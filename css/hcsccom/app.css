@@ -1724,3 +1724,214 @@ padding-bottom:1em;
 .p-t-40{
 	padding-top: 40px;
 }
+
+
+
+/*home-page-layout.css start*/
+
+body
+{
+  margin:0;
+}
+
+body.ls-center
+{
+  text-align:center;
+}
+
+.ls-canvas .ls-row .ls-row-clr
+{
+  clear:both;
+}
+
+.ls-canvas .ls-col
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-col-body
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area-body
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area .ls-1st
+{
+  margin-top:0 !important;
+}
+
+.ls-canvas .ls-cmp-wrap
+{
+  padding:1px 0;
+}
+
+.ls-canvas .iw_component
+{
+  margin:-1px 0;
+}
+
+#ls-canvas
+{
+  width:100%;
+}
+
+/*
+#news-events
+{
+  display:inline;
+  float:left;
+  width:58%;
+}
+
+#ls-row-3-area-2
+{
+  display:inline;
+  float:left;
+  width:42%;
+  margin-right:-1px;
+}
+*/
+
+
+/*home-page-layout.css end*/
+
+/*one-column-page.css start*/
+
+
+body
+{
+  margin:0;
+}
+
+body.ls-center
+{
+  text-align:center;
+}
+
+.ls-canvas .ls-row .ls-row-clr
+{
+  clear:both;
+}
+
+.ls-canvas .ls-col
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-col-body
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area-body
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area .ls-1st
+{
+  margin-top:0 !important;
+}
+
+.ls-canvas .ls-cmp-wrap
+{
+  padding:1px 0;
+}
+
+.ls-canvas .iw_component
+{
+  margin:-1px 0;
+}
+
+
+/*one-column-page.css end*/
+
+
+/*two-column-page.css start*/
+
+body
+{
+  margin:0;
+}
+
+body.ls-center
+{
+  text-align:center;
+}
+
+.ls-canvas .ls-row .ls-row-clr
+{
+  clear:both;
+}
+
+.ls-canvas .ls-col
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-col-body
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area-body
+{
+  overflow:hidden;
+}
+
+.ls-canvas .ls-area .ls-1st
+{
+  margin-top:0 !important;
+}
+
+.ls-canvas .ls-cmp-wrap
+{
+  padding:1px 0;
+}
+
+.ls-canvas .iw_component
+{
+  margin:-1px 0;
+}
+
+#ls-canvas
+{
+  width:100%;
+}
+
+#sidebar
+{
+  display:inline;
+  float:left;
+  width:25%;
+}
+
+#mainContent
+{
+  display:inline;
+  float:left;
+  width:75%;
+  margin-right:-1px;
+}
+
+
+/*two-column-page.css end*/
