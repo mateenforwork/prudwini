@@ -1,4 +1,4 @@
-!function ($) {
+! function ($) {
 
   "use strict";
 
@@ -348,7 +348,7 @@
 
       var aArgs = Array.prototype.slice.call(arguments, 1),
         fToBind = this,
-        fNOP = function () { },
+        fNOP = function () {},
         fBound = function () {
           return fToBind.apply(this instanceof fNOP ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments)));
         };
@@ -374,8 +374,11 @@
       return fn.prototype.constructor.name;
     }
   }
+
   function parseValue(str) {
-    if (/true/.test(str)) return true; else if (/false/.test(str)) return false; else if (!isNaN(str * 1)) return parseFloat(str);
+    if (/true/.test(str)) return true;
+    else if (/false/.test(str)) return false;
+    else if (!isNaN(str * 1)) return parseFloat(str);
     return str;
   }
   // Convert PascalCase to kebab-case
@@ -386,7 +389,7 @@
 }(jQuery);
 'use strict';
 
-!function ($) {
+! function ($) {
 
   // Default set of media queries
   var defaultQueries = {
@@ -602,7 +605,7 @@
 }(jQuery);
 'use strict';
 
-!function ($) {
+! function ($) {
 
   Foundation.Box = {
     ImNotTouchingYou: ImNotTouchingYou,
@@ -798,7 +801,7 @@
 }(jQuery);
 'use strict';
 
-!function ($) {
+! function ($) {
 
   /**
    * Motion module.
@@ -895,7 +898,7 @@
 }(jQuery);
 'use strict';
 
-!function ($) {
+! function ($) {
 
   var MutationObserver = function () {
     var prefixes = ['WebKit', 'Moz', 'O', 'Ms', ''];
@@ -953,10 +956,10 @@
   });
 
   /**
-  * Fires once after all other scripts have loaded
-  * @function
-  * @private
-  */
+   * Fires once after all other scripts have loaded
+   * @function
+   * @private
+   */
   $(window).on('load', function () {
     checkListeners();
   });
@@ -1068,19 +1071,19 @@
           $target.triggerHandler('scrollme.zf.trigger', [$target, window.pageYOffset]);
           break;
 
-        // case "mutate" :
-        // console.log('mutate', $target);
-        // $target.triggerHandler('mutate.zf.trigger');
-        //
-        // //make sure we don't get stuck in an infinite loop from sloppy codeing
-        // if ($target.index('[data-mutate]') == $("[data-mutate]").length-1) {
-        //   domMutationObserver();
-        // }
-        // break;
+          // case "mutate" :
+          // console.log('mutate', $target);
+          // $target.triggerHandler('mutate.zf.trigger');
+          //
+          // //make sure we don't get stuck in an infinite loop from sloppy codeing
+          // if ($target.index('[data-mutate]') == $("[data-mutate]").length-1) {
+          //   domMutationObserver();
+          // }
+          // break;
 
         default:
           return false;
-        //nothing
+          //nothing
       }
     };
 
@@ -1088,7 +1091,13 @@
       //for each element that needs to listen for resizing, scrolling, (or coming soon mutation) add a single observer
       for (var i = 0; i <= nodes.length - 1; i++) {
         var elementObserver = new MutationObserver(listeningElementsMutation);
-        elementObserver.observe(nodes[i], { attributes: true, childList: false, characterData: false, subtree: false, attributeFilter: ["data-events"] });
+        elementObserver.observe(nodes[i], {
+          attributes: true,
+          childList: false,
+          characterData: false,
+          subtree: false,
+          attributeFilter: ["data-events"]
+        });
       }
     }
   }
@@ -1146,7 +1155,7 @@
 
 'use strict';
 
-!function ($) {
+! function ($) {
 
   var keyCodes = {
     9: 'TAB',
@@ -1199,7 +1208,8 @@
         cmds = commandList; // use plain list
       } else {
         // merge ltr and rtl: if document is rtl, rtl overwrites ltr and vice versa
-        if (Foundation.rtl()) cmds = $.extend({}, commandList.ltr, commandList.rtl); else cmds = $.extend({}, commandList.rtl, commandList.ltr);
+        if (Foundation.rtl()) cmds = $.extend({}, commandList.ltr, commandList.rtl);
+        else cmds = $.extend({}, commandList.rtl, commandList.ltr);
       }
       command = cmds[keyCode];
 
@@ -1254,14 +1264,15 @@
     var k = {};
     for (var kc in kcs) {
       k[kcs[kc]] = kcs[kc];
-    } return k;
+    }
+    return k;
   }
 
   Foundation.Keyboard = Keyboard;
 }(jQuery);
 'use strict';
 
-!function ($) {
+! function ($) {
 
   var Nest = {
     Feather: function (menu) {
@@ -1269,7 +1280,9 @@
 
       menu.attr('role', 'menubar');
 
-      var items = menu.find('li').attr({ 'role': 'menuitem' }),
+      var items = menu.find('li').attr({
+          'role': 'menuitem'
+        }),
         subMenuClass = 'is-' + type + '-submenu',
         subItemClass = subMenuClass + '-item',
         hasSubClass = 'is-' + type + '-submenu-parent';
@@ -1330,7 +1343,7 @@
 }(jQuery);
 'use strict';
 
-!function ($) {
+! function ($) {
 
   function Timer(elem, options, cb) {
     var _this = this,
@@ -1485,7 +1498,9 @@
     this.removeEventListener('touchstart', onTouchStart);
   }
 
-  $.event.special.swipe = { setup: init };
+  $.event.special.swipe = {
+    setup: init
+  };
 
   $.each(['left', 'up', 'down', 'right'], function () {
     $.event.special['swipe' + this] = {
@@ -1498,7 +1513,7 @@
 /****************************************************
  * Method for adding psuedo drag events to elements *
  ***************************************************/
-!function ($) {
+! function ($) {
   $.fn.addTouch = function () {
     this.each(function (i, el) {
       $(el).bind('touchstart touchmove touchend touchcancel', function () {
@@ -1530,7 +1545,7 @@
         });
       } else {
         simulatedEvent = document.createEvent('MouseEvent');
-        simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0 /*left*/, null);
+        simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0 /*left*/ , null);
       }
       first.target.dispatchEvent(simulatedEvent);
     };
@@ -1770,11 +1785,30 @@
 */
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Slider module.
@@ -1953,7 +1987,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             dim,
 
             //percentage w/h of the handle compared to the slider bar
-            handlePct = ~ ~(percent(handleDim, elemDim) * 100);
+            handlePct = ~~(percent(handleDim, elemDim) * 100);
           //if left handle, the math is slightly different than if it's the right handle, and the left/top property needs to be changed for the fill bar
           if (isLeftHndl) {
             //left or top percentage value to apply to the fill bar.
@@ -2198,25 +2232,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var $body = $('body');
           $handle.off('mousedown.zf.slider').on('mousedown.zf.slider', function (e) {
-            $handle.addClass('is-dragging');
-            _this.$fill.addClass('is-dragging'); //
-            _this.$element.data('dragging', true);
+              $handle.addClass('is-dragging');
+              _this.$fill.addClass('is-dragging'); //
+              _this.$element.data('dragging', true);
 
-            curHandle = $(e.currentTarget);
+              curHandle = $(e.currentTarget);
 
-            $body.on('mousemove.zf.slider', function (e) {
-              e.preventDefault();
-              _this._handleEvent(e, curHandle);
-            }).on('mouseup.zf.slider', function (e) {
-              _this._handleEvent(e, curHandle);
+              $body.on('mousemove.zf.slider', function (e) {
+                e.preventDefault();
+                _this._handleEvent(e, curHandle);
+              }).on('mouseup.zf.slider', function (e) {
+                _this._handleEvent(e, curHandle);
 
-              $handle.removeClass('is-dragging');
-              _this.$fill.removeClass('is-dragging');
-              _this.$element.data('dragging', false);
+                $handle.removeClass('is-dragging');
+                _this.$fill.removeClass('is-dragging');
+                _this.$element.data('dragging', false);
 
-              $body.off('mousemove.zf.slider mouseup.zf.slider');
-            });
-          })
+                $body.off('mousemove.zf.slider mouseup.zf.slider');
+              });
+            })
             // prevent events triggered by touch
             .on('selectstart.zf.slider touchmove.zf.slider', function (e) {
               e.preventDefault();
@@ -2384,6 +2418,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   function percent(frac, num) {
     return frac / num;
   }
+
   function absPosition($handle, dir, clickPos, param) {
     return Math.abs($handle.position()[dir] + $handle[param]() / 2 - clickPos);
   }
@@ -2418,11 +2453,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 // };
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Drilldown module.
@@ -2838,11 +2892,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * AccordionMenu module.
@@ -3067,7 +3140,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.up(this.$element.find('.is-active').not($target.parentsUntil(this.$element).add($target)));
         }
 
-        $target.addClass('is-active').attr({ 'aria-hidden': false }).parent('.is-accordion-submenu-parent').attr({ 'aria-expanded': true });
+        $target.addClass('is-active').attr({
+          'aria-hidden': false
+        }).parent('.is-accordion-submenu-parent').attr({
+          'aria-expanded': true
+        });
 
         //Foundation.Move(this.options.slideSpeed, $target, function() {
         $target.slideDown(_this.options.slideSpeed, function () {
@@ -3144,11 +3221,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * DropdownMenu module.
@@ -3309,11 +3405,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
 
           var nextSibling = function () {
-            if (!$element.is(':last-child')) {
-              $nextElement.children('a:first').focus();
-              e.preventDefault();
-            }
-          },
+              if (!$element.is(':last-child')) {
+                $nextElement.children('a:first').focus();
+                e.preventDefault();
+              }
+            },
             prevSibling = function () {
               $prevElement.children('a:first').focus();
               e.preventDefault();
@@ -3450,7 +3546,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }));
         var $sibs = $sub.parent('li.is-dropdown-submenu-parent').siblings('li.is-dropdown-submenu-parent');
         this._hide($sibs, idx);
-        $sub.css('visibility', 'hidden').addClass('js-dropdown-active').attr({ 'aria-hidden': false }).parent('li.is-dropdown-submenu-parent').addClass('is-active').attr({ 'aria-expanded': true });
+        $sub.css('visibility', 'hidden').addClass('js-dropdown-active').attr({
+          'aria-hidden': false
+        }).parent('li.is-dropdown-submenu-parent').addClass('is-active').attr({
+          'aria-expanded': true
+        });
         var clear = Foundation.Box.ImNotTouchingYou($sub, null, true);
         if (!clear) {
           var oldClass = this.options.alignment === 'left' ? '-right' : '-left',
@@ -3617,11 +3717,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Magellan module.
@@ -3746,7 +3865,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         var scrollPos = Math.round($(loc).offset().top - this.options.threshold / 2 - this.options.barOffset);
 
-        $('html, body').stop(true).animate({ scrollTop: scrollPos }, this.options.animationDuration, this.options.animationEasing);
+        $('html, body').stop(true).animate({
+          scrollTop: scrollPos
+        }, this.options.animationDuration, this.options.animationEasing);
       }
 
       /**
@@ -3771,7 +3892,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }, {
       key: '_updateActive',
       value: function _updateActive() /*evt, elem, scrollPos*/ {
-        var winPos = /*scrollPos ||*/parseInt(window.pageYOffset, 10),
+        var winPos = /*scrollPos ||*/ parseInt(window.pageYOffset, 10),
           curIdx;
 
         if (winPos + this.winHeight === this.docHeight) {
@@ -3878,11 +3999,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * ResponsiveMenu module.
@@ -4049,11 +4189,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Accordion module.
@@ -4114,7 +4273,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             'aria-selected': false
           });
 
-          $content.attr({ 'role': 'tabpanel', 'aria-labelledby': linkId, 'aria-hidden': true, 'id': id });
+          $content.attr({
+            'role': 'tabpanel',
+            'aria-labelledby': linkId,
+            'aria-hidden': true,
+            'id': id
+          });
         });
         var $initActive = this.$element.find('.is-active').children('[data-tab-content]');
         if ($initActive.length) {
@@ -4299,11 +4463,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Dropdown module.
@@ -4600,10 +4783,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * @event Dropdown#closeme
          */
         this.$element.trigger('closeme.zf.dropdown', this.$element.attr('id'));
-        this.$anchor.addClass('hover').attr({ 'aria-expanded': true });
+        this.$anchor.addClass('hover').attr({
+          'aria-expanded': true
+        });
         // this.$element/*.show()*/;
         this._setPosition();
-        this.$element.addClass('is-open').attr({ 'aria-hidden': false });
+        this.$element.addClass('is-open').attr({
+          'aria-hidden': false
+        });
 
         if (this.options.autoFocus) {
           var $focusable = Foundation.Keyboard.findFocusable(this.$element);
@@ -4635,7 +4822,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (!this.$element.hasClass('is-open')) {
           return false;
         }
-        this.$element.removeClass('is-open').attr({ 'aria-hidden': true });
+        this.$element.removeClass('is-open').attr({
+          'aria-hidden': true
+        });
 
         this.$anchor.removeClass('hover').attr('aria-expanded', false);
 
@@ -4645,7 +4834,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.$element.removeClass(curPositionClass);
           }
           this.$element.addClass(this.options.positionClass)
-          /*.hide()*/.css({ height: '', width: '' });
+            /*.hide()*/
+            .css({
+              height: '',
+              width: ''
+            });
           this.classChanged = false;
           this.counter = 4;
           this.usedPositions.length = 0;
@@ -4749,11 +4942,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * OffCanvas module.
@@ -4847,7 +5059,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
 
         if (this.options.closeOnClick && this.$exiter.length) {
-          this.$exiter.on({ 'click.zf.offcanvas': this.close.bind(this) });
+          this.$exiter.on({
+            'click.zf.offcanvas': this.close.bind(this)
+          });
         }
       }
 
@@ -5205,11 +5419,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Tabs module.
@@ -5269,7 +5502,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             linkId = $link[0].id ? $link[0].id : hash + '-label',
             $tabContent = $('#' + hash);
 
-          $elem.attr({ 'role': 'presentation' });
+          $elem.attr({
+            'role': 'presentation'
+          });
 
           $link.attr({
             'role': 'tab',
@@ -5409,15 +5644,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var $tabLink = $target.find('[role="tab"]'),
           hash = $tabLink[0].hash,
           $targetContent = this.$tabContent.find(hash),
-          $oldTab = this.$element.find('.' + this.options.linkClass + '.is-active').removeClass('is-active').find('[role="tab"]').attr({ 'aria-selected': 'false' });
+          $oldTab = this.$element.find('.' + this.options.linkClass + '.is-active').removeClass('is-active').find('[role="tab"]').attr({
+            'aria-selected': 'false'
+          });
 
-        $('#' + $oldTab.attr('aria-controls')).removeClass('is-active').attr({ 'aria-hidden': 'true' });
+        $('#' + $oldTab.attr('aria-controls')).removeClass('is-active').attr({
+          'aria-hidden': 'true'
+        });
 
         $target.addClass('is-active');
 
-        $tabLink.attr({ 'aria-selected': 'true' });
+        $tabLink.attr({
+          'aria-selected': 'true'
+        });
 
-        $targetContent.addClass('is-active').attr({ 'aria-hidden': 'false' });
+        $targetContent.addClass('is-active').attr({
+          'aria-hidden': 'false'
+        });
 
         /**
          * Fires when the plugin has successfully changed tabs.
@@ -5468,7 +5711,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             isActive = panel.hasClass('is-active');
 
           if (!isActive) {
-            panel.css({ 'visibility': 'hidden', 'display': 'block' });
+            panel.css({
+              'visibility': 'hidden',
+              'display': 'block'
+            });
           }
 
           var temp = this.getBoundingClientRect().height;
@@ -5553,11 +5799,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Reveal module.
@@ -5605,7 +5870,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       value: function _init() {
         this.id = this.$element.attr('id');
         this.isActive = false;
-        this.cached = { mq: Foundation.MediaQuery.current };
+        this.cached = {
+          mq: Foundation.MediaQuery.current
+        };
         this.isMobile = mobileSniff();
 
         this.$anchor = $('[data-open="' + this.id + '"]').length ? $('[data-open="' + this.id + '"]') : $('[data-toggle="' + this.id + '"]');
@@ -5682,12 +5949,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         } else {
           top = parseInt(this.options.vOffset, 10);
         }
-        this.$element.css({ top: top + 'px' });
+        this.$element.css({
+          top: top + 'px'
+        });
         // only worry about left if we don't have an overlay or we havea  horizontal offset,
         // otherwise we're perfectly in the middle
         if (!this.$overlay || this.options.hOffset !== 'auto') {
-          this.$element.css({ left: left + 'px' });
-          this.$element.css({ margin: '0px' });
+          this.$element.css({
+            left: left + 'px'
+          });
+          this.$element.css({
+            margin: '0px'
+          });
         }
       }
 
@@ -5780,17 +6053,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.isActive = true;
 
         // Make elements invisible, but remove display: none so we can get size and positioning
-        this.$element.css({ 'visibility': 'hidden' }).show().scrollTop(0);
+        this.$element.css({
+          'visibility': 'hidden'
+        }).show().scrollTop(0);
         if (this.options.overlay) {
-          this.$overlay.css({ 'visibility': 'hidden' }).show();
+          this.$overlay.css({
+            'visibility': 'hidden'
+          }).show();
         }
 
         this._updatePosition();
 
-        this.$element.hide().css({ 'visibility': '' });
+        this.$element.hide().css({
+          'visibility': ''
+        });
 
         if (this.$overlay) {
-          this.$overlay.css({ 'visibility': '' }).hide();
+          this.$overlay.css({
+            'visibility': ''
+          }).hide();
           if (this.$element.hasClass('fast')) {
             this.$overlay.addClass('fast');
           } else if (this.$element.hasClass('slow')) {
@@ -6009,16 +6290,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _this.$element.attr('aria-hidden', true);
 
           /**
-          * Fires when the modal is done closing.
-          * @event Reveal#closed
-          */
+           * Fires when the modal is done closing.
+           * @event Reveal#closed
+           */
           _this.$element.trigger('closed.zf.reveal');
         }
 
         /**
-        * Resets the modal content
-        * This prevents a running video to keep going in the background
-        */
+         * Resets the modal content
+         * This prevents a running video to keep going in the background
+         */
         if (this.options.resetOnClose) {
           this.$element.html(this.$element.html());
         }
@@ -6162,13 +6443,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   Foundation.plugin(Reveal, 'Reveal');
 
   function iPhoneSniff() {
-    return (/iP(ad|hone|od).*OS/.test(window.navigator.userAgent)
-    );
+    return (/iP(ad|hone|od).*OS/.test(window.navigator.userAgent));
   }
 
   function androidSniff() {
-    return (/Android/.test(window.navigator.userAgent)
-    );
+    return (/Android/.test(window.navigator.userAgent));
   }
 
   function mobileSniff() {
@@ -6177,11 +6456,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Tooltip module.
@@ -6646,11 +6944,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Orbit module.
@@ -6663,11 +6980,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   var Orbit = function () {
     /**
-    * Creates a new instance of an orbit carousel.
-    * @class
-    * @param {jQuery} element - jQuery object to make into an Orbit Carousel.
-    * @param {Object} options - Overrides to the default plugin settings.
-    */
+     * Creates a new instance of an orbit carousel.
+     * @class
+     * @param {jQuery} element - jQuery object to make into an Orbit Carousel.
+     * @param {Object} options - Overrides to the default plugin settings.
+     */
 
     function Orbit(element, options) {
       _classCallCheck(this, Orbit);
@@ -6691,10 +7008,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     /**
-    * Initializes the plugin by creating jQuery collections, setting attributes, and starting the animation.
-    * @function
-    * @private
-    */
+     * Initializes the plugin by creating jQuery collections, setting attributes, and starting the animation.
+     * @function
+     * @private
+     */
 
 
     _createClass(Orbit, [{
@@ -6736,10 +7053,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
-      * Creates a jQuery collection of bullets, if they are being used.
-      * @function
-      * @private
-      */
+       * Creates a jQuery collection of bullets, if they are being used.
+       * @function
+       * @private
+       */
 
     }, {
       key: '_loadBullets',
@@ -6748,9 +7065,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
-      * Sets a `timer` object on the orbit, and starts the counter for the next slide.
-      * @function
-      */
+       * Sets a `timer` object on the orbit, and starts the counter for the next slide.
+       * @function
+       */
 
     }, {
       key: 'geoSync',
@@ -6766,10 +7083,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
-      * Sets wrapper and slide heights for the orbit.
-      * @function
-      * @private
-      */
+       * Sets wrapper and slide heights for the orbit.
+       * @function
+       * @private
+       */
 
     }, {
       key: '_prepareForOrbit',
@@ -6781,11 +7098,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
-      * Calulates the height of each slide in the collection, and uses the tallest one for the wrapper height.
-      * @function
-      * @private
-      * @param {Function} cb - a callback function to fire when complete.
-      */
+       * Calulates the height of each slide in the collection, and uses the tallest one for the wrapper height.
+       * @function
+       * @private
+       * @param {Function} cb - a callback function to fire when complete.
+       */
 
     }, {
       key: '_setWrapperHeight',
@@ -6801,23 +7118,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (counter) {
             //if not the first slide, set css position and display property
-            $(this).css({ 'position': 'relative', 'display': 'none' });
+            $(this).css({
+              'position': 'relative',
+              'display': 'none'
+            });
           }
           max = temp > max ? temp : max;
           counter++;
         });
 
         if (counter === this.$slides.length) {
-          this.$wrapper.css({ 'height': max }); //only change the wrapper height property once.
+          this.$wrapper.css({
+            'height': max
+          }); //only change the wrapper height property once.
           cb(max); //fire callback with max height dimension.
         }
       }
 
       /**
-      * Sets the max-height of each slide.
-      * @function
-      * @private
-      */
+       * Sets the max-height of each slide.
+       * @function
+       * @private
+       */
 
     }, {
       key: '_setSlideHeight',
@@ -6828,10 +7150,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
-      * Adds event listeners to basically everything within the element.
-      * @function
-      * @private
-      */
+       * Adds event listeners to basically everything within the element.
+       * @function
+       * @private
+       */
 
     }, {
       key: '_events',
@@ -6918,13 +7240,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
-      * Changes the current slide to a new one.
-      * @function
-      * @param {Boolean} isLTR - flag if the slide should move left to right.
-      * @param {jQuery} chosenSlide - the jQuery element of the slide to show next, if one is selected.
-      * @param {Number} idx - the index of the new slide in its collection, if one chosen.
-      * @fires Orbit#slidechange
-      */
+       * Changes the current slide to a new one.
+       * @function
+       * @param {Boolean} isLTR - flag if the slide should move left to right.
+       * @param {jQuery} chosenSlide - the jQuery element of the slide to show next, if one is selected.
+       * @param {Number} idx - the index of the new slide in its collection, if one chosen.
+       * @fires Orbit#slidechange
+       */
 
     }, {
       key: 'changeSlide',
@@ -6953,9 +7275,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if ($newSlide.length) {
           /**
-          * Triggers before the next slide starts animating in and only if a next slide has been found.
-          * @event Orbit#beforeslidechange
-          */
+           * Triggers before the next slide starts animating in and only if a next slide has been found.
+           * @event Orbit#beforeslidechange
+           */
           this.$element.trigger('beforeslidechange.zf.orbit', [$curSlide, $newSlide]);
 
           if (this.options.bullets) {
@@ -6964,8 +7286,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
           if (this.options.useMUI) {
-            Foundation.Motion.animateIn($newSlide.addClass('is-active').css({ 'position': 'absolute', 'top': 0 }), this.options['animInFrom' + dirIn], function () {
-              $newSlide.css({ 'position': 'relative', 'display': 'block' }).attr('aria-live', 'polite');
+            Foundation.Motion.animateIn($newSlide.addClass('is-active').css({
+              'position': 'absolute',
+              'top': 0
+            }), this.options['animInFrom' + dirIn], function () {
+              $newSlide.css({
+                'position': 'relative',
+                'display': 'block'
+              }).attr('aria-live', 'polite');
             });
 
             Foundation.Motion.animateOut($curSlide.removeClass('is-active'), this.options['animOutTo' + dirOut], function () {
@@ -6983,19 +7311,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
           }
           /**
-          * Triggers when the slide has finished animating in.
-          * @event Orbit#slidechange
-          */
+           * Triggers when the slide has finished animating in.
+           * @event Orbit#slidechange
+           */
           this.$element.trigger('slidechange.zf.orbit', [$newSlide]);
         }
       }
 
       /**
-      * Updates the active state of the bullets, if displayed.
-      * @function
-      * @private
-      * @param {Number} idx - the index of the current slide.
-      */
+       * Updates the active state of the bullets, if displayed.
+       * @function
+       * @private
+       * @param {Number} idx - the index of the current slide.
+       */
 
     }, {
       key: '_updateBullets',
@@ -7006,9 +7334,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       /**
-      * Destroys the carousel and hides the element.
-      * @function
-      */
+       * Destroys the carousel and hides the element.
+       * @function
+       */
 
     }, {
       key: 'destroy',
@@ -7023,113 +7351,113 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   Orbit.defaults = {
     /**
-    * Tells the JS to look for and loadBullets.
-    * @option
-    * @example true
-    */
+     * Tells the JS to look for and loadBullets.
+     * @option
+     * @example true
+     */
     bullets: true,
     /**
-    * Tells the JS to apply event listeners to nav buttons
-    * @option
-    * @example true
-    */
+     * Tells the JS to apply event listeners to nav buttons
+     * @option
+     * @example true
+     */
     navButtons: true,
     /**
-    * motion-ui animation class to apply
-    * @option
-    * @example 'slide-in-right'
-    */
+     * motion-ui animation class to apply
+     * @option
+     * @example 'slide-in-right'
+     */
     animInFromRight: 'slide-in-right',
     /**
-    * motion-ui animation class to apply
-    * @option
-    * @example 'slide-out-right'
-    */
+     * motion-ui animation class to apply
+     * @option
+     * @example 'slide-out-right'
+     */
     animOutToRight: 'slide-out-right',
     /**
-    * motion-ui animation class to apply
-    * @option
-    * @example 'slide-in-left'
-    *
-    */
+     * motion-ui animation class to apply
+     * @option
+     * @example 'slide-in-left'
+     *
+     */
     animInFromLeft: 'slide-in-left',
     /**
-    * motion-ui animation class to apply
-    * @option
-    * @example 'slide-out-left'
-    */
+     * motion-ui animation class to apply
+     * @option
+     * @example 'slide-out-left'
+     */
     animOutToLeft: 'slide-out-left',
     /**
-    * Allows Orbit to automatically animate on page load.
-    * @option
-    * @example true
-    */
+     * Allows Orbit to automatically animate on page load.
+     * @option
+     * @example true
+     */
     autoPlay: true,
     /**
-    * Amount of time, in ms, between slide transitions
-    * @option
-    * @example 5000
-    */
+     * Amount of time, in ms, between slide transitions
+     * @option
+     * @example 5000
+     */
     timerDelay: 5000,
     /**
-    * Allows Orbit to infinitely loop through the slides
-    * @option
-    * @example true
-    */
+     * Allows Orbit to infinitely loop through the slides
+     * @option
+     * @example true
+     */
     infiniteWrap: true,
     /**
-    * Allows the Orbit slides to bind to swipe events for mobile, requires an additional util library
-    * @option
-    * @example true
-    */
+     * Allows the Orbit slides to bind to swipe events for mobile, requires an additional util library
+     * @option
+     * @example true
+     */
     swipe: true,
     /**
-    * Allows the timing function to pause animation on hover.
-    * @option
-    * @example true
-    */
+     * Allows the timing function to pause animation on hover.
+     * @option
+     * @example true
+     */
     pauseOnHover: true,
     /**
-    * Allows Orbit to bind keyboard events to the slider, to animate frames with arrow keys
-    * @option
-    * @example true
-    */
+     * Allows Orbit to bind keyboard events to the slider, to animate frames with arrow keys
+     * @option
+     * @example true
+     */
     accessible: true,
     /**
-    * Class applied to the container of Orbit
-    * @option
-    * @example 'orbit-container'
-    */
+     * Class applied to the container of Orbit
+     * @option
+     * @example 'orbit-container'
+     */
     containerClass: 'orbit-container',
     /**
-    * Class applied to individual slides.
-    * @option
-    * @example 'orbit-slide'
-    */
+     * Class applied to individual slides.
+     * @option
+     * @example 'orbit-slide'
+     */
     slideClass: 'orbit-slide',
     /**
-    * Class applied to the bullet container. You're welcome.
-    * @option
-    * @example 'orbit-bullets'
-    */
+     * Class applied to the bullet container. You're welcome.
+     * @option
+     * @example 'orbit-bullets'
+     */
     boxOfBullets: 'orbit-bullets',
     /**
-    * Class applied to the `next` navigation button.
-    * @option
-    * @example 'orbit-next'
-    */
+     * Class applied to the `next` navigation button.
+     * @option
+     * @example 'orbit-next'
+     */
     nextClass: 'orbit-next',
     /**
-    * Class applied to the `previous` navigation button.
-    * @option
-    * @example 'orbit-previous'
-    */
+     * Class applied to the `previous` navigation button.
+     * @option
+     * @example 'orbit-previous'
+     */
     prevClass: 'orbit-previous',
     /**
-    * Boolean to flag the js to use motion ui classes or not. Default to true for backwards compatability.
-    * @option
-    * @example true
-    */
+     * Boolean to flag the js to use motion ui classes or not. Default to true for backwards compatability.
+     * @option
+     * @example true
+     */
     useMUI: true
   };
 
@@ -7138,11 +7466,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Sticky module.
@@ -7190,7 +7537,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.$container = $parent.length ? $parent : $(this.options.container).wrapInner(this.$element);
         this.$container.addClass(this.options.containerClass);
 
-        this.$element.addClass(this.options.stickyClass).attr({ 'data-resize': id });
+        this.$element.addClass(this.options.stickyClass).attr({
+          'data-resize': id
+        });
 
         this.scrollCount = this.options.checkEvery;
         this.isStuck = false;
@@ -7466,7 +7815,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.elemHeight = newContainerHeight;
 
         if (this.isStuck) {
-          this.$element.css({ "left": this.$container.offset().left + parseInt(comp['padding-left'], 10) });
+          this.$element.css({
+            "left": this.$container.offset().left + parseInt(comp['padding-left'], 10)
+          });
         } else {
           if (this.$element.hasClass('is-at-bottom')) {
             var anchorPt = (this.points ? this.points[1] - this.$container.offset().top : this.anchorHeight) - this.elemHeight;
@@ -7644,11 +7995,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Interchange module.
@@ -7814,7 +8184,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
         // Replacing background images
         else if (path.match(/\.(gif|jpg|jpeg|png|svg|tiff)([?#].*)?/i)) {
-          this.$element.css({ 'background-image': 'url(' + path + ')' }).trigger(trigger);
+          this.$element.css({
+            'background-image': 'url(' + path + ')'
+          }).trigger(trigger);
         }
         // Replacing HTML
         else {
@@ -7871,11 +8243,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * ResponsiveToggle module.
@@ -8013,11 +8404,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Toggler module.
@@ -8179,11 +8589,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Abide module.
@@ -8779,11 +9208,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 }(jQuery);
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-!function ($) {
+! function ($) {
 
   /**
    * Equalizer module.
@@ -9073,21 +9521,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var groupsILength = groups[i].length,
             max = groups[i][groupsILength - 1];
           if (groupsILength <= 2) {
-            $(groups[i][0][0]).css({ 'height': 'auto' });
+            $(groups[i][0][0]).css({
+              'height': 'auto'
+            });
             continue;
           }
           /**
-            * Fires before the heights per row are applied
-            * @event Equalizer#preequalizedRow
-            */
+           * Fires before the heights per row are applied
+           * @event Equalizer#preequalizedRow
+           */
           this.$element.trigger('preequalizedrow.zf.equalizer');
           for (var j = 0, lenJ = groupsILength - 1; j < lenJ; j++) {
-            $(groups[i][j][0]).css({ 'height': max });
+            $(groups[i][j][0]).css({
+              'height': max
+            });
           }
           /**
-            * Fires when the heights per row have been applied
-            * @event Equalizer#postequalizedRow
-            */
+           * Fires when the heights per row have been applied
+           * @event Equalizer#postequalizedRow
+           */
           this.$element.trigger('postequalizedrow.zf.equalizer');
         }
         /**

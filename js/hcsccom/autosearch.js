@@ -13,18 +13,15 @@ function processSearch(url, mode) {
 	if (mode == "NAVIGATE") {
 		keyword = $("#appendedInputButtonNavigate").val();
 		keywordID = "#appendedInputButtonNavigate";
-	}
-	else if (mode == "NEW") {
+	} else if (mode == "NEW") {
 		keyword = $("#appendedInputButtonLarge").val();
 		keywordID = "#appendedInputButtonLarge";
 
-	}
-	else if (mode == "NEW_SMALL") {
+	} else if (mode == "NEW_SMALL") {
 		keyword = $("#appendedInputButtonSmall").val();
 		keywordID = "#appendedInputButtonSmall";
 
-	}
-	else {
+	} else {
 		keyword = $("#appendedInputButtonLarge").val();
 		keywordID = "#appendedInputButtonLarge";
 	}
@@ -69,7 +66,9 @@ $(document).ready(function () {
 				dataType: 'jsonp',
 				async: false,
 				jsonpCallback: "suggestCallBack",
-				data: { q: request.term },
+				data: {
+					q: request.term
+				},
 				success: function (data) {
 					console.log("Success");
 				},
@@ -85,7 +84,9 @@ $(document).ready(function () {
 				var suggestions = [];
 				console.log("befor iteration suggestions.length >" + suggestions.length);
 				$.each(data["results"], function (key, val) {
-					suggestions.push({ "value": val["name"] });
+					suggestions.push({
+						"value": val["name"]
+					});
 					//     alert("KEY>"+key +"  VAL>"+ val+"   vALUE IN json>"+val["name"] +"  suggestions.length>"+suggestions.length);
 				});
 				console.log("after iteration suggestions.length >" + suggestions.length);

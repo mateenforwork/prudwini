@@ -1,4 +1,4 @@
-!function ($) {
+! function ($) {
   "use strict";
 
   var FOUNDATION_VERSION = '6.1.1';
@@ -55,8 +55,12 @@
       var pluginName = name ? hyphenate(name) : functionName(plugin.constructor).toLowerCase();
       plugin.uuid = this.GetYoDigits(6, pluginName);
 
-      if (!plugin.$element.attr('data-' + pluginName)) { plugin.$element.attr('data-' + pluginName, plugin.uuid); }
-      if (!plugin.$element.data('zfPlugin')) { plugin.$element.data('zfPlugin', plugin); }
+      if (!plugin.$element.attr('data-' + pluginName)) {
+        plugin.$element.attr('data-' + pluginName, plugin.uuid);
+      }
+      if (!plugin.$element.data('zfPlugin')) {
+        plugin.$element.data('zfPlugin', plugin);
+      }
       /**
        * Fires when the plugin has initialized.
        * @event Plugin#init
@@ -85,7 +89,7 @@
          */
         .trigger('destroyed.zf.' + pluginName);
       for (var prop in plugin) {
-        plugin[prop] = null;//clean up script to prep for garbage collection.
+        plugin[prop] = null; //clean up script to prep for garbage collection.
       }
       return;
     },
@@ -178,7 +182,9 @@
 
           if ($el.attr('data-options')) {
             var thing = $el.attr('data-options').split(';').forEach(function (e, i) {
-              var opt = e.split(':').map(function (el) { return el.trim(); });
+              var opt = e.split(':').map(function (el) {
+                return el.trim();
+              });
               if (opt[0]) opts[opt[0]] = parseValue(opt[1]);
             });
           }
@@ -232,7 +238,8 @@
       var timer = null;
 
       return function () {
-        var context = this, args = arguments;
+        var context = this,
+          args = arguments;
 
         if (timer === null) {
           timer = setTimeout(function () {
@@ -262,25 +269,25 @@
       $noJS.removeClass('no-js');
     }
 
-    if (type === 'undefined') {//needs to initialize the Foundation object, or an individual plugin.
+    if (type === 'undefined') { //needs to initialize the Foundation object, or an individual plugin.
       Foundation.MediaQuery._init();
       Foundation.reflow(this);
-    } else if (type === 'string') {//an individual method to invoke on a plugin or group of plugins
-      var args = Array.prototype.slice.call(arguments, 1);//collect all the arguments, if necessary
-      var plugClass = this.data('zfPlugin');//determine the class of plugin
+    } else if (type === 'string') { //an individual method to invoke on a plugin or group of plugins
+      var args = Array.prototype.slice.call(arguments, 1); //collect all the arguments, if necessary
+      var plugClass = this.data('zfPlugin'); //determine the class of plugin
 
-      if (plugClass !== undefined && plugClass[method] !== undefined) {//make sure both the class and method exist
-        if (this.length === 1) {//if there's only one, call it directly.
+      if (plugClass !== undefined && plugClass[method] !== undefined) { //make sure both the class and method exist
+        if (this.length === 1) { //if there's only one, call it directly.
           plugClass[method].apply(plugClass, args);
         } else {
-          this.each(function (i, el) {//otherwise loop through the jQuery collection and invoke the method on each
+          this.each(function (i, el) { //otherwise loop through the jQuery collection and invoke the method on each
             plugClass[method].apply($(el).data('zfPlugin'), args);
           });
         }
-      } else {//error for no class or no method
+      } else { //error for no class or no method
         throw new ReferenceError("We're sorry, '" + method + "' is not an available method for " + (plugClass ? functionName(plugClass) : 'this element') + '.');
       }
-    } else {//error for invalid argument type
+    } else { //error for invalid argument type
       throw new TypeError("We're sorry, '" + type + "' is not a valid parameter. You must use a string representing the method you wish to invoke.");
     }
     return this;
@@ -292,22 +299,26 @@
   // Polyfill for requestAnimationFrame
   (function () {
     if (!Date.now || !window.Date.now)
-      window.Date.now = Date.now = function () { return new Date().getTime(); };
+      window.Date.now = Date.now = function () {
+        return new Date().getTime();
+      };
 
     var vendors = ['webkit', 'moz'];
     for (var i = 0; i < vendors.length && !window.requestAnimationFrame; ++i) {
       var vp = vendors[i];
       window.requestAnimationFrame = window[vp + 'RequestAnimationFrame'];
-      window.cancelAnimationFrame = (window[vp + 'CancelAnimationFrame']
-        || window[vp + 'CancelRequestAnimationFrame']);
+      window.cancelAnimationFrame = (window[vp + 'CancelAnimationFrame'] ||
+        window[vp + 'CancelRequestAnimationFrame']);
     }
-    if (/iP(ad|hone|od).*OS 6/.test(window.navigator.userAgent)
-      || !window.requestAnimationFrame || !window.cancelAnimationFrame) {
+    if (/iP(ad|hone|od).*OS 6/.test(window.navigator.userAgent) ||
+      !window.requestAnimationFrame || !window.cancelAnimationFrame) {
       var lastTime = 0;
       window.requestAnimationFrame = function (callback) {
         var now = Date.now();
         var nextTime = Math.max(lastTime + 16, now);
-        return setTimeout(function () { callback(lastTime = nextTime); },
+        return setTimeout(function () {
+            callback(lastTime = nextTime);
+          },
           nextTime - now);
       };
       window.cancelAnimationFrame = clearTimeout;
@@ -318,7 +329,9 @@
     if (!window.performance || !window.performance.now) {
       window.performance = {
         start: Date.now(),
-        now: function () { return Date.now() - this.start; }
+        now: function () {
+          return Date.now() - this.start;
+        }
       };
     }
   })();
@@ -332,11 +345,11 @@
 
       var aArgs = Array.prototype.slice.call(arguments, 1),
         fToBind = this,
-        fNOP = function () { },
+        fNOP = function () {},
         fBound = function () {
-          return fToBind.apply(this instanceof fNOP
-            ? this
-            : oThis,
+          return fToBind.apply(this instanceof fNOP ?
+            this :
+            oThis,
             aArgs.concat(Array.prototype.slice.call(arguments)));
         };
 
@@ -355,14 +368,13 @@
       var funcNameRegex = /function\s([^(]{1,})\(/;
       var results = (funcNameRegex).exec((fn).toString());
       return (results && results.length > 1) ? results[1].trim() : "";
-    }
-    else if (fn.prototype === undefined) {
+    } else if (fn.prototype === undefined) {
       return fn.constructor.name;
-    }
-    else {
+    } else {
       return fn.prototype.constructor.name;
     }
   }
+
   function parseValue(str) {
     if (/true/.test(str)) return true;
     else if (/false/.test(str)) return false;
@@ -377,7 +389,7 @@
 
 }(jQuery);
 
-!function (Foundation, window) {
+! function (Foundation, window) {
   /**
    * Compares the dimensions of an element to a container and determines collision events with container.
    * @function
@@ -407,8 +419,12 @@
     }
     var allDirs = [bottom, top, left, right];
 
-    if (lrOnly) { return left === right === true; }
-    if (tbOnly) { return top === bottom === true; }
+    if (lrOnly) {
+      return left === right === true;
+    }
+    if (tbOnly) {
+      return top === bottom === true;
+    }
 
     return allDirs.indexOf(false) === -1;
   };
@@ -423,7 +439,9 @@
   var GetDimensions = function (elem, test) {
     elem = elem.length ? elem[0] : elem;
 
-    if (elem === window || elem === document) { throw new Error("I'm sorry, Dave. I'm afraid I can't do that."); }
+    if (elem === window || elem === document) {
+      throw new Error("I'm sorry, Dave. I'm afraid I can't do that.");
+    }
 
     var rect = elem.getBoundingClientRect(),
       parRect = elem.parentNode.getBoundingClientRect(),
@@ -554,7 +572,7 @@
  * or the web http://www.mariusolbertz.de/ *
  *                                         *
  ******************************************/
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
   Foundation.Keyboard = {};
 
@@ -645,7 +663,9 @@
    */
   var findFocusable = function ($element) {
     return $element.find('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]').filter(function () {
-      if (!$(this).is(':visible') || $(this).attr('tabindex') < 0) { return false; } //only have visible elements and those that have a tabindex greater or equal 0
+      if (!$(this).is(':visible') || $(this).attr('tabindex') < 0) {
+        return false;
+      } //only have visible elements and those that have a tabindex greater or equal 0
       return true;
     });
   };
@@ -663,7 +683,7 @@
   Foundation.Keyboard.register = register;
 }(jQuery, window.Foundation);
 
-!function ($, Foundation) {
+! function ($, Foundation) {
 
   // Default set of media queries
   var defaultQueries = {
@@ -878,7 +898,7 @@
  * Motion module.
  * @module foundation.motion
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
 
   var initClasses = ['mui-enter', 'mui-leave'];
   var activeClasses = ['mui-enter-active', 'mui-leave-active'];
@@ -914,7 +934,7 @@
     // });
 
     // Clean up the animation when it finishes
-    element.one(Foundation.transitionend(element), finish);//.one('finished.zf.animate', finish);
+    element.one(Foundation.transitionend(element), finish); //.one('finished.zf.animate', finish);
 
     // Hides the element (for out animations), resets the element, and runs a callback
     function finish() {
@@ -950,8 +970,9 @@
       prog = ts - start;
       fn.apply(elem);
 
-      if (prog < duration) { anim = window.requestAnimationFrame(move, elem); }
-      else {
+      if (prog < duration) {
+        anim = window.requestAnimationFrame(move, elem);
+      } else {
         window.cancelAnimationFrame(anim);
         elem.trigger('finished.zf.animate', [elem]).triggerHandler('finished.zf.animate', [elem]);
       }
@@ -964,13 +985,15 @@
 
 }(jQuery, Foundation);
 
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
   Foundation.Nest = {
     Feather: function (menu, type) {
       menu.attr('role', 'menubar');
       type = type || 'zf';
-      var items = menu.find('li').attr({ 'role': 'menuitem' }),
+      var items = menu.find('li').attr({
+          'role': 'menuitem'
+        }),
         subMenuClass = 'is-' + type + '-submenu',
         subItemClass = subMenuClass + '-item',
         hasSubClass = 'is-' + type + '-submenu-parent';
@@ -1029,11 +1052,11 @@
   };
 }(jQuery, window.Foundation);
 
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
   var Timer = function (elem, options, cb) {
     var _this = this,
-      duration = options.duration,//options is an object for easily adding features later.
+      duration = options.duration, //options is an object for easily adding features later.
       nameSpace = Object.keys(elem.data())[0] || 'timer',
       remain = -1,
       start,
@@ -1053,7 +1076,7 @@
       start = Date.now();
       timer = setTimeout(function () {
         if (options.infinite) {
-          _this.restart();//rerun the timer.
+          _this.restart(); //rerun the timer.
         }
         cb();
       }, remain);
@@ -1092,11 +1115,9 @@
     images.each(function () {
       if (this.complete) {
         singleImageLoaded();
-      }
-      else if (typeof this.naturalWidth !== 'undefined' && this.naturalWidth > 0) {
+      } else if (typeof this.naturalWidth !== 'undefined' && this.naturalWidth > 0) {
         singleImageLoaded();
-      }
-      else {
+      } else {
         $(this).one('load', function () {
           singleImageLoaded();
         });
@@ -1136,7 +1157,9 @@
   }
 
   function onTouchMove(e) {
-    if ($.spotSwipe.preventDefault) { e.preventDefault(); }
+    if ($.spotSwipe.preventDefault) {
+      e.preventDefault();
+    }
     if (isMoving) {
       var x = e.touches[0].pageX;
       var y = e.touches[0].pageY;
@@ -1177,7 +1200,9 @@
     this.removeEventListener('touchstart', onTouchStart);
   }
 
-  $.event.special.swipe = { setup: init };
+  $.event.special.swipe = {
+    setup: init
+  };
 
   $.each(['left', 'up', 'down', 'right'], function () {
     $.event.special['swipe' + this] = {
@@ -1190,7 +1215,7 @@
 /****************************************************
  * Method for adding psuedo drag events to elements *
  ***************************************************/
-!function ($) {
+! function ($) {
   $.fn.addTouch = function () {
     this.each(function (i, el) {
       $(el).bind('touchstart touchmove touchend touchcancel', function () {
@@ -1211,7 +1236,7 @@
         type = eventTypes[event.type];
 
       var simulatedEvent = document.createEvent('MouseEvent');
-      simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0/*left*/, null);
+      simulatedEvent.initMouseEvent(type, true, true, window, 1, first.screenX, first.screenY, first.clientX, first.clientY, false, false, false, false, 0 /*left*/ , null);
       first.target.dispatchEvent(simulatedEvent);
     };
   };
@@ -1450,7 +1475,7 @@
 })( jQuery, this );
 */
 
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
   // Elements with [data-open] will reveal a plugin that supports it when clicked.
   $(document).on('click.zf.trigger', '[data-open]', function () {
@@ -1464,8 +1489,7 @@
     var id = $(this).data('close');
     if (id) {
       $('#' + id).triggerHandler('close.zf.trigger', [$(this)]);
-    }
-    else {
+    } else {
       $(this).trigger('close.zf.trigger');
     }
   });
@@ -1506,10 +1530,10 @@
     closemeListener();
   };
   /**
-  * Fires once after all other scripts have loaded
-  * @function
-  * @private
-  */
+   * Fires once after all other scripts have loaded
+   * @function
+   * @private
+   */
   $(window).load(function () {
     checkListeners();
   });
@@ -1551,18 +1575,20 @@
     if ($nodes.length) {
       $(window).off('resize.zf.trigger')
         .on('resize.zf.trigger', function (e) {
-          if (timer) { clearTimeout(timer); }
+          if (timer) {
+            clearTimeout(timer);
+          }
 
           timer = setTimeout(function () {
 
-            if (!MutationObserver) {//fallback for IE 9
+            if (!MutationObserver) { //fallback for IE 9
               $nodes.each(function () {
                 $(this).triggerHandler('resizeme.zf.trigger');
               });
             }
             //trigger all listening elements and signal a resize event
             $nodes.attr('data-events', "resize");
-          }, debounce || 10);//default time to emit resize event
+          }, debounce || 10); //default time to emit resize event
         });
     }
   };
@@ -1572,18 +1598,20 @@
     if ($nodes.length) {
       $(window).off('scroll.zf.trigger')
         .on('scroll.zf.trigger', function (e) {
-          if (timer) { clearTimeout(timer); }
+          if (timer) {
+            clearTimeout(timer);
+          }
 
           timer = setTimeout(function () {
 
-            if (!MutationObserver) {//fallback for IE 9
+            if (!MutationObserver) { //fallback for IE 9
               $nodes.each(function () {
                 $(this).triggerHandler('scrollme.zf.trigger');
               });
             }
             //trigger all listening elements and signal a scroll event
             $nodes.attr('data-events', "scroll");
-          }, debounce || 10);//default time to emit scroll event
+          }, debounce || 10); //default time to emit scroll event
         });
     }
   };
@@ -1622,7 +1650,9 @@
   //   }
   // }
   var eventsListener = function () {
-    if (!MutationObserver) { return false; }
+    if (!MutationObserver) {
+      return false;
+    }
     var nodes = document.querySelectorAll('[data-resize], [data-scroll], [data-mutate]');
 
     //element callback
@@ -1639,19 +1669,19 @@
           $target.triggerHandler('scrollme.zf.trigger', [$target, window.pageYOffset]);
           break;
 
-        // case "mutate" :
-        // console.log('mutate', $target);
-        // $target.triggerHandler('mutate.zf.trigger');
-        //
-        // //make sure we don't get stuck in an infinite loop from sloppy codeing
-        // if ($target.index('[data-mutate]') == $("[data-mutate]").length-1) {
-        //   domMutationObserver();
-        // }
-        // break;
+          // case "mutate" :
+          // console.log('mutate', $target);
+          // $target.triggerHandler('mutate.zf.trigger');
+          //
+          // //make sure we don't get stuck in an infinite loop from sloppy codeing
+          // if ($target.index('[data-mutate]') == $("[data-mutate]").length-1) {
+          //   domMutationObserver();
+          // }
+          // break;
 
         default:
           return false;
-        //nothing
+          //nothing
       }
     }
 
@@ -1659,7 +1689,13 @@
       //for each element that needs to listen for resizing, scrolling, (or coming soon mutation) add a single observer
       for (var i = 0; i <= nodes.length - 1; i++) {
         var elementObserver = new MutationObserver(listeningElementsMutation);
-        elementObserver.observe(nodes[i], { attributes: true, childList: false, characterData: false, subtree: false, attributeFilter: ["data-events"] });
+        elementObserver.observe(nodes[i], {
+          attributes: true,
+          childList: false,
+          characterData: false,
+          subtree: false,
+          attributeFilter: ["data-events"]
+        });
       }
     }
   };
@@ -1673,7 +1709,7 @@
 
 }(window.Foundation, window.jQuery);
 
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
 
   /**
@@ -1796,30 +1832,30 @@
    * @private
    */
   Abide.prototype._events = function () {
-    var _this = this;
+      var _this = this;
 
-    this.$element.off('.abide')
-      .on('reset.zf.abide', function (e) {
-        _this.resetForm();
-      })
-      .on('submit.zf.abide', function (e) {
-        return _this.validateForm();
-      });
-
-    if (this.options.validateOn === 'fieldChange') {
-      this.$inputs.off('change.zf.abide')
-        .on('change.zf.abide', function (e) {
-          _this.validateInput($(this));
+      this.$element.off('.abide')
+        .on('reset.zf.abide', function (e) {
+          _this.resetForm();
+        })
+        .on('submit.zf.abide', function (e) {
+          return _this.validateForm();
         });
-    }
 
-    if (this.options.liveValidate) {
-      this.$inputs.off('input.zf.abide')
-        .on('input.zf.abide', function (e) {
-          _this.validateInput($(this));
-        });
-    }
-  },
+      if (this.options.validateOn === 'fieldChange') {
+        this.$inputs.off('change.zf.abide')
+          .on('change.zf.abide', function (e) {
+            _this.validateInput($(this));
+          });
+      }
+
+      if (this.options.liveValidate) {
+        this.$inputs.off('input.zf.abide')
+          .on('input.zf.abide', function (e) {
+            _this.validateInput($(this));
+          });
+      }
+    },
     /**
      * Calls necessary functions to update Abide upon DOM change
      * @private
@@ -1952,8 +1988,12 @@
         validated = this.validateText($el);
     }
 
-    if (validator) { customValidator = this.matchValidation($el, validator, $el.attr('required')); }
-    if ($el.attr('data-equalto')) { equalTo = this.options.validators.equalTo($el); }
+    if (validator) {
+      customValidator = this.matchValidation($el, validator, $el.attr('required'));
+    }
+    if ($el.attr('data-equalto')) {
+      equalTo = this.options.validators.equalTo($el);
+    }
 
     var goodToGo = [clearRequire, validated, customValidator, equalTo].indexOf(false) === -1,
       message = (goodToGo ? 'valid' : 'invalid') + '.zf.abide';
@@ -2008,10 +2048,11 @@
     pattern = (pattern || $el.attr('pattern') || $el.attr('type'));
     var inputText = $el.val();
 
-    return inputText.length ?//if text, check if the pattern exists, if so, test it, if no text or no pattern, return true.
+    return inputText.length ? //if text, check if the pattern exists, if so, test it, if no text or no pattern, return true.
       this.options.patterns.hasOwnProperty(pattern) ? this.options.patterns[pattern].test(inputText) :
-        pattern && pattern !== $el.attr('type') ? new RegExp(pattern).test(inputText) : true : true;
-  };  /**
+      pattern && pattern !== $el.attr('type') ? new RegExp(pattern).test(inputText) : true : true;
+  };
+  /**
    * Determines whether or a not a radio input is valid based on whether or not it is required and selected
    * @param {String} groupName - A string that specifies the name of a radio button group
    * @returns {Boolean} Boolean value depends on whether or not at least one radio input has been selected (if it's required)
@@ -2098,7 +2139,7 @@
  * @requires foundation.util.keyboard
  * @requires foundation.util.motion
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
 
   /**
@@ -2167,7 +2208,12 @@
         'aria-expanded': false,
         'aria-selected': false
       });
-      $content.attr({ 'role': 'tabpanel', 'aria-labelledby': linkId, 'aria-hidden': true, 'id': id });
+      $content.attr({
+        'role': 'tabpanel',
+        'aria-labelledby': linkId,
+        'aria-hidden': true,
+        'id': id
+      });
     });
     var $initActive = this.$element.find('.is-active').children('[data-tab-content]');
     if ($initActive.length) {
@@ -2195,8 +2241,7 @@
               if (_this.options.allowAllClosed || $elem.siblings().hasClass('is-active')) {
                 _this.up($tabContent);
               }
-            }
-            else {
+            } else {
               _this.down($tabContent);
             }
           }).on('keydown.zf.accordion', function (e) {
@@ -2228,7 +2273,9 @@
     if ($target.parent().hasClass('is-active')) {
       if (this.options.allowAllClosed || $target.parent().siblings().hasClass('is-active')) {
         this.up($target);
-      } else { return; }
+      } else {
+        return;
+      }
     } else {
       this.down($target);
     }
@@ -2329,7 +2376,7 @@
  * @requires foundation.util.motion
  * @requires foundation.util.nest
  */
-!function ($) {
+! function ($) {
   'use strict';
 
   /**
@@ -2381,7 +2428,7 @@
    * @private
    */
   AccordionMenu.prototype._init = function () {
-    this.$element.find('[data-submenu]').not('.is-active').slideUp(0);//.find('a').css('padding-left', '1rem');
+    this.$element.find('[data-submenu]').not('.is-active').slideUp(0); //.find('a').css('padding-left', '1rem');
     this.$element.attr({
       'role': 'tablist',
       'aria-multiselectable': this.options.multiOpen
@@ -2496,7 +2543,7 @@
           e.stopImmediatePropagation();
         }
       });
-    });//.attr('tabindex', 0);
+    }); //.attr('tabindex', 0);
   };
   /**
    * Closes all panes of the menu.
@@ -2514,8 +2561,7 @@
     if (!$target.is(':animated')) {
       if (!$target.is(':hidden')) {
         this.up($target);
-      }
-      else {
+      } else {
         this.down($target);
       }
     }
@@ -2532,8 +2578,13 @@
       this.up(this.$element.find('.is-active').not($target.parentsUntil(this.$element).add($target)));
     }
 
-    $target.addClass('is-active').attr({ 'aria-hidden': false })
-      .parent('.has-submenu').attr({ 'aria-expanded': true, 'aria-selected': true });
+    $target.addClass('is-active').attr({
+        'aria-hidden': false
+      })
+      .parent('.has-submenu').attr({
+        'aria-expanded': true,
+        'aria-selected': true
+      });
 
     Foundation.Move(this.options.slideSpeed, $target, function () {
       $target.slideDown(_this.options.slideSpeed);
@@ -2558,7 +2609,10 @@
     $target.attr('aria-hidden', true)
       .find('[data-submenu]').slideUp(0).attr('aria-hidden', true).end()
       .parent('.has-submenu')
-      .attr({ 'aria-expanded': false, 'aria-selected': false });
+      .attr({
+        'aria-expanded': false,
+        'aria-selected': false
+      });
     // $target.slideUp(this.options.slideSpeed, function() {
     //   $target.find('[data-submenu]').slideUp(0).attr('aria-hidden', true);
     // }).attr('aria-hidden', true).parent('.has-submenu').attr({'aria-expanded': false, 'aria-selected': false});
@@ -2592,7 +2646,7 @@
  * @requires foundation.util.motion
  * @requires foundation.util.nest
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
 
   /**
@@ -2774,10 +2828,14 @@
         open: function () {
           if (!$element.is(_this.$menuItems)) { // not menu item means back button
             _this._hide($element.parent('ul'));
-            setTimeout(function () { $element.parent('ul').parent('li').focus(); }, 1);
+            setTimeout(function () {
+              $element.parent('ul').parent('li').focus();
+            }, 1);
           } else if ($element.is(_this.$submenuAnchors)) {
             _this._show($element);
-            setTimeout(function () { $element.find('ul li').filter(_this.$menuItems).first().focus(); }, 1);
+            setTimeout(function () {
+              $element.find('ul li').filter(_this.$menuItems).first().focus();
+            }, 1);
           }
         },
         handled: function () {
@@ -2873,7 +2931,8 @@
    * @private
    */
   Drilldown.prototype._getMaxDims = function () {
-    var max = 0, result = {};
+    var max = 0,
+      result = {};
     this.$submenus.add(this.$element).each(function () {
       var numOfElems = $(this).children('li').length;
       max = numOfElems > max ? numOfElems : max;
@@ -2900,7 +2959,9 @@
       var $link = $(this);
       if ($link.data('savedHref')) {
         $link.attr('href', $link.data('savedHref')).removeData('savedHref');
-      } else { return; }
+      } else {
+        return;
+      }
     });
     Foundation.unregisterPlugin(this);
   };
@@ -2913,7 +2974,7 @@
  * @requires foundation.util.keyboard
  * @requires foundation.util.box
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
   /**
    * Creates a new instance of a dropdown.
@@ -3077,7 +3138,9 @@
    * @private
    */
   Dropdown.prototype._setPosition = function () {
-    if (this.$anchor.attr('aria-expanded') === 'false') { return false; }
+    if (this.$anchor.attr('aria-expanded') === 'false') {
+      return false;
+    }
     var position = this.getPositionClass(),
       $eleDims = Foundation.Box.GetDimensions(this.$element),
       $anchorDims = Foundation.Box.GetDimensions(this.$anchor),
@@ -3218,11 +3281,15 @@
      */
     this.$element.trigger('closeme.zf.dropdown', this.$element.attr('id'));
     this.$anchor.addClass('hover')
-      .attr({ 'aria-expanded': true });
+      .attr({
+        'aria-expanded': true
+      });
     // this.$element/*.show()*/;
     this._setPosition();
     this.$element.addClass('is-open')
-      .attr({ 'aria-hidden': false });
+      .attr({
+        'aria-hidden': false
+      });
 
     if (this.options.autoFocus) {
       var $focusable = Foundation.Keyboard.findFocusable(this.$element);
@@ -3231,7 +3298,9 @@
       }
     }
 
-    if (this.options.closeOnClick) { this._addBodyHandler(); }
+    if (this.options.closeOnClick) {
+      this._addBodyHandler();
+    }
 
     /**
      * Fires once the dropdown is visible.
@@ -3253,7 +3322,9 @@
       return false;
     }
     this.$element.removeClass('is-open')
-      .attr({ 'aria-hidden': true });
+      .attr({
+        'aria-hidden': true
+      });
 
     this.$anchor.removeClass('hover')
       .attr('aria-expanded', false);
@@ -3264,7 +3335,11 @@
         this.$element.removeClass(curPositionClass);
       }
       this.$element.addClass(this.options.positionClass)
-          /*.hide()*/.css({ height: '', width: '' });
+        /*.hide()*/
+        .css({
+          height: '',
+          width: ''
+        });
       this.classChanged = false;
       this.counter = 4;
       this.usedPositions.length = 0;
@@ -3305,7 +3380,7 @@
  * @requires foundation.util.box
  * @requires foundation.util.nest
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
 
   /**
@@ -3447,8 +3522,9 @@
 
         if (hasSub) {
           if (hasClicked) {
-            if (!_this.options.closeOnClick || (!_this.options.clickOpen && !hasTouch) || (_this.options.forceFollow && hasTouch)) { return; }
-            else {
+            if (!_this.options.closeOnClick || (!_this.options.clickOpen && !hasTouch) || (_this.options.forceFollow && hasTouch)) {
+              return;
+            } else {
               e.stopImmediatePropagation();
               e.preventDefault();
               _this._hide($elem);
@@ -3459,7 +3535,9 @@
             _this._show($elem.children('.is-dropdown-submenu'));
             $elem.add($elem.parentsUntil(_this.$element, '.' + parClass)).attr('data-is-click', true);
           }
-        } else { return; }
+        } else {
+          return;
+        }
       });
     }
 
@@ -3479,7 +3557,9 @@
         var $elem = $(this),
           hasSub = $elem.hasClass(parClass);
         if (hasSub && _this.options.autoclose) {
-          if ($elem.attr('data-is-click') === 'true' && _this.options.clickOpen) { return false; }
+          if ($elem.attr('data-is-click') === 'true' && _this.options.clickOpen) {
+            return false;
+          }
 
           // clearTimeout(delay);
           delay = setTimeout(function () {
@@ -3504,22 +3584,27 @@
       });
 
       var nextSibling = function () {
-        if (!$element.is(':last-child')) $nextElement.children('a:first').focus();
-      }, prevSibling = function () {
-        $prevElement.children('a:first').focus();
-      }, openSub = function () {
-        var $sub = $element.children('ul.is-dropdown-submenu');
-        if ($sub.length) {
-          _this._show($sub);
-          $element.find('li > a:first').focus();
-        } else { return; }
-      }, closeSub = function () {
-        //if ($element.is(':first-child')) {
-        var close = $element.parent('ul').parent('li');
-        close.children('a:first').focus();
-        _this._hide(close);
-        //}
-      };
+          if (!$element.is(':last-child')) $nextElement.children('a:first').focus();
+        },
+        prevSibling = function () {
+          $prevElement.children('a:first').focus();
+        },
+        openSub = function () {
+          var $sub = $element.children('ul.is-dropdown-submenu');
+          if ($sub.length) {
+            _this._show($sub);
+            $element.find('li > a:first').focus();
+          } else {
+            return;
+          }
+        },
+        closeSub = function () {
+          //if ($element.is(':first-child')) {
+          var close = $element.parent('ul').parent('li');
+          close.children('a:first').focus();
+          _this._hide(close);
+          //}
+        };
       var functions = {
         open: openSub,
         close: function () {
@@ -3589,7 +3674,9 @@
     $body.off('mouseup.zf.dropdownmenu touchend.zf.dropdownmenu')
       .on('mouseup.zf.dropdownmenu touchend.zf.dropdownmenu', function (e) {
         var $link = _this.$element.find(e.target);
-        if ($link.length) { return; }
+        if ($link.length) {
+          return;
+        }
 
         _this._hide();
         $body.off('mouseup.zf.dropdownmenu touchend.zf.dropdownmenu');
@@ -3608,9 +3695,14 @@
     }));
     var $sibs = $sub.parent('li.is-dropdown-submenu-parent').siblings('li.is-dropdown-submenu-parent');
     this._hide($sibs, idx);
-    $sub.css('visibility', 'hidden').addClass('js-dropdown-active').attr({ 'aria-hidden': false })
+    $sub.css('visibility', 'hidden').addClass('js-dropdown-active').attr({
+        'aria-hidden': false
+      })
       .parent('li.is-dropdown-submenu-parent').addClass('is-active')
-      .attr({ 'aria-selected': true, 'aria-expanded': true });
+      .attr({
+        'aria-selected': true,
+        'aria-expanded': true
+      });
     var clear = Foundation.Box.ImNotTouchingYou($sub, null, true);
     if (!clear) {
       var oldClass = this.options.alignment === 'left' ? '-right' : '-left',
@@ -3623,7 +3715,9 @@
       this.changed = true;
     }
     $sub.css('visibility', '');
-    if (this.options.closeOnClick) { this._addBodyHandler(); }
+    if (this.options.closeOnClick) {
+      this._addBodyHandler();
+    }
     /**
      * Fires when the new dropdown pane is visible.
      * @event DropdownMenu#show
@@ -3645,8 +3739,7 @@
       $toClose = this.$tabs.not(function (i, el) {
         return i === idx;
       });
-    }
-    else {
+    } else {
       $toClose = this.$element;
     }
     var somethingToClose = $toClose.hasClass('is-active') || $toClose.find('.is-active').length > 0;
@@ -3690,7 +3783,7 @@
   Foundation.plugin(DropdownMenu, 'DropdownMenu');
 }(jQuery, window.Foundation);
 
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
 
   /**
@@ -3782,7 +3875,9 @@
     this._pauseEvents();
     if (this.hasNested) {
       this.$element.on('postequalized.zf.equalizer', function (e) {
-        if (e.target !== _this.$element[0]) { _this._reflow(); }
+        if (e.target !== _this.$element[0]) {
+          _this._reflow();
+        }
       });
     } else {
       this.$element.on('resizeme.zf.trigger', this._reflow.bind(this));
@@ -3875,7 +3970,9 @@
     }
 
     for (var i = 0, len = groups.length; i < len; i++) {
-      var heights = $(groups[i]).map(function () { return this[1] }).get();
+      var heights = $(groups[i]).map(function () {
+        return this[1]
+      }).get();
       var max = Math.max.apply(null, heights);
       groups[i].push(max);
     }
@@ -3920,21 +4017,25 @@
       var groupsILength = groups[i].length,
         max = groups[i][groupsILength - 1];
       if (groupsILength <= 2) {
-        $(groups[i][0][0]).css({ 'height': 'auto' });
+        $(groups[i][0][0]).css({
+          'height': 'auto'
+        });
         continue;
       };
       /**
-        * Fires before the heights per row are applied
-        * @event Equalizer#preequalizedRow
-        */
+       * Fires before the heights per row are applied
+       * @event Equalizer#preequalizedRow
+       */
       this.$element.trigger('preequalizedrow.zf.equalizer');
       for (var j = 0, lenJ = (groupsILength - 1); j < lenJ; j++) {
-        $(groups[i][j][0]).css({ 'height': max });
+        $(groups[i][j][0]).css({
+          'height': max
+        });
       }
       /**
-        * Fires when the heights per row have been applied
-        * @event Equalizer#postequalizedRow
-        */
+       * Fires when the heights per row have been applied
+       * @event Equalizer#postequalizedRow
+       */
       this.$element.trigger('postequalizedrow.zf.equalizer');
     }
     /**
@@ -3971,7 +4072,7 @@
  * @requires foundation.util.mediaQuery
  * @requires foundation.util.timerAndImageLoader
  */
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
 
   /**
@@ -4077,8 +4178,7 @@
 
     if (this.options.rules) {
       rules = this.options.rules;
-    }
-    else {
+    } else {
       rules = this.$element.data('interchange').match(/\[.*?\]/g);
     }
 
@@ -4119,7 +4219,9 @@
     }
     // Replacing background images
     else if (path.match(/\.(gif|jpg|jpeg|tiff|png)([?#].*)?/i)) {
-      this.$element.css({ 'background-image': 'url(' + path + ')' });
+      this.$element.css({
+        'background-image': 'url(' + path + ')'
+      });
     }
     // Replacing HTML
     else {
@@ -4159,7 +4261,7 @@
  * Magellan module.
  * @module foundation.magellan
  */
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
 
   /**
@@ -4307,17 +4409,19 @@
    * @function
    * @fires Magellan#update
    */
-  Magellan.prototype._updateActive = function (/*evt, elem, scrollPos*/) {
+  Magellan.prototype._updateActive = function ( /*evt, elem, scrollPos*/ ) {
     var winPos = /*scrollPos ||*/ parseInt(window.pageYOffset, 10),
       curIdx;
 
-    if (winPos + this.winHeight === this.docHeight) { curIdx = this.points.length - 1; }
-    else if (winPos < this.points[0]) { curIdx = 0; }
-    else {
+    if (winPos + this.winHeight === this.docHeight) {
+      curIdx = this.points.length - 1;
+    } else if (winPos < this.points[0]) {
+      curIdx = 0;
+    } else {
       var isDown = this.scrollPos < winPos,
         _this = this,
         curVisible = this.points.filter(function (p, i) {
-          return isDown ? p <= winPos : p - _this.options.threshold <= winPos;//&& winPos >= _this.points[i -1] - _this.options.threshold;
+          return isDown ? p <= winPos : p - _this.options.threshold <= winPos; //&& winPos >= _this.points[i -1] - _this.options.threshold;
         });
       curIdx = curVisible.length ? curVisible.length - 1 : 0;
     }
@@ -4374,7 +4478,7 @@
  * @requires foundation.util.triggers
  * @requires foundation.util.motion
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
 
   'use strict';
 
@@ -4512,7 +4616,9 @@
 
     if (this.$exiter.length) {
       var _this = this;
-      this.$exiter.on({ 'click.zf.offcanvas': this.close.bind(this) });
+      this.$exiter.on({
+        'click.zf.offcanvas': this.close.bind(this)
+      });
     }
   };
   /**
@@ -4550,7 +4656,9 @@
       // }
       // if(this.options.isSticky){ this._stick(); }
       this.$element.off('open.zf.trigger toggle.zf.trigger');
-      if ($closer.length) { $closer.hide(); }
+      if ($closer.length) {
+        $closer.hide();
+      }
     } else {
       this.isRevealed = false;
       // if(this.options.isSticky || !this.options.forceTop){
@@ -4575,7 +4683,9 @@
    * @fires OffCanvas#opened
    */
   OffCanvas.prototype.open = function (event, trigger) {
-    if (this.$element.hasClass('is-open') || this.isRevealed) { return; }
+    if (this.$element.hasClass('is-open') || this.isRevealed) {
+      return;
+    }
     var _this = this,
       $body = $(document.body);
     $('body').scrollTop(0);
@@ -4667,7 +4777,9 @@
    * @fires OffCanvas#closed
    */
   OffCanvas.prototype.close = function (cb) {
-    if (!this.$element.hasClass('is-open') || this.isRevealed) { return; }
+    if (!this.$element.hasClass('is-open') || this.isRevealed) {
+      return;
+    }
 
     var _this = this;
 
@@ -4705,8 +4817,7 @@
   OffCanvas.prototype.toggle = function (event, trigger) {
     if (this.$element.hasClass('is-open')) {
       this.close(event, trigger);
-    }
-    else {
+    } else {
       this.open(event, trigger);
     }
   };
@@ -4748,7 +4859,7 @@
  * @requires foundation.util.timerAndImageLoader
  * @requires foundation.util.touch
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
   /**
    * Creates a new instance of an orbit carousel.
@@ -4905,7 +5016,7 @@
     if ($images.length) {
       Foundation.onImagesLoaded($images, this._prepareForOrbit.bind(this));
     } else {
-      this._prepareForOrbit();//hehe
+      this._prepareForOrbit(); //hehe
     }
 
     if (this.options.bullets) {
@@ -4936,8 +5047,7 @@
   Orbit.prototype.geoSync = function () {
     var _this = this;
     this.timer = new Foundation.Timer(
-      this.$element,
-      {
+      this.$element, {
         duration: this.options.timerDelay,
         infinite: false
       },
@@ -4963,23 +5073,29 @@
    * @private
    * @param {Function} cb - a callback function to fire when complete.
    */
-  Orbit.prototype._setWrapperHeight = function (cb) {//rewrite this to `for` loop
-    var max = 0, temp, counter = 0;
+  Orbit.prototype._setWrapperHeight = function (cb) { //rewrite this to `for` loop
+    var max = 0,
+      temp, counter = 0;
 
     this.$slides.each(function () {
       temp = this.getBoundingClientRect().height;
       $(this).attr('data-slide', counter);
 
-      if (counter) {//if not the first slide, set css position and display property
-        $(this).css({ 'position': 'relative', 'display': 'none' });
+      if (counter) { //if not the first slide, set css position and display property
+        $(this).css({
+          'position': 'relative',
+          'display': 'none'
+        });
       }
       max = temp > max ? temp : max;
       counter++;
     });
 
     if (counter === this.$slides.length) {
-      this.$wrapper.css({ 'height': max });//only change the wrapper height property once.
-      cb(max);//fire callback with max height dimension.
+      this.$wrapper.css({
+        'height': max
+      }); //only change the wrapper height property once.
+      cb(max); //fire callback with max height dimension.
     }
   };
   /**
@@ -5043,7 +5159,9 @@
 
     if (this.options.bullets) {
       this.$bullets.on('click.zf.orbit touchend.zf.orbit', function () {
-        if (/is-active/g.test(this.className)) { return false; }//if this is active, kick out of function.
+        if (/is-active/g.test(this.className)) {
+          return false;
+        } //if this is active, kick out of function.
         var idx = $(this).data('slide'),
           ltr = idx > _this.$slides.filter('.is-active').data('slide'),
           $slide = _this.$slides.eq(idx);
@@ -5080,7 +5198,9 @@
   Orbit.prototype.changeSlide = function (isLTR, chosenSlide, idx) {
     var $curSlide = this.$slides.filter('.is-active').eq(0);
 
-    if (/mui/g.test($curSlide[0].className)) { return false; }//if the slide is currently animating, kick out of the function
+    if (/mui/g.test($curSlide[0].className)) {
+      return false;
+    } //if the slide is currently animating, kick out of the function
 
     var $firstSlide = this.$slides.first(),
       $lastSlide = this.$slides.last(),
@@ -5089,26 +5209,32 @@
       _this = this,
       $newSlide;
 
-    if (!chosenSlide) {//most of the time, this will be auto played or clicked from the navButtons.
+    if (!chosenSlide) { //most of the time, this will be auto played or clicked from the navButtons.
       $newSlide = isLTR ? //if wrapping enabled, check to see if there is a `next` or `prev` sibling, if not, select the first or last slide to fill in. if wrapping not enabled, attempt to select `next` or `prev`, if there's nothing there, the function will kick out on next step. CRAZY NESTED TERNARIES!!!!!
-        (this.options.infiniteWrap ? $curSlide.next('.' + this.options.slideClass).length ? $curSlide.next('.' + this.options.slideClass) : $firstSlide : $curSlide.next('.' + this.options.slideClass))//pick next slide if moving left to right
+        (this.options.infiniteWrap ? $curSlide.next('.' + this.options.slideClass).length ? $curSlide.next('.' + this.options.slideClass) : $firstSlide : $curSlide.next('.' + this.options.slideClass)) //pick next slide if moving left to right
         :
-        (this.options.infiniteWrap ? $curSlide.prev('.' + this.options.slideClass).length ? $curSlide.prev('.' + this.options.slideClass) : $lastSlide : $curSlide.prev('.' + this.options.slideClass));//pick prev slide if moving right to left
+        (this.options.infiniteWrap ? $curSlide.prev('.' + this.options.slideClass).length ? $curSlide.prev('.' + this.options.slideClass) : $lastSlide : $curSlide.prev('.' + this.options.slideClass)); //pick prev slide if moving right to left
     } else {
       $newSlide = chosenSlide;
     }
     if ($newSlide.length) {
       if (this.options.bullets) {
-        idx = idx || this.$slides.index($newSlide);//grab index to update bullets
+        idx = idx || this.$slides.index($newSlide); //grab index to update bullets
         this._updateBullets(idx);
       }
       if (this.options.useMUI) {
 
         Foundation.Motion.animateIn(
-          $newSlide.addClass('is-active').css({ 'position': 'absolute', 'top': 0 }),
+          $newSlide.addClass('is-active').css({
+            'position': 'absolute',
+            'top': 0
+          }),
           this.options['animInFrom' + dirIn],
           function () {
-            $newSlide.css({ 'position': 'relative', 'display': 'block' })
+            $newSlide.css({
+                'position': 'relative',
+                'display': 'block'
+              })
               .attr('aria-live', 'polite');
           });
 
@@ -5171,7 +5297,7 @@
  * @requires foundation.util.drilldown
  * @requires foundation.util.dropdown-menu
  */
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
 
   // The plugin matches the plugin classes with these plugin instances.
@@ -5313,7 +5439,7 @@
  * @module foundation.responsiveToggle
  * @requires foundation.util.mediaQuery
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
 
   'use strict';
 
@@ -5424,7 +5550,7 @@
  * @requires foundation.util.mediaQuery
  * @requires foundation.util.motion if using animations
  */
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
 
   /**
@@ -5549,7 +5675,9 @@
         'aria-haspopup': true,
         'tabindex': 0
       });
-      this.$element.attr({ 'aria-labelledby': anchorId });
+      this.$element.attr({
+        'aria-labelledby': anchorId
+      });
     }
 
     // this.options.fullScreen = this.$element.hasClass('full');
@@ -5578,7 +5706,10 @@
   Reveal.prototype._makeOverlay = function (id) {
     var $overlay = $('<div></div>')
       .addClass('reveal-overlay')
-      .attr({ 'tabindex': -1, 'aria-hidden': true })
+      .attr({
+        'tabindex': -1,
+        'aria-hidden': true
+      })
       .appendTo('body');
     if (this.options.closeOnClick) {
       $overlay.attr({
@@ -5601,7 +5732,7 @@
       'toggle.zf.trigger': this.toggle.bind(this),
       'resizeme.zf.trigger': function () {
         if (_this.$element.is(':visible')) {
-          _this._setPosition(function () { });
+          _this._setPosition(function () {});
         }
       }
     });
@@ -5671,13 +5802,17 @@
     this.isActive = true;
     //make element invisible, but remove display: none so we can get size and positioning
     this.$element
-      .css({ 'visibility': 'hidden' })
+      .css({
+        'visibility': 'hidden'
+      })
       .show()
       .scrollTop(0);
 
     this._setPosition(function () {
       _this.$element.hide()
-        .css({ 'visibility': '' });
+        .css({
+          'visibility': ''
+        });
       if (!_this.options.multipleOpened) {
         /**
          * Fires immediately before the modal opens.
@@ -5701,19 +5836,19 @@
       } else {
         if (_this.options.overlay) {
           _this.$overlay.show(0, function () {
-            _this.$element.show(_this.options.showDelay, function () {
-            });
+            _this.$element.show(_this.options.showDelay, function () {});
           });
         } else {
-          _this.$element.show(_this.options.showDelay, function () {
-          });
+          _this.$element.show(_this.options.showDelay, function () {});
         }
       }
     });
 
 
     // handle accessibility
-    this.$element.attr({ 'aria-hidden': false }).attr('tabindex', -1).focus()
+    this.$element.attr({
+        'aria-hidden': false
+      }).attr('tabindex', -1).focus()
       /**
        * Fires when the modal has successfully opened.
        * @event Reveal#open
@@ -5721,7 +5856,9 @@
       .trigger('open.zf.reveal');
 
     $('body').addClass('is-reveal-open')
-      .attr({ 'aria-hidden': (this.options.overlay || this.options.fullScreen) ? true : false });
+      .attr({
+        'aria-hidden': (this.options.overlay || this.options.fullScreen) ? true : false
+      });
     setTimeout(function () {
       _this._extraHandlers();
       // Foundation.reflow();
@@ -5809,15 +5946,13 @@
     if (this.options.animationOut) {
       Foundation.Motion.animateOut(this.$element, this.options.animationOut, function () {
         if (_this.options.overlay) {
-          Foundation.Motion.animateOut(_this.$overlay, 'fade-out', function () {
-          });
+          Foundation.Motion.animateOut(_this.$overlay, 'fade-out', function () {});
         }
       });
     } else {
       this.$element.hide(_this.options.hideDelay, function () {
         if (_this.options.overlay) {
-          _this.$overlay.hide(0, function () {
-          });
+          _this.$overlay.hide(0, function () {});
         }
       });
     }
@@ -5838,18 +5973,23 @@
       });
     }
 
-    $('body').removeClass('is-reveal-open').attr({ 'aria-hidden': false, 'tabindex': '' });
+    $('body').removeClass('is-reveal-open').attr({
+      'aria-hidden': false,
+      'tabindex': ''
+    });
 
     /**
-    * Resets the modal content
-    * This prevents a running video to keep going in the background
-    */
+     * Resets the modal content
+     * This prevents a running video to keep going in the background
+     */
     if (this.options.resetOnClose) {
       this.$element.html(this.$element.html());
     }
 
     this.isActive = false;
-    this.$element.attr({ 'aria-hidden': true })
+    this.$element.attr({
+        'aria-hidden': true
+      })
       /**
        * Fires when the modal is done closing.
        * @event Reveal#closed
@@ -5902,7 +6042,7 @@
  * @requires foundation.util.keyboard
  * @requires foundation.util.touch
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
 
   /**
@@ -6023,7 +6163,7 @@
      * @option
      * @example 200
      */
-    moveTime: 200,//update this if changing the transition time in the sass
+    moveTime: 200, //update this if changing the transition time in the sass
     /**
      * Class applied to disabled sliders.
      * @option
@@ -6091,10 +6231,13 @@
    */
   Slider.prototype._setHandlePos = function ($hndl, location, noInvert, cb) {
     //might need to alter that slightly for bars that will have odd number selections.
-    location = parseFloat(location);//on input change events, convert string to number...grumble.
+    location = parseFloat(location); //on input change events, convert string to number...grumble.
     // prevent slider from running out of bounds
-    if (location < this.options.start) { location = this.options.start; }
-    else if (location > this.options.end) { location = this.options.end; }
+    if (location < this.options.start) {
+      location = this.options.start;
+    } else if (location > this.options.end) {
+      location = this.options.end;
+    }
 
     var isDbl = this.options.doubleSided,
       callback = cb || null;
@@ -6122,20 +6265,23 @@
       pxToMove = (elemDim - halfOfHandle) * pctOfBar,
       movement = (percent(pxToMove, elemDim) * 100).toFixed(this.options.decimal),
       location = location > 0 ? parseFloat(location.toFixed(this.options.decimal)) : 0,
-      anim, prog, start = null, css = {};
+      anim, prog, start = null,
+      css = {};
 
     this._setValues($hndl, location);
 
-    if (this.options.doubleSided) {//update to calculate based on values set to respective inputs??
+    if (this.options.doubleSided) { //update to calculate based on values set to respective inputs??
       var isLeftHndl = this.handles.index($hndl) === 0,
         dim,
         idx = this.handles.index($hndl);
 
       if (isLeftHndl) {
-        css[lOrT] = (pctOfBar > 0 ? pctOfBar * 100 : 0) + '%';//
-        dim = /*Math.abs*/((percent(this.$handle2.position()[lOrT] + halfOfHandle, elemDim) - parseFloat(pctOfBar)) * 100).toFixed(this.options.decimal) + '%';
+        css[lOrT] = (pctOfBar > 0 ? pctOfBar * 100 : 0) + '%'; //
+        dim = /*Math.abs*/ ((percent(this.$handle2.position()[lOrT] + halfOfHandle, elemDim) - parseFloat(pctOfBar)) * 100).toFixed(this.options.decimal) + '%';
         css['min-' + hOrW] = dim;
-        if (cb && typeof cb === 'function') { cb(); }
+        if (cb && typeof cb === 'function') {
+          cb();
+        }
       } else {
         var handleLeft = parseFloat(this.$handle[0].style.left);
         location = (location < 100 ? location : 100) - (!isNaN(handleLeft) ? handleLeft : this.options.end - location);
@@ -6152,7 +6298,8 @@
       _this.$element.trigger('moved.zf.slider', [$hndl]);
     });
     var moveTime = _this.$element.data('dragging') ? 1000 / 60 : _this.options.moveTime;
-    /*var move = new */Foundation.Move(moveTime, $hndl, function () {
+    /*var move = new */
+    Foundation.Move(moveTime, $hndl, function () {
       $hndl.css(lOrT, movement + '%');
       if (!_this.options.doubleSided) {
         _this.$fill.css(hOrW, pctOfBar * 100 + '%');
@@ -6210,7 +6357,7 @@
    */
   Slider.prototype._handleEvent = function (e, $handle, val) {
     var value, hasVal;
-    if (!val) {//click or drag events
+    if (!val) { //click or drag events
       e.preventDefault();
       var _this = this,
         vertical = this.options.vertical,
@@ -6220,19 +6367,19 @@
         halfOfHandle = this.$handle[0].getBoundingClientRect()[param] / 2,
         barDim = this.$element[0].getBoundingClientRect()[param],
         barOffset = (this.$element.offset()[direction] - pageXY),
-        barXY = barOffset > 0 ? -halfOfHandle : (barOffset - halfOfHandle) < -barDim ? barDim : Math.abs(barOffset),//if the cursor position is less than or greater than the elements bounding coordinates, set coordinates within those bounds
+        barXY = barOffset > 0 ? -halfOfHandle : (barOffset - halfOfHandle) < -barDim ? barDim : Math.abs(barOffset), //if the cursor position is less than or greater than the elements bounding coordinates, set coordinates within those bounds
         // eleDim = this.$element[0].getBoundingClientRect()[param],
         offsetPct = percent(barXY, barDim);
       value = (this.options.end - this.options.start) * offsetPct;
       hasVal = false;
 
-      if (!$handle) {//figure out which handle it is, pass it to the next function.
+      if (!$handle) { //figure out which handle it is, pass it to the next function.
         var firstHndlPos = absPosition(this.$handle, direction, barXY, param),
           secndHndlPos = absPosition(this.$handle2, direction, barXY, param);
         $handle = firstHndlPos <= secndHndlPos ? this.$handle : this.$handle2;
       }
 
-    } else {//change event on input
+    } else { //change event on input
       value = val;
       hasVal = true;
     }
@@ -6246,7 +6393,9 @@
    * @param {jQuery} $handle - the current handle to apply listeners to.
    */
   Slider.prototype._events = function ($handle) {
-    if (this.options.disabled) { return false; }
+    if (this.options.disabled) {
+      return false;
+    }
 
     var _this = this,
       curHandle,
@@ -6259,7 +6408,9 @@
 
     if (this.options.clickSelect) {
       this.$element.off('click.zf.slider').on('click.zf.slider', function (e) {
-        if (_this.$element.data('dragging')) { return false; }
+        if (_this.$element.data('dragging')) {
+          return false;
+        }
         _this.animComplete = false;
         if (_this.options.doubleSided) {
           _this._handleEvent(e);
@@ -6278,7 +6429,7 @@
         .off('mousedown.zf.slider')
         .on('mousedown.zf.slider', function (e) {
           $handle.addClass('is-dragging');
-          _this.$fill.addClass('is-dragging');//
+          _this.$fill.addClass('is-dragging'); //
           _this.$element.data('dragging', true);
           _this.animComplete = false;
           curHandle = $(e.currentTarget);
@@ -6349,6 +6500,7 @@
   function percent(frac, num) {
     return (frac / num);
   }
+
   function absPosition($handle, dir, clickPos, param) {
     return Math.abs(($handle.position()[dir] + ($handle[param]() / 2)) - clickPos);
   }
@@ -6385,7 +6537,7 @@
  * @requires foundation.util.triggers
  * @requires foundation.util.mediaQuery
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
 
   /**
@@ -6489,7 +6641,9 @@
 
 
     this.$element.addClass(this.options.stickyClass)
-      .attr({ 'data-resize': id });
+      .attr({
+        'data-resize': id
+      });
 
     this.scrollCount = this.options.checkEvery;
     this.isStuck = false;
@@ -6533,7 +6687,10 @@
         breaks[i] = pt;
       }
     } else {
-      breaks = { 0: 1, 1: document.documentElement.scrollHeight };
+      breaks = {
+        0: 1,
+        1: document.documentElement.scrollHeight
+      };
     }
 
     this.points = breaks;
@@ -6548,7 +6705,9 @@
   Sticky.prototype._events = function (id) {
     var _this = this,
       scrollListener = this.scrollListener = 'scroll.zf.' + id;
-    if (this.isOn) { return; }
+    if (this.isOn) {
+      return;
+    }
     if (this.canStick) {
       this.isOn = true;
       $(window).off(scrollListener)
@@ -6604,7 +6763,9 @@
    * @param {Number} scroll - current scroll position passed from scroll event cb function. If not passed, defaults to `window.pageYOffset`.
    */
   Sticky.prototype._calc = function (checkSizes, scroll) {
-    if (checkSizes) { this._setSizes(); }
+    if (checkSizes) {
+      this._setSizes();
+    }
 
     if (!this.canStick) {
       if (this.isStuck) {
@@ -6613,7 +6774,9 @@
       return false;
     }
 
-    if (!scroll) { scroll = window.pageYOffset; }
+    if (!scroll) {
+      scroll = window.pageYOffset;
+    }
 
     if (scroll >= this.topPoint) {
       if (scroll <= this.bottomPoint) {
@@ -6708,7 +6871,9 @@
    */
   Sticky.prototype._setSizes = function (cb) {
     this.canStick = Foundation.MediaQuery.atLeast(this.options.stickyOn);
-    if (!this.canStick) { cb(); }
+    if (!this.canStick) {
+      cb();
+    }
     var _this = this,
       newElemWidth = this.$container[0].getBoundingClientRect().width,
       comp = window.getComputedStyle(this.$container[0]),
@@ -6732,11 +6897,15 @@
     this.elemHeight = newContainerHeight;
 
     if (this.isStuck) {
-      this.$element.css({ "left": this.$container.offset().left + parseInt(comp['padding-left'], 10) });
+      this.$element.css({
+        "left": this.$container.offset().left + parseInt(comp['padding-left'], 10)
+      });
     }
 
     this._setBreakPoints(newContainerHeight, function () {
-      if (cb) { cb(); }
+      if (cb) {
+        cb();
+      }
     });
 
   };
@@ -6748,8 +6917,11 @@
    */
   Sticky.prototype._setBreakPoints = function (elemHeight, cb) {
     if (!this.canStick) {
-      if (cb) { cb(); }
-      else { return false; }
+      if (cb) {
+        cb();
+      } else {
+        return false;
+      }
     }
     var mTop = emCalc(this.options.marginTop),
       mBtm = emCalc(this.options.marginBottom),
@@ -6772,7 +6944,9 @@
     this.topPoint = topPoint;
     this.bottomPoint = bottomPoint;
 
-    if (cb) { cb(); }
+    if (cb) {
+      cb();
+    }
   };
 
   /**
@@ -6822,7 +6996,7 @@
  * @requires foundation.util.keyboard
  * @requires foundation.util.timerAndImageLoader if tabs contain images
  */
-!function ($, Foundation) {
+! function ($, Foundation) {
   'use strict';
 
   /**
@@ -6910,7 +7084,9 @@
         linkId = hash + '-label',
         $tabContent = $(hash);
 
-      $elem.attr({ 'role': 'presentation' });
+      $elem.attr({
+        'role': 'presentation'
+      });
 
       $link.attr({
         'role': 'tab',
@@ -7031,18 +7207,26 @@
       $targetContent = $(hash),
 
       $oldTab = this.$element.find('.' + this.options.linkClass + '.is-active')
-        .removeClass('is-active').find('[role="tab"]')
-        .attr({ 'aria-selected': 'false' }).attr('href');
+      .removeClass('is-active').find('[role="tab"]')
+      .attr({
+        'aria-selected': 'false'
+      }).attr('href');
 
-    $($oldTab).removeClass('is-active').attr({ 'aria-hidden': 'true' });
+    $($oldTab).removeClass('is-active').attr({
+      'aria-hidden': 'true'
+    });
 
     $target.addClass('is-active');
 
-    $tabLink.attr({ 'aria-selected': 'true' });
+    $tabLink.attr({
+      'aria-selected': 'true'
+    });
 
     $targetContent
       .addClass('is-active')
-      .attr({ 'aria-hidden': 'false' });
+      .attr({
+        'aria-hidden': 'false'
+      });
 
     /**
      * Fires when the plugin has successfully changed tabs.
@@ -7088,12 +7272,18 @@
           isActive = panel.hasClass('is-active');
 
         if (!isActive) {
-          panel.css({ 'visibility': 'hidden', 'display': 'block' });
+          panel.css({
+            'visibility': 'hidden',
+            'display': 'block'
+          });
         }
         var temp = this.getBoundingClientRect().height;
 
         if (!isActive) {
-          panel.css({ 'visibility': '', 'display': '' });
+          panel.css({
+            'visibility': '',
+            'display': ''
+          });
         }
 
         max = temp > max ? temp : max;
@@ -7129,7 +7319,7 @@
  * @requires foundation.util.motion
  */
 
-!function (Foundation, $) {
+! function (Foundation, $) {
   'use strict';
 
   /**
@@ -7217,8 +7407,7 @@
        * @event Toggler#on
        */
       this.$element.trigger('on.zf.toggler');
-    }
-    else {
+    } else {
       /**
        * Fires if the target element does not have the class after a toggle.
        * @event Toggler#off
@@ -7237,8 +7426,7 @@
         this.trigger('on.zf.toggler');
         _this._updateARIA(true);
       });
-    }
-    else {
+    } else {
       Foundation.Motion.animateOut(this.$element, this.animationOut, function () {
         this.trigger('off.zf.toggler');
         _this._updateARIA(false);
@@ -7277,7 +7465,7 @@
  * @requires foundation.util.box
  * @requires foundation.util.triggers
  */
-!function ($, document, Foundation) {
+! function ($, document, Foundation) {
   'use strict';
 
   /**
@@ -7423,7 +7611,9 @@
    * @private
    */
   Tooltip.prototype._getPositionClass = function (element) {
-    if (!element) { return ''; }
+    if (!element) {
+      return '';
+    }
     // var position = element.attr('class').match(/top|left|right/g);
     var position = element[0].className.match(/(top|left|right)/g);
     position = position ? position[0] : '';

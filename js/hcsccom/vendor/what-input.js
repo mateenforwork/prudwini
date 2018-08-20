@@ -42,7 +42,7 @@ window.whatInput = (function () {
     17, // control
     18, // alt
     91, // Windows key / left Apple cmd
-    93  // Windows menu / right Apple cmd
+    93 // Windows menu / right Apple cmd
   ];
 
   // mapping of events to input types
@@ -130,7 +130,7 @@ window.whatInput = (function () {
       var eventTargetType = (eventTargetNode === 'input') ? eventTarget.getAttribute('type') : null;
 
       if (
-        (// only if the user flag to allow typing in form fields isn't set
+        ( // only if the user flag to allow typing in form fields isn't set
           !body.hasAttribute('data-whatinput-formtyping') &&
 
           // only if currentInput has a value
@@ -241,8 +241,8 @@ window.whatInput = (function () {
       'wheel' : // Modern browsers support "wheel"
 
       document.onmousewheel !== undefined ?
-        'mousewheel' : // Webkit and IE support at least "mousewheel"
-        'DOMMouseScroll'; // let's assume that remaining browsers are older Firefox
+      'mousewheel' : // Webkit and IE support at least "mousewheel"
+      'DOMMouseScroll'; // let's assume that remaining browsers are older Firefox
   }
 
 
@@ -280,13 +280,19 @@ window.whatInput = (function () {
   return {
 
     // returns string: the current input type
-    ask: function () { return currentInput; },
+    ask: function () {
+      return currentInput;
+    },
 
     // returns array: currently pressed keys
-    keys: function () { return activeKeys; },
+    keys: function () {
+      return activeKeys;
+    },
 
     // returns array: all the detected input types
-    types: function () { return inputTypes; },
+    types: function () {
+      return inputTypes;
+    },
 
     // accepts string: manually set the input type
     set: switchInput

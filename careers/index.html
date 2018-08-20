@@ -24,7 +24,9 @@
 
 
 	<div id="header"></div>
-	<script>$("#header").load("includes/page_components/header.html");</script>
+	<script>
+		$("#header").load("includes/page_components/header.html");
+	</script>
 
 
 
@@ -43,7 +45,6 @@
 	</div>
 
 	<script>
-
 		$(window).load(function () {
 
 			$('#hbt-1').fadeOut(function () {
@@ -80,7 +81,6 @@
 			};
 
 		});
-
 	</script>
 
 	<style>
@@ -114,22 +114,25 @@
 
 	<div class="row" id="home-values-container">
 		<div class="large-4 columns">
-			<h3 class="one"><img src="img/svg/icon_purpose.svg" alt="Purpose and Values Icon">Purpose &amp; Values</h3>
+			<h3 class="one">
+				<img src="img/svg/icon_purpose.svg" alt="Purpose and Values Icon">Purpose &amp; Values</h3>
 			<p>At HCSC, we are there for our members—in sickness and in health—and we strive to do right by them because their trust
 				in us matters. We value diversity and inclusion because diverse perspectives, experiences and approaches foster a stronger,
 				smarter and more informed business.</p>
 			<a href="about-us/purpose-values.html" aria-label="Read more about our purpose and values">&#8212; Read More</a>
 		</div>
 		<div class="large-4 columns">
-			<h3 class="two"><img src="img/svg/icon_culture.svg" alt="Culture Icon">Culture</h3>
+			<h3 class="two">
+				<img src="img/svg/icon_culture.svg" alt="Culture Icon">Culture</h3>
 			<p>HCSC is an organization of purpose-driven performance. With our members at the center of all we do, we bring authenticity
 				to our work and innovate for competitive advantage, for our members and our company. </p>
 			<a href="about-us/culture.html" aria-label="Learn more about our culture">&#8212; Learn More</a>
 		</div>
 		<div class="large-4 columns">
-			<h3 class="three"><img src="img/svg/icon_rewards.svg" alt="Total Rewards Icon">Total Rewards</h3>
-			<p>From a comprehensive suite of financial and medical benefits to well-established professional development programs,
-				HCSC is there for our employees—just as we are there for our members.</p>
+			<h3 class="three">
+				<img src="img/svg/icon_rewards.svg" alt="Total Rewards Icon">Total Rewards</h3>
+			<p>From a comprehensive suite of financial and medical benefits to well-established professional development programs, HCSC
+				is there for our employees—just as we are there for our members.</p>
 			<a href="total-rewards/index.html" aria-label="Read more about total rewards">&#8212; Read More</a>
 		</div>
 	</div>
@@ -162,8 +165,6 @@
 	</div>-->
 
 	<script>
-
-
 		function videoReplace() {
 
 			$('#highlights').css('padding', '0');
@@ -175,7 +176,9 @@
 			$('#careers-areas').addClass('vidClick');
 
 
-			$("#video-holder").html('<div class="videoWrapper" style="margin-bottom:0;"><iframe src="https://www.youtube.com/embed/yZbv6skzfck?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></div>');
+			$("#video-holder").html(
+				'<div class="videoWrapper" style="margin-bottom:0;"><iframe src="https://www.youtube.com/embed/yZbv6skzfck?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe></div>'
+			);
 
 			var windowWidth = window.innerWidth;
 			//var vidClick = $(#careers-areas).hasClass("vidClick");
@@ -207,8 +210,7 @@
 
 				//$('#careers-areas').css('height', y);
 
-			}
-			else {
+			} else {
 				//$('#careers-areas').css('height', 'auto');
 				//$('#highlights').css('height', 'auto');
 
@@ -216,8 +218,6 @@
 
 
 		});
-
-
 	</script>
 
 	<div class="row small-collapse">
@@ -231,9 +231,11 @@
 					<div class="text-container">
 
 						<h2>What our people are saying</h2>
-						<p>"HCSC is like your neighbor or your buddy down the street. Always been there. Will always be there. People very
-							dedicated to their jobs—it’s a passion as well."</p>
-						<p class="title"><strong>Joe</strong><br>Unit Manager Facilities </p>
+						<p>"HCSC is like your neighbor or your buddy down the street. Always been there. Will always be there. People very dedicated
+							to their jobs—it’s a passion as well."</p>
+						<p class="title">
+							<strong>Joe</strong>
+							<br>Unit Manager Facilities </p>
 					</div>
 				</div>
 
@@ -242,7 +244,9 @@
 					<div class="text-container">
 						<h2>What our people are saying</h2>
 						<p>"Reimagining means coming together as one team with the new technology and new way."</p>
-						<p class="title"><strong>Sylvia</strong><br>Business Systems Analyst</p>
+						<p class="title">
+							<strong>Sylvia</strong>
+							<br>Business Systems Analyst</p>
 					</div>
 				</div>
 
@@ -251,9 +255,12 @@
 					<div class="text-container">
 
 						<h2>What our people are saying</h2>
-						<p>"Our leaders are visionary because they stay true to that purpose&mdash;"to do everything in our power to stand
-							with our members in sickness and in health<sup>&reg;</sup>"&mdash;and that shines through in everything they do."</p>
-						<p class="title"><strong>Jackson</strong><br>Divisional Senior Vice President, Service Delivery Operations</p>
+						<p>"Our leaders are visionary because they stay true to that purpose&mdash;"to do everything in our power to stand with
+							our members in sickness and in health
+							<sup>&reg;</sup>"&mdash;and that shines through in everything they do."</p>
+						<p class="title">
+							<strong>Jackson</strong>
+							<br>Divisional Senior Vice President, Service Delivery Operations</p>
 					</div>
 				</div>
 
@@ -294,7 +301,9 @@
 
 
 	<div id="footer"></div>
-	<script>$("#footer").load("includes/page_components/footer.html");</script>
+	<script>
+		$("#footer").load("includes/page_components/footer.html");
+	</script>
 
 
 
@@ -309,7 +318,7 @@
 		//<![CDATA[
 		var _tag = new WebTrends();
 		_tag.dcsGetId();
-        //]]>>
+		//]]>>
 	</script>
 
 	<script type="text/javascript">
@@ -317,7 +326,7 @@
 		// Add custom parameters here.
 		//_tag.DCSext.param_name=param_value;
 		_tag.dcsCollect();
-        //]]>>
+		//]]>>
 	</script>
 
 	<noscript>

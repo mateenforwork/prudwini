@@ -53,11 +53,29 @@ function WebTrends() {
 	this.images = [];
 	this.index = 0;
 
-	this.exre = (function () { return (window.RegExp ? new RegExp("dcs(uri)|(ref)|(aut)|(met)|(sta)|(sip)|(pro)|(byt)|(dat)|(p3p)|(cfg)|(redirect)|(cip)", "i") : ""); })();
-	this.re = (function () { return (window.RegExp ? (that.i18n ? { "%25": /\%/g, "%26": /\&/g } : { "%09": /\t/g, "%20": / /g, "%23": /\#/g, "%26": /\&/g, "%2B": /\+/g, "%3F": /\?/g, "%5C": /\\/g, "%22": /\"/g, "%7F": /\x7F/g, "%A0": /\xA0/g }) : ""); })();
+	this.exre = (function () {
+		return (window.RegExp ? new RegExp("dcs(uri)|(ref)|(aut)|(met)|(sta)|(sip)|(pro)|(byt)|(dat)|(p3p)|(cfg)|(redirect)|(cip)", "i") : "");
+	})();
+	this.re = (function () {
+		return (window.RegExp ? (that.i18n ? {
+			"%25": /\%/g,
+			"%26": /\&/g
+		} : {
+			"%09": /\t/g,
+			"%20": / /g,
+			"%23": /\#/g,
+			"%26": /\&/g,
+			"%2B": /\+/g,
+			"%3F": /\?/g,
+			"%5C": /\\/g,
+			"%22": /\"/g,
+			"%7F": /\x7F/g,
+			"%A0": /\xA0/g
+		}) : "");
+	})();
 }
 WebTrends.prototype.dcsGetId = function () {
-	var sdcIP = "id=2";// Actual SDC IP: "172.29.17.145";
+	var sdcIP = "id=2"; // Actual SDC IP: "172.29.17.145";
 	if (this.dcsGetCookie(this.FPCConfig.name) &&
 		this.dcsGetCookie(this.FPCConfig.name).indexOf(sdcIP) > -1) {
 		var epoch = new Date(1);
@@ -100,8 +118,7 @@ WebTrends.prototype.dcsGetCookie = function (name) {
 			}
 		}
 		return unescape(cmatch[idx].substring(namelen + 1));
-	}
-	else {
+	} else {
 		return null;
 	}
 }
@@ -167,12 +184,10 @@ WebTrends.prototype.dcsFPC = function () {
 	if (document.cookie.indexOf(name + "=") == -1) {
 		if ((typeof (gWtId) != "undefined") && (gWtId != "")) {
 			WT.co_f = gWtId;
-		}
-		else if ((typeof (gTempWtId) != "undefined") && (gTempWtId != "")) {
+		} else if ((typeof (gTempWtId) != "undefined") && (gTempWtId != "")) {
 			WT.co_f = gTempWtId;
 			WT.vt_f = "1";
-		}
-		else {
+		} else {
 			WT.co_f = "2";
 			var curt = dCur.getTime().toString();
 			for (var i = 2; i <= (32 - curt.length); i++) {
@@ -186,8 +201,7 @@ WebTrends.prototype.dcsFPC = function () {
 		}
 		WT.vt_f_s = WT.vt_f_d = "1";
 		WT.vt_f_tlh = WT.vt_f_tlv = "0";
-	}
-	else {
+	} else {
 		var c = this.dcsGetCookie(name);
 		var id = this.dcsGetIdCrumb(c, "id");
 		var lv = parseInt(this.dcsGetCrumb(c, "lv"));
@@ -232,8 +246,7 @@ WebTrends.prototype.dcsIsOnsite = function (host) {
 		}
 		if (typeof (this.onsitedoms.test) == "function") {
 			return this.onsitedoms.test(host);
-		}
-		else if (this.onsitedoms.length > 0) {
+		} else if (this.onsitedoms.length > 0) {
 			var doms = this.dcsSplit(this.onsitedoms);
 			var len = doms.length;
 			for (var i = 0; i < len; i++) {
@@ -286,8 +299,7 @@ WebTrends.prototype.dcsBind = function (event, func) {
 	if ((typeof (func) == "function") && document.body) {
 		if (document.body.addEventListener) {
 			document.body.addEventListener(event, func.wtbind(this), true);
-		}
-		else if (document.body.attachEvent) {
+		} else if (document.body.attachEvent) {
 			document.body.attachEvent("on" + event, func.wtbind(this));
 		}
 	}
@@ -332,11 +344,9 @@ WebTrends.prototype.dcsSetProps = function (args) {
 	for (var i = 0; i < args.length; i += 2) {
 		if (args[i].indexOf('WT.') == 0) {
 			this.WT[args[i].substring(3)] = args[i + 1];
-		}
-		else if (args[i].indexOf('DCS.') == 0) {
+		} else if (args[i].indexOf('DCS.') == 0) {
 			this.DCS[args[i].substring(4)] = args[i + 1];
-		}
-		else if (args[i].indexOf('DCSext.') == 0) {
+		} else if (args[i].indexOf('DCSext.') == 0) {
 			this.DCSext[args[i].substring(7)] = args[i + 1];
 		}
 	}
@@ -352,14 +362,12 @@ WebTrends.prototype.dcsSaveProps = function (args) {
 				this.args[x] = param;
 				this.args[x + 1] = this.WT[key] || "";
 				x += 2;
-			}
-			else if (param.indexOf('DCS.') == 0) {
+			} else if (param.indexOf('DCS.') == 0) {
 				key = param.substring(4);
 				this.args[x] = param;
 				this.args[x + 1] = this.DCS[key] || "";
 				x += 2;
-			}
-			else if (param.indexOf('DCSext.') == 0) {
+			} else if (param.indexOf('DCSext.') == 0) {
 				key = param.substring(7);
 				this.args[x] = param;
 				this.args[x + 1] = this.DCSext[key] || "";
@@ -431,11 +439,9 @@ WebTrends.prototype.dcsDownload = function (evt) {
 				var img = this.dcsEvt(evt, "IMG");
 				if (img.alt) {
 					ttl = img.alt;
-				}
-				else if (text) {
+				} else if (text) {
 					ttl = text;
-				}
-				else if (e.innerHTML) {
+				} else if (e.innerHTML) {
 					ttl = e.innerHTML;
 				}
 				this.dcsMultiTrack("DCS.dcssip", hn, "DCS.dcsuri", pth, "DCS.dcsqry", e.search || "", "WT.ti", "Download:" + ttl, "WT.dl", "20", "WT.nv", this.dcsNavigation(evt));
@@ -499,8 +505,7 @@ WebTrends.prototype.dcsDynamic = function (evt) {
 			if (e.protocol == "javascript:") {
 				this.dcsMultiTrack("DCS.dcssip", "", "DCS.dcsuri", e.href, "WT.ti", "JavaScript:" + e.innerHTML, "WT.dl", "22", "WT.nv", this.dcsNavigation(evt));
 				this.DCS.dcssip = this.DCS.dcsuri = this.WT.ti = this.WT.cl = this.WT.nv = "";
-			}
-			else if (e.protocol == "mailto:") {
+			} else if (e.protocol == "mailto:") {
 				this.dcsMultiTrack("DCS.dcssip", "", "DCS.dcsuri", e.href, "WT.ti", "MailTo:" + e.innerHTML, "WT.dl", "23", "WT.nv", this.dcsNavigation(evt));
 			}
 		}
@@ -524,8 +529,7 @@ WebTrends.prototype.dcsFormButton = function (evt) {
 					uri = e.form.action || window.location.pathname;
 					ttl = e.form.id || e.form.name || e.form.className || "Unknown";
 					id = (e.form.method && (e.form.method.toLowerCase() == "post")) ? "27" : "26";
-				}
-				else {
+				} else {
 					uri = window.location.pathname;
 					ttl = e.name || e.id || "Unknown";
 					id = (tags[j].toLowerCase() == "input") ? "28" : "29";
@@ -583,8 +587,7 @@ WebTrends.prototype.dcsImageMap = function (evt) {
 				if (map) {
 					if (map.name) {
 						ttl = map.name;
-					}
-					else if (map.id) {
+					} else if (map.id) {
 						ttl = map.id;
 					}
 				}
@@ -598,8 +601,7 @@ WebTrends.prototype.dcsAdv = function () {
 	if (this.trackevents && (typeof (this.dcsET) == "function")) {
 		if (window.addEventListener) {
 			window.addEventListener("load", this.dcsET.wtbind(this), false);
-		}
-		else if (window.attachEvent) {
+		} else if (window.attachEvent) {
 			window.attachEvent("onload", this.dcsET.wtbind(this));
 		}
 	}
@@ -623,8 +625,7 @@ WebTrends.prototype.dcsVar = function () {
 		if (window.RegExp) {
 			var tire = new RegExp("^" + window.location.protocol + "//" + window.location.hostname + "\\s-\\s");
 			WT.ti = document.title.replace(tire, "");
-		}
-		else {
+		} else {
 			WT.ti = document.title;
 		}
 	}
@@ -652,23 +653,17 @@ WebTrends.prototype.dcsVar = function () {
 		var jv = "1.1";
 		if (ff3up) {
 			jv = "1.8";
-		}
-		else if (ff20) {
+		} else if (ff20) {
 			jv = "1.7";
-		}
-		else if (ff15) {
+		} else if (ff15) {
 			jv = "1.6";
-		}
-		else if (ff0 || ff10 || nn6up || op7up) {
+		} else if (ff0 || ff10 || nn6up || op7up) {
 			jv = "1.5";
-		}
-		else if ((mac && ie5up) || op6) {
+		} else if ((mac && ie5up) || op6) {
 			jv = "1.4";
-		}
-		else if (ie5up || nn4 || op5) {
+		} else if (ie5up || nn4 || op5) {
 			jv = "1.3";
-		}
-		else if (ie4) {
+		} else if (ie4) {
 			jv = "1.2";
 		}
 		return jv;
@@ -680,14 +675,11 @@ WebTrends.prototype.dcsVar = function () {
 			WT.ct = document.body.connectionType || "unknown";
 			document.body.addBehavior("#default#homePage");
 			WT.hp = document.body.isHomePage(location.href) ? "1" : "0";
-		}
-		catch (e) {
-		}
+		} catch (e) {}
 	}
 	if (document.all) {
 		WT.bs = document.body ? document.body.offsetWidth + "x" + document.body.offsetHeight : "unknown";
-	}
-	else {
+	} else {
 		WT.bs = window.innerWidth + "x" + window.innerHeight;
 	}
 	WT.fv = (function () {
@@ -697,12 +689,9 @@ WebTrends.prototype.dcsVar = function () {
 				try {
 					flash = new ActiveXObject("ShockwaveFlash.ShockwaveFlash." + i);
 					return i + ".0";
-				}
-				catch (e) {
-				}
+				} catch (e) {}
 			}
-		}
-		else if (navigator.plugins && navigator.plugins.length) {
+		} else if (navigator.plugins && navigator.plugins.length) {
 			for (i = 0; i < navigator.plugins.length; i++) {
 				if (navigator.plugins[i].name.indexOf('Shockwave Flash') != -1) {
 					return navigator.plugins[i].description.split(" ")[2];
@@ -719,13 +708,10 @@ WebTrends.prototype.dcsVar = function () {
 				if (sli) {
 					slv = "Unknown";
 				}
-			}
-			else if (navigator.plugins["Silverlight Plug-In"]) {
+			} else if (navigator.plugins["Silverlight Plug-In"]) {
 				slv = "Unknown";
 			}
-		}
-		catch (e) {
-		}
+		} catch (e) {}
 		if (slv != "Not enabled") {
 			var i, m, M, F;
 			if ((typeof (Silverlight) == "object") && (typeof (Silverlight.isInstalled) == "function")) {
@@ -755,11 +741,9 @@ WebTrends.prototype.dcsVar = function () {
 	if (this.i18n) {
 		if (typeof (document.defaultCharset) == "string") {
 			WT.le = document.defaultCharset;
-		}
-		else if (typeof (document.characterSet) == "string") {
+		} else if (typeof (document.characterSet) == "string") {
 			WT.le = document.characterSet;
-		}
-		else {
+		} else {
 			WT.le = "unknown";
 		}
 	}
@@ -813,8 +797,7 @@ WebTrends.prototype.dcsEscape = function (S, REL) {
 			}
 		}
 		return S;
-	}
-	else {
+	} else {
 		return escape(S);
 	}
 }
@@ -836,8 +819,7 @@ WebTrends.prototype.dcsA = function (N, V) {
 				}
 			}
 			V = V.substring(0, 1) + newV;
-		}
-		else {
+		} else {
 			V = this.dcsEncode(V);
 		}
 	}
@@ -851,8 +833,7 @@ WebTrends.prototype.dcsCreateImage = function (dcsSrc) {
 		this.images[this.index] = new Image();
 		this.images[this.index].src = dcsSrc;
 		this.index++;
-	}
-	else {
+	} else {
 		document.write('<IMG ALT="" BORDER="0" NAME="DCSIMG" WIDTH="1" HEIGHT="1" SRC="' + dcsSrc + '">');
 	}
 }
@@ -860,8 +841,7 @@ WebTrends.prototype.dcsMeta = function () {
 	var elems;
 	if (document.documentElement) {
 		elems = document.getElementsByTagName("meta");
-	}
-	else if (document.all) {
+	} else if (document.all) {
 		elems = document.all.tags("meta");
 	}
 	if (typeof (elems) != "undefined") {
@@ -873,11 +853,9 @@ WebTrends.prototype.dcsMeta = function () {
 			if (name.length > 0) {
 				if (name.toUpperCase().indexOf("WT.") == 0) {
 					this.WT[name.substring(3)] = content;
-				}
-				else if (name.toUpperCase().indexOf("DCSEXT.") == 0) {
+				} else if (name.toUpperCase().indexOf("DCSEXT.") == 0) {
 					this.DCSext[name.substring(7)] = content;
-				}
-				else if (name.toUpperCase().indexOf("DCS.") == 0) {
+				} else if (name.toUpperCase().indexOf("DCS.") == 0) {
 					this.DCS[name.substring(4)] = content;
 				}
 			}
@@ -989,7 +967,8 @@ WebTrends.prototype.dcsRetailCookieManagement = function () {
 			fqdCookie = this.dcsGetCookie("FirstQuoteDate"),
 			scenarioNames = scenarioName.split(';'),
 			scenarioSteps = scenarioStep.split(';'),
-			retailCookiesExist = vsqCookie !== null && fqdCookie !== null, i, shopIndex = -1;
+			retailCookiesExist = vsqCookie !== null && fqdCookie !== null,
+			i, shopIndex = -1;
 		for (i = 0; i < scenarioNames.length && shopIndex === -1; i++) {
 			if (scenarioNames[i] === "Shop") {
 				shopIndex = i;
@@ -999,8 +978,10 @@ WebTrends.prototype.dcsRetailCookieManagement = function () {
 			if (scenarioSteps[shopIndex] === "10") {
 				// Shop converted, pass cookies if they exist
 				if (retailCookiesExist) {
-					var vtbCookie = this.dcsGetCookie("VisitsToBCBS"), currentVTB = (vtbCookie !== null) ? parseInt(vtbCookie) : 0,
-						vfbCookie = this.dcsGetCookie("VisitsFromBCBS"), currentVFB = (vfbCookie !== null) ? parseInt(vfbCookie) : 0,
+					var vtbCookie = this.dcsGetCookie("VisitsToBCBS"),
+						currentVTB = (vtbCookie !== null) ? parseInt(vtbCookie) : 0,
+						vfbCookie = this.dcsGetCookie("VisitsFromBCBS"),
+						currentVFB = (vfbCookie !== null) ? parseInt(vfbCookie) : 0,
 						currentVSQ = parseInt(vsqCookie);
 					this.WT.z_firstquotedate = fqdCookie;
 					this.WT.z_visitstosubmit = (currentVSQ + currentVTB - currentVFB) + "";
@@ -1033,11 +1014,11 @@ WebTrends.prototype.dcsRetailCookieManagement = function () {
 			vtbParam !== null) {
 			this.dcsUpdateHallmarkCookies(vtbParam);
 		}
-	} else {// The view is from an IFRAME to initialize cookies
+	} else { // The view is from an IFRAME to initialize cookies
 		var fqdParam = this.dcsParseQueryParameter("FirstQuoteDate");
 		if (fqdParam !== null) {
 			this.dcsSetRetailCookies(true);
-		} else {// Must be a CLEAR request
+		} else { // Must be a CLEAR request
 			this.dcsClearRetailCookies(false);
 		}
 	}
@@ -1076,7 +1057,8 @@ WebTrends.prototype.dcsClearRetailCookies = function (clearOtherDomain) {
 
 // Helper function to manage cookies on the Hallmark site 
 WebTrends.prototype.dcsUpdateHallmarkCookies = function (vtbParam) {
-	var vfbCookie = this.dcsGetCookie("VisitsFromBCBS"), currentVFB = (vfbCookie === null) ? 0 : parseInt(vfbCookie),
+	var vfbCookie = this.dcsGetCookie("VisitsFromBCBS"),
+		currentVFB = (vfbCookie === null) ? 0 : parseInt(vfbCookie),
 		currentVTB = (vtbCookie === null) ? 0 : parseInt(vtbCookie);
 	this.dcsSetPersistentCookie("VisitsToBCBS", currentVTB);
 	this.dcsSetPersistentCookie("VisitsFromBCBS", currentVFB + 1);
@@ -1168,7 +1150,8 @@ WebTrends.prototype.dcsAppendToHallmarkLinks = function () {
 	if (vtbCookie !== null) {
 		var links = document.links;
 		if (links !== null) {
-			var numLinks = links.length, i, currentLink;
+			var numLinks = links.length,
+				i, currentLink;
 			for (i = 0; i < numLinks; i++) {
 				currentLink = links[i], currentHREF = currentLink.href;
 				if (currentHREF.indexOf("osc.hscil.com") > -1 && document.domain.match(/bcbs\w\w(\.com|-uat|-stg)/) !== null) {
@@ -1212,7 +1195,8 @@ WebTrends.prototype.dcsStoreSource = function () {
 	if (recentSource !== null) {
 		var links = document.links;
 		if (links !== null) {
-			var numLinks = links.length, i, currentLink;
+			var numLinks = links.length,
+				i, currentLink;
 			for (i = 0; i < numLinks; i++) {
 				currentLink = links[i], currentHREF = currentLink.href;
 				if ((currentHREF.indexOf("osc.hscil.com") > -1 || currentHREF.match(/shopbyprice(|-uat|-qa)\.hcsc\.net/) !== null || currentHREF.match(/retailweb(|-uat|-qa)\.hcsc\.net/) !== null) && document.domain.match(/bcbs\w\w(\.com|-uat|-stg)/) !== null) {
@@ -1228,7 +1212,9 @@ WebTrends.prototype.dcsStoreSource = function () {
 WebTrends.prototype.dcsPauseBrowser = function (delay) {
 	var date = new Date();
 	var curDate = null;
-	do { curDate = new Date(); }
+	do {
+		curDate = new Date();
+	}
 	while (curDate.getTime() - date.getTime() < delay);
 };
 WebTrends.prototype.dcsCollect = function () {
@@ -1348,6 +1334,8 @@ function dcsCollectUserInfo() {
 
 	var date = new Date();
 	var curDate = null;
-	do { curDate = new Date(); }
+	do {
+		curDate = new Date();
+	}
 	while (curDate.getTime() - date.getTime() < 500);
 }

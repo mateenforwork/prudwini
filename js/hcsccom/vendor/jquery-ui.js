@@ -1,7 +1,7 @@
 /*! jQuery UI - v1.11.1 - 2014-08-13
-* http://jqueryui.com
-* Includes: core.js, widget.js, mouse.js, position.js, accordion.js, autocomplete.js, button.js, datepicker.js, dialog.js, draggable.js, droppable.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js, effect-transfer.js, menu.js, progressbar.js, resizable.js, selectable.js, selectmenu.js, slider.js, sortable.js, spinner.js, tabs.js, tooltip.js
-* Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
+ * http://jqueryui.com
+ * Includes: core.js, widget.js, mouse.js, position.js, accordion.js, autocomplete.js, button.js, datepicker.js, dialog.js, draggable.js, droppable.js, effect.js, effect-blind.js, effect-bounce.js, effect-clip.js, effect-drop.js, effect-explode.js, effect-fade.js, effect-fold.js, effect-highlight.js, effect-puff.js, effect-pulsate.js, effect-scale.js, effect-shake.js, effect-size.js, effect-slide.js, effect-transfer.js, menu.js, progressbar.js, resizable.js, selectable.js, selectmenu.js, slider.js, sortable.js, spinner.js, tabs.js, tooltip.js
+ * Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
 
 (function (factory) {
 	if (typeof define === "function" && define.amd) {
@@ -104,8 +104,8 @@
 			return !!img && visible(img);
 		}
 		return (/input|select|textarea|button|object/.test(nodeName) ?
-			!element.disabled :
-			"a" === nodeName ?
+				!element.disabled :
+				"a" === nodeName ?
 				element.href || isTabIndexNotNaN :
 				isTabIndexNotNaN) &&
 			// the element and all of its ancestors must be visible
@@ -253,7 +253,8 @@
 			}
 
 			if (this.length) {
-				var elem = $(this[0]), position, value;
+				var elem = $(this[0]),
+					position, value;
 				while (elem.length && elem[0] !== document) {
 					// Ignore z-index if position is set to a value where z-index is ignored by the browser
 					// This makes behavior of this function consistent across browsers
@@ -326,7 +327,8 @@
 	$.cleanData = (function (orig) {
 		return function (elems) {
 			var events, elem, i;
-			for (i = 0; (elem = elems[i]) != null; i++) {
+			for (i = 0;
+				(elem = elems[i]) != null; i++) {
 				try {
 
 					// Only trigger remove when necessary to save time
@@ -336,7 +338,7 @@
 					}
 
 					// http://bugs.jquery.com/ticket/8235
-				} catch (e) { }
+				} catch (e) {}
 			}
 			orig(elems);
 		};
@@ -399,8 +401,8 @@
 			}
 			proxiedPrototype[prop] = (function () {
 				var _super = function () {
-					return base.prototype[prop].apply(this, arguments);
-				},
+						return base.prototype[prop].apply(this, arguments);
+					},
 					_superApply = function (args) {
 						return base.prototype[prop].apply(this, args);
 					};
@@ -427,11 +429,11 @@
 			// don't prefix for widgets that aren't DOM-based
 			widgetEventPrefix: existingConstructor ? (basePrototype.widgetEventPrefix || name) : name
 		}, proxiedPrototype, {
-				constructor: constructor,
-				namespace: namespace,
-				widgetName: name,
-				widgetFullName: fullName
-			});
+			constructor: constructor,
+			namespace: namespace,
+			widgetName: name,
+			widgetFullName: fullName
+		});
 
 		// If this widget is being redefined then we need to find all widgets that
 		// are inheriting from it and redefine all of them so that they inherit from
@@ -536,7 +538,7 @@
 		};
 	};
 
-	$.Widget = function ( /* options, element */) { };
+	$.Widget = function ( /* options, element */ ) {};
 	$.Widget._childConstructors = [];
 
 	$.Widget.prototype = {
@@ -683,10 +685,14 @@
 		},
 
 		enable: function () {
-			return this._setOptions({ disabled: false });
+			return this._setOptions({
+				disabled: false
+			});
 		},
 		disable: function () {
-			return this._setOptions({ disabled: true });
+			return this._setOptions({
+				disabled: true
+			});
 		},
 
 		_on: function (suppressDisabledCheck, element, handlers) {
@@ -809,20 +815,27 @@
 		}
 	};
 
-	$.each({ show: "fadeIn", hide: "fadeOut" }, function (method, defaultEffect) {
+	$.each({
+		show: "fadeIn",
+		hide: "fadeOut"
+	}, function (method, defaultEffect) {
 		$.Widget.prototype["_" + method] = function (element, options, callback) {
 			if (typeof options === "string") {
-				options = { effect: options };
+				options = {
+					effect: options
+				};
 			}
 			var hasOptions,
 				effectName = !options ?
-					method :
-					options === true || typeof options === "number" ?
-						defaultEffect :
-						options.effect || defaultEffect;
+				method :
+				options === true || typeof options === "number" ?
+				defaultEffect :
+				options.effect || defaultEffect;
 			options = options || {};
 			if (typeof options === "number") {
-				options = { duration: options };
+				options = {
+					duration: options
+				};
 			}
 			hasOptions = !$.isEmptyObject(options);
 			options.complete = callback;
@@ -1006,19 +1019,20 @@
 			return (Math.max(
 				Math.abs(this._mouseDownEvent.pageX - event.pageX),
 				Math.abs(this._mouseDownEvent.pageY - event.pageY)
-			) >= this.options.distance
-			);
+			) >= this.options.distance);
 		},
 
-		_mouseDelayMet: function (/* event */) {
+		_mouseDelayMet: function ( /* event */ ) {
 			return this.mouseDelayMet;
 		},
 
 		// These are placeholder methods, to be overriden by extending plugin
-		_mouseStart: function (/* event */) { },
-		_mouseDrag: function (/* event */) { },
-		_mouseStop: function (/* event */) { },
-		_mouseCapture: function (/* event */) { return true; }
+		_mouseStart: function ( /* event */ ) {},
+		_mouseDrag: function ( /* event */ ) {},
+		_mouseStop: function ( /* event */ ) {},
+		_mouseCapture: function ( /* event */ ) {
+			return true;
+		}
 	});
 
 
@@ -1065,21 +1079,30 @@
 				return {
 					width: elem.width(),
 					height: elem.height(),
-					offset: { top: 0, left: 0 }
+					offset: {
+						top: 0,
+						left: 0
+					}
 				};
 			}
 			if ($.isWindow(raw)) {
 				return {
 					width: elem.width(),
 					height: elem.height(),
-					offset: { top: elem.scrollTop(), left: elem.scrollLeft() }
+					offset: {
+						top: elem.scrollTop(),
+						left: elem.scrollLeft()
+					}
 				};
 			}
 			if (raw.preventDefault) {
 				return {
 					width: 0,
 					height: 0,
-					offset: { top: raw.pageY, left: raw.pageX }
+					offset: {
+						top: raw.pageY,
+						left: raw.pageX
+					}
 				};
 			}
 			return {
@@ -1116,11 +1139,11 @@
 				var overflowX = within.isWindow || within.isDocument ? "" :
 					within.element.css("overflow-x"),
 					overflowY = within.isWindow || within.isDocument ? "" :
-						within.element.css("overflow-y"),
+					within.element.css("overflow-y"),
 					hasOverflowX = overflowX === "scroll" ||
-						(overflowX === "auto" && within.width < within.element[0].scrollWidth),
+					(overflowX === "auto" && within.width < within.element[0].scrollWidth),
 					hasOverflowY = overflowY === "scroll" ||
-						(overflowY === "auto" && within.height < within.element[0].scrollHeight);
+					(overflowY === "auto" && within.height < within.element[0].scrollHeight);
 				return {
 					width: hasOverflowY ? $.position.scrollbarWidth() : 0,
 					height: hasOverflowX ? $.position.scrollbarWidth() : 0
@@ -1134,7 +1157,10 @@
 					element: withinElement,
 					isWindow: isWindow,
 					isDocument: isDocument,
-					offset: withinElement.offset() || { left: 0, top: 0 },
+					offset: withinElement.offset() || {
+						left: 0,
+						top: 0
+					},
 					scrollLeft: withinElement.scrollLeft(),
 					scrollTop: withinElement.scrollTop(),
 
@@ -1182,9 +1208,7 @@
 				if (pos.length === 1) {
 					pos = rhorizontal.test(pos[0]) ?
 						pos.concat(["center"]) :
-						rvertical.test(pos[0]) ?
-							["center"].concat(pos) :
-							["center", "center"];
+						rvertical.test(pos[0]) ? ["center"].concat(pos) : ["center", "center"];
 				}
 				pos[0] = rhorizontal.test(pos[0]) ? pos[0] : "center";
 				pos[1] = rvertical.test(pos[1]) ? pos[1] : "center";
@@ -1322,7 +1346,9 @@
 					};
 				}
 
-				elem.offset($.extend(position, { using: using }));
+				elem.offset($.extend(position, {
+					using: using
+				}));
 			});
 		};
 
@@ -1413,15 +1439,15 @@
 						overLeft = collisionPosLeft - offsetLeft,
 						overRight = collisionPosLeft + data.collisionWidth - outerWidth - offsetLeft,
 						myOffset = data.my[0] === "left" ?
-							-data.elemWidth :
-							data.my[0] === "right" ?
-								data.elemWidth :
-								0,
+						-data.elemWidth :
+						data.my[0] === "right" ?
+						data.elemWidth :
+						0,
 						atOffset = data.at[0] === "left" ?
-							data.targetWidth :
-							data.at[0] === "right" ?
-								-data.targetWidth :
-								0,
+						data.targetWidth :
+						data.at[0] === "right" ?
+						-data.targetWidth :
+						0,
 						offset = -2 * data.offset[0],
 						newOverRight,
 						newOverLeft;
@@ -1448,15 +1474,15 @@
 						overBottom = collisionPosTop + data.collisionHeight - outerHeight - offsetTop,
 						top = data.my[1] === "top",
 						myOffset = top ?
-							-data.elemHeight :
-							data.my[1] === "bottom" ?
-								data.elemHeight :
-								0,
+						-data.elemHeight :
+						data.my[1] === "bottom" ?
+						data.elemHeight :
+						0,
 						atOffset = data.at[1] === "top" ?
-							data.targetHeight :
-							data.at[1] === "bottom" ?
-								-data.targetHeight :
-								0,
+						data.targetHeight :
+						data.at[1] === "bottom" ?
+						-data.targetHeight :
+						0,
 						offset = -2 * data.offset[1],
 						newOverTop,
 						newOverBottom;
@@ -1829,10 +1855,10 @@
 				this.headers.eq(0).attr("tabIndex", 0);
 			} else {
 				this.active.attr({
-					"aria-selected": "true",
-					"aria-expanded": "true",
-					tabIndex: 0
-				})
+						"aria-selected": "true",
+						"aria-expanded": "true",
+						tabIndex: 0
+					})
 					.next()
 					.attr({
 						"aria-hidden": "false"
@@ -1909,7 +1935,9 @@
 
 			this._off(this.headers.add(this.headers.next()));
 			this._on(this.headers, events);
-			this._on(this.headers.next(), { keydown: "_panelKeyDown" });
+			this._on(this.headers.next(), {
+				keydown: "_panelKeyDown"
+			});
 			this._hoverable(this.headers);
 			this._focusable(this.headers);
 		},
@@ -2002,8 +2030,8 @@
 				});
 			} else if (toShow.length) {
 				this.headers.filter(function () {
-					return $(this).attr("tabIndex") === 0;
-				})
+						return $(this).attr("tabIndex") === 0;
+					})
 					.attr("tabIndex", -1);
 			}
 
@@ -2022,7 +2050,7 @@
 				that = this,
 				adjust = 0,
 				down = toShow.length &&
-					(!toHide.length || (toShow.index() < toHide.index())),
+				(!toHide.length || (toShow.index() < toHide.index())),
 				animate = this.options.animate || {},
 				options = down && animate.down || animate,
 				complete = function () {
@@ -2381,8 +2409,8 @@
 					var menu = $(this),
 						item = menu.parent(),
 						submenuCarat = $("<span>")
-							.addClass("ui-menu-icon ui-icon " + icon)
-							.data("ui-menu-submenu-carat", true);
+						.addClass("ui-menu-icon ui-icon " + icon)
+						.data("ui-menu-submenu-carat", true);
 
 					item
 						.attr("aria-haspopup", "true")
@@ -2474,7 +2502,9 @@
 			}
 			this.activeMenu = item.parent();
 
-			this._trigger("focus", event, { item: item });
+			this._trigger("focus", event, {
+				item: item
+			});
 		},
 
 		_scrollIntoView: function (item) {
@@ -2507,7 +2537,9 @@
 			this.active.removeClass("ui-state-focus");
 			this.active = null;
 
-			this._trigger("blur", event, { item: this.active });
+			this._trigger("blur", event, {
+				item: this.active
+			});
 		},
 
 		_startOpening: function (submenu) {
@@ -2526,8 +2558,7 @@
 		},
 
 		_open: function (submenu) {
-			var position = $.extend({
-				of: this.active
+			var position = $.extend({ of: this.active
 			}, this.options.position);
 
 			clearTimeout(this.timer);
@@ -2600,9 +2631,9 @@
 		expand: function (event) {
 			var newItem = this.active &&
 				this.active
-					.children(".ui-menu ")
-					.find(this.options.items)
-					.first();
+				.children(".ui-menu ")
+				.find(this.options.items)
+				.first();
 
 			if (newItem && newItem.length) {
 				this._open(newItem.parent());
@@ -2634,12 +2665,10 @@
 			var next;
 			if (this.active) {
 				if (direction === "first" || direction === "last") {
-					next = this.active
-					[direction === "first" ? "prevAll" : "nextAll"](".ui-menu-item")
+					next = this.active[direction === "first" ? "prevAll" : "nextAll"](".ui-menu-item")
 						.eq(-1);
 				} else {
-					next = this.active
-					[direction + "All"](".ui-menu-item")
+					next = this.active[direction + "All"](".ui-menu-item")
 						.eq(0);
 				}
 			}
@@ -2670,8 +2699,7 @@
 
 				this.focus(event, item);
 			} else {
-				this.focus(event, this.activeMenu.find(this.options.items)
-				[!this.active ? "first" : "last"]());
+				this.focus(event, this.activeMenu.find(this.options.items)[!this.active ? "first" : "last"]());
 			}
 		},
 
@@ -2706,7 +2734,9 @@
 			// TODO: It should never be possible to not have an active item at this
 			// point, but the tests don't trigger mouseenter before click.
 			this.active = this.active || $(event.target).closest(".ui-menu-item");
-			var ui = { item: this.active };
+			var ui = {
+				item: this.active
+			};
 			if (!this.active.has(".ui-menu").length) {
 				this.collapseAll(event, true);
 			}
@@ -2771,11 +2801,11 @@
 			this.isMultiLine =
 				// Textareas are always multi-line
 				isTextarea ? true :
-					// Inputs are always single-line, even if inside a contentEditable element
-					// IE also treats inputs as contentEditable
-					isInput ? false :
-						// All other element types are determined by whether or not they're contentEditable
-						this.element.prop("isContentEditable");
+				// Inputs are always single-line, even if inside a contentEditable element
+				// IE also treats inputs as contentEditable
+				isInput ? false :
+				// All other element types are determined by whether or not they're contentEditable
+				this.element.prop("isContentEditable");
 
 			this.valueMethod = this.element[isTextarea || isInput ? "val" : "text"];
 			this.isNewMenu = true;
@@ -2960,7 +2990,9 @@
 					}
 
 					item = ui.item.data("ui-autocomplete-item");
-					if (false !== this._trigger("focus", event, { item: item })) {
+					if (false !== this._trigger("focus", event, {
+							item: item
+						})) {
 						// use value to match what will end up in the input, if it was a key event
 						if (event.originalEvent && /^key/.test(event.originalEvent.type)) {
 							this._value(item.value);
@@ -2991,7 +3023,9 @@
 						});
 					}
 
-					if (false !== this._trigger("select", event, { item: item })) {
+					if (false !== this._trigger("select", event, {
+							item: item
+						})) {
 						this._value(item.value);
 					}
 					// reset the term after the select event
@@ -3004,10 +3038,10 @@
 			});
 
 			this.liveRegion = $("<span>", {
-				role: "status",
-				"aria-live": "assertive",
-				"aria-relevant": "additions"
-			})
+					role: "status",
+					"aria-live": "assertive",
+					"aria-relevant": "additions"
+				})
 				.addClass("ui-helper-hidden-accessible")
 				.appendTo(this.document[0].body);
 
@@ -3132,7 +3166,9 @@
 			this.element.addClass("ui-autocomplete-loading");
 			this.cancelSearch = false;
 
-			this.source({ term: value }, this._response());
+			this.source({
+				term: value
+			}, this._response());
 		},
 
 		_response: function () {
@@ -3154,7 +3190,9 @@
 			if (content) {
 				content = this._normalize(content);
 			}
-			this._trigger("response", null, { content: content });
+			this._trigger("response", null, {
+				content: content
+			});
 			if (!this.options.disabled && content && content.length && !this.cancelSearch) {
 				this._suggest(content);
 				this._trigger("open");
@@ -3180,7 +3218,9 @@
 
 		_change: function (event) {
 			if (this.previous !== this._value()) {
-				this._trigger("change", event, { item: this.selectedItem });
+				this._trigger("change", event, {
+					item: this.selectedItem
+				});
 			}
 		},
 
@@ -3212,8 +3252,7 @@
 			// size and position menu
 			ul.show();
 			this._resizeMenu();
-			ul.position($.extend({
-				of: this.element
+			ul.position($.extend({ of: this.element
 			}, this.options.position));
 
 			if (this.options.autoFocus) {
@@ -3627,10 +3666,10 @@
 			}
 			var buttonElement = this.buttonElement.removeClass(typeClasses),
 				buttonText = $("<span></span>", this.document[0])
-					.addClass("ui-button-text")
-					.html(this.options.label)
-					.appendTo(buttonElement.empty())
-					.text(),
+				.addClass("ui-button-text")
+				.html(this.options.label)
+				.appendTo(buttonElement.empty())
+				.text(),
 				icons = this.options.icons,
 				multipleIcons = icons.primary && icons.secondary,
 				buttonClasses = [];
@@ -3736,7 +3775,11 @@
 	 */
 
 
-	$.extend($.ui, { datepicker: { version: "1.11.1" } });
+	$.extend($.ui, {
+		datepicker: {
+			version: "1.11.1"
+		}
+	});
 
 	var datepicker_instActive;
 
@@ -3789,7 +3832,8 @@
 			nextText: "Next", // Display text for next month link
 			currentText: "Today", // Display text for current month link
 			monthNames: ["January", "February", "March", "April", "May", "June",
-				"July", "August", "September", "October", "November", "December"], // Names of months for drop-down and formatting
+				"July", "August", "September", "October", "November", "December"
+			], // Names of months for drop-down and formatting
 			monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], // For formatting
 			dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], // For formatting
 			dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], // For formatting
@@ -3903,9 +3947,13 @@
 		_newInst: function (target, inline) {
 			var id = target[0].id.replace(/([^A-Za-z0-9_\-])/g, "\\\\$1"); // escape jQuery meta chars
 			return {
-				id: id, input: target, // associated target
-				selectedDay: 0, selectedMonth: 0, selectedYear: 0, // current selection
-				drawMonth: 0, drawYear: 0, // month being drawn
+				id: id,
+				input: target, // associated target
+				selectedDay: 0,
+				selectedMonth: 0,
+				selectedYear: 0, // current selection
+				drawMonth: 0,
+				drawYear: 0, // month being drawn
 				inline: inline, // is datepicker inline or not
 				dpDiv: (!inline ? this.dpDiv : // presentation div
 					datepicker_bindHover($("<div class='" + this._inlineClass + " ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all'></div>")))
@@ -3922,7 +3970,7 @@
 			}
 			this._attachments(input, inst);
 			input.addClass(this.markerClassName).keydown(this._doKeyDown).
-				keypress(this._doKeyPress).keyup(this._doKeyUp);
+			keypress(this._doKeyPress).keyup(this._doKeyUp);
 			this._autoSize(inst);
 			$.data(target, "datepicker", inst);
 			//If disabled option is true, disable the datepicker once it has been attached to the input (see ticket #5665)
@@ -3959,11 +4007,16 @@
 				buttonText = this._get(inst, "buttonText");
 				buttonImage = this._get(inst, "buttonImage");
 				inst.trigger = $(this._get(inst, "buttonImageOnly") ?
-					$("<img/>").addClass(this._triggerClass).
-						attr({ src: buttonImage, alt: buttonText, title: buttonText }) :
-					$("<button type='button'></button>").addClass(this._triggerClass).
-						html(!buttonImage ? buttonText : $("<img/>").attr(
-							{ src: buttonImage, alt: buttonText, title: buttonText })));
+					$("<img/>").addClass(this._triggerClass).attr({
+						src: buttonImage,
+						alt: buttonText,
+						title: buttonText
+					}) :
+					$("<button type='button'></button>").addClass(this._triggerClass).html(!buttonImage ? buttonText : $("<img/>").attr({
+						src: buttonImage,
+						alt: buttonText,
+						title: buttonText
+					})));
 				input[isRTL ? "before" : "after"](inst.trigger);
 				inst.trigger.click(function () {
 					if ($.datepicker._datepickerShowing && $.datepicker._lastInput === input[0]) {
@@ -4097,10 +4150,10 @@
 				inst.append.remove();
 				inst.trigger.remove();
 				$target.removeClass(this.markerClassName).
-					unbind("focus", this._showDatepicker).
-					unbind("keydown", this._doKeyDown).
-					unbind("keypress", this._doKeyPress).
-					unbind("keyup", this._doKeyUp);
+				unbind("focus", this._showDatepicker).
+				unbind("keydown", this._doKeyDown).
+				unbind("keypress", this._doKeyPress).
+				unbind("keyup", this._doKeyUp);
 			} else if (nodeName === "div" || nodeName === "span") {
 				$target.removeClass(this.markerClassName).empty();
 			}
@@ -4122,16 +4175,23 @@
 			if (nodeName === "input") {
 				target.disabled = false;
 				inst.trigger.filter("button").
-					each(function () { this.disabled = false; }).end().
-					filter("img").css({ opacity: "1.0", cursor: "" });
+				each(function () {
+					this.disabled = false;
+				}).end().
+				filter("img").css({
+					opacity: "1.0",
+					cursor: ""
+				});
 			} else if (nodeName === "div" || nodeName === "span") {
 				inline = $target.children("." + this._inlineClass);
 				inline.children().removeClass("ui-state-disabled");
 				inline.find("select.ui-datepicker-month, select.ui-datepicker-year").
-					prop("disabled", false);
+				prop("disabled", false);
 			}
 			this._disabledInputs = $.map(this._disabledInputs,
-				function (value) { return (value === target ? null : value); }); // delete entry
+				function (value) {
+					return (value === target ? null : value);
+				}); // delete entry
 		},
 
 		/* Disable the date picker to a jQuery selection.
@@ -4150,16 +4210,23 @@
 			if (nodeName === "input") {
 				target.disabled = true;
 				inst.trigger.filter("button").
-					each(function () { this.disabled = true; }).end().
-					filter("img").css({ opacity: "0.5", cursor: "default" });
+				each(function () {
+					this.disabled = true;
+				}).end().
+				filter("img").css({
+					opacity: "0.5",
+					cursor: "default"
+				});
 			} else if (nodeName === "div" || nodeName === "span") {
 				inline = $target.children("." + this._inlineClass);
 				inline.children().addClass("ui-state-disabled");
 				inline.find("select.ui-datepicker-month, select.ui-datepicker-year").
-					prop("disabled", true);
+				prop("disabled", true);
 			}
 			this._disabledInputs = $.map(this._disabledInputs,
-				function (value) { return (value === target ? null : value); }); // delete entry
+				function (value) {
+					return (value === target ? null : value);
+				}); // delete entry
 			this._disabledInputs[this._disabledInputs.length] = target;
 		},
 
@@ -4187,8 +4254,7 @@
 		_getInst: function (target) {
 			try {
 				return $.data(target, "datepicker");
-			}
-			catch (err) {
+			} catch (err) {
 				throw "Missing instance data for this datepicker";
 			}
 		},
@@ -4300,11 +4366,13 @@
 			inst._keyEvent = true;
 			if ($.datepicker._datepickerShowing) {
 				switch (event.keyCode) {
-					case 9: $.datepicker._hideDatepicker();
+					case 9:
+						$.datepicker._hideDatepicker();
 						handled = false;
 						break; // hide on tab out
-					case 13: sel = $("td." + $.datepicker._dayOverClass + ":not(." +
-						$.datepicker._currentClass + ")", inst.dpDiv);
+					case 13:
+						sel = $("td." + $.datepicker._dayOverClass + ":not(." +
+							$.datepicker._currentClass + ")", inst.dpDiv);
 						if (sel[0]) {
 							$.datepicker._selectDay(event.target, inst.selectedMonth, inst.selectedYear, sel[0]);
 						}
@@ -4320,29 +4388,35 @@
 						}
 
 						return false; // don't submit the form
-					case 27: $.datepicker._hideDatepicker();
+					case 27:
+						$.datepicker._hideDatepicker();
 						break; // hide on escape
-					case 33: $.datepicker._adjustDate(event.target, (event.ctrlKey ?
-						-$.datepicker._get(inst, "stepBigMonths") :
-						-$.datepicker._get(inst, "stepMonths")), "M");
+					case 33:
+						$.datepicker._adjustDate(event.target, (event.ctrlKey ?
+							-$.datepicker._get(inst, "stepBigMonths") :
+							-$.datepicker._get(inst, "stepMonths")), "M");
 						break; // previous month/year on page up/+ ctrl
-					case 34: $.datepicker._adjustDate(event.target, (event.ctrlKey ?
-						+$.datepicker._get(inst, "stepBigMonths") :
-						+$.datepicker._get(inst, "stepMonths")), "M");
+					case 34:
+						$.datepicker._adjustDate(event.target, (event.ctrlKey ?
+							+$.datepicker._get(inst, "stepBigMonths") :
+							+$.datepicker._get(inst, "stepMonths")), "M");
 						break; // next month/year on page down/+ ctrl
-					case 35: if (event.ctrlKey || event.metaKey) {
-						$.datepicker._clearDate(event.target);
-					}
+					case 35:
+						if (event.ctrlKey || event.metaKey) {
+							$.datepicker._clearDate(event.target);
+						}
 						handled = event.ctrlKey || event.metaKey;
 						break; // clear on ctrl or command +end
-					case 36: if (event.ctrlKey || event.metaKey) {
-						$.datepicker._gotoToday(event.target);
-					}
+					case 36:
+						if (event.ctrlKey || event.metaKey) {
+							$.datepicker._gotoToday(event.target);
+						}
 						handled = event.ctrlKey || event.metaKey;
 						break; // current on ctrl or command +home
-					case 37: if (event.ctrlKey || event.metaKey) {
-						$.datepicker._adjustDate(event.target, (isRTL ? +1 : -1), "D");
-					}
+					case 37:
+						if (event.ctrlKey || event.metaKey) {
+							$.datepicker._adjustDate(event.target, (isRTL ? +1 : -1), "D");
+						}
 						handled = event.ctrlKey || event.metaKey;
 						// -1 day on ctrl or command +left
 						if (event.originalEvent.altKey) {
@@ -4352,14 +4426,16 @@
 						}
 						// next month/year on alt +left on Mac
 						break;
-					case 38: if (event.ctrlKey || event.metaKey) {
-						$.datepicker._adjustDate(event.target, -7, "D");
-					}
+					case 38:
+						if (event.ctrlKey || event.metaKey) {
+							$.datepicker._adjustDate(event.target, -7, "D");
+						}
 						handled = event.ctrlKey || event.metaKey;
 						break; // -1 week on ctrl or command +up
-					case 39: if (event.ctrlKey || event.metaKey) {
-						$.datepicker._adjustDate(event.target, (isRTL ? -1 : +1), "D");
-					}
+					case 39:
+						if (event.ctrlKey || event.metaKey) {
+							$.datepicker._adjustDate(event.target, (isRTL ? -1 : +1), "D");
+						}
 						handled = event.ctrlKey || event.metaKey;
 						// +1 day on ctrl or command +right
 						if (event.originalEvent.altKey) {
@@ -4369,12 +4445,14 @@
 						}
 						// next month/year on alt +right
 						break;
-					case 40: if (event.ctrlKey || event.metaKey) {
-						$.datepicker._adjustDate(event.target, +7, "D");
-					}
+					case 40:
+						if (event.ctrlKey || event.metaKey) {
+							$.datepicker._adjustDate(event.target, +7, "D");
+						}
 						handled = event.ctrlKey || event.metaKey;
 						break; // +1 week on ctrl or command +down
-					default: handled = false;
+					default:
+						handled = false;
 				}
 			} else if (event.keyCode === 36 && event.ctrlKey) { // display the date picker on ctrl+home
 				$.datepicker._showDatepicker(this);
@@ -4416,9 +4494,7 @@
 						$.datepicker._updateAlternate(inst);
 						$.datepicker._updateDatepicker(inst);
 					}
-				}
-				catch (err) {
-				}
+				} catch (err) {}
 			}
 			return true;
 		},
@@ -4474,20 +4550,29 @@
 				return !isFixed;
 			});
 
-			offset = { left: $.datepicker._pos[0], top: $.datepicker._pos[1] };
+			offset = {
+				left: $.datepicker._pos[0],
+				top: $.datepicker._pos[1]
+			};
 			$.datepicker._pos = null;
 			//to avoid flashes on Firefox
 			inst.dpDiv.empty();
 			// determine sizing offscreen
-			inst.dpDiv.css({ position: "absolute", display: "block", top: "-1000px" });
+			inst.dpDiv.css({
+				position: "absolute",
+				display: "block",
+				top: "-1000px"
+			});
 			$.datepicker._updateDatepicker(inst);
 			// fix width for dynamic number of date pickers
 			// and adjust position before showing
 			offset = $.datepicker._checkOffset(inst, offset, isFixed);
 			inst.dpDiv.css({
 				position: ($.datepicker._inDialog && $.blockUI ?
-					"static" : (isFixed ? "fixed" : "absolute")), display: "none",
-				left: offset.left + "px", top: offset.top + "px"
+					"static" : (isFixed ? "fixed" : "absolute")),
+				display: "none",
+				left: offset.left + "px",
+				top: offset.top + "px"
 			});
 
 			if (!inst.inline) {
@@ -4634,7 +4719,11 @@
 
 				this._lastInput = null;
 				if (this._inDialog) {
-					this._dialogInput.css({ position: "absolute", left: "0", top: "-100px" });
+					this._dialogInput.css({
+						position: "absolute",
+						left: "0",
+						top: "-100px"
+					});
 					if ($.blockUI) {
 						$.unblockUI();
 						$("body").append(this.dpDiv);
@@ -4659,10 +4748,10 @@
 				inst = $.datepicker._getInst($target[0]);
 
 			if ((($target[0].id !== $.datepicker._mainDivId &&
-				$target.parents("#" + $.datepicker._mainDivId).length === 0 &&
-				!$target.hasClass($.datepicker.markerClassName) &&
-				!$target.closest("." + $.datepicker._triggerClass).length &&
-				$.datepicker._datepickerShowing && !($.datepicker._inDialog && $.blockUI))) ||
+					$target.parents("#" + $.datepicker._mainDivId).length === 0 &&
+					!$target.hasClass($.datepicker.markerClassName) &&
+					!$target.closest("." + $.datepicker._triggerClass).length &&
+					$.datepicker._datepickerShowing && !($.datepicker._inDialog && $.blockUI))) ||
 				($target.hasClass($.datepicker.markerClassName) && $.datepicker._curInst !== inst)) {
 				$.datepicker._hideDatepicker();
 			}
@@ -4752,7 +4841,7 @@
 
 			onSelect = this._get(inst, "onSelect");
 			if (onSelect) {
-				onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]);  // trigger custom callback
+				onSelect.apply((inst.input ? inst.input[0] : null), [dateStr, inst]); // trigger custom callback
 			} else if (inst.input) {
 				inst.input.trigger("change"); // fire the change event
 			}
@@ -4778,7 +4867,9 @@
 				altFormat = this._get(inst, "altFormat") || this._get(inst, "dateFormat");
 				date = this._getDate(inst);
 				dateStr = this.formatDate(altFormat, date, this._getFormatConfig(inst));
-				$(altField).each(function () { $(this).val(dateStr); });
+				$(altField).each(function () {
+					$(this).val(dateStr);
+				});
 			}
 		},
 
@@ -4872,7 +4963,9 @@
 				getName = function (match, shortNames, longNames) {
 					var index = -1,
 						names = $.map(lookAhead(match) ? longNames : shortNames, function (v, k) {
-							return [[k, v]];
+							return [
+								[k, v]
+							];
 						}).sort(function (a, b) {
 							return -(a[1].length - b[1].length);
 						});
@@ -5140,10 +5233,14 @@
 					}
 				} else {
 					switch (format.charAt(iFormat)) {
-						case "d": case "m": case "y": case "@":
+						case "d":
+						case "m":
+						case "y":
+						case "@":
 							chars += "0123456789";
 							break;
-						case "D": case "M":
+						case "D":
+						case "M":
 							return null; // Accept anything
 						case "'":
 							if (lookAhead("'")) {
@@ -5201,21 +5298,20 @@
 		/* A date may be specified as an exact value or a relative one. */
 		_determineDate: function (inst, date, defaultDate) {
 			var offsetNumeric = function (offset) {
-				var date = new Date();
-				date.setDate(date.getDate() + offset);
-				return date;
-			},
+					var date = new Date();
+					date.setDate(date.getDate() + offset);
+					return date;
+				},
 				offsetString = function (offset) {
 					try {
 						return $.datepicker.parseDate($.datepicker._get(inst, "dateFormat"),
 							offset, $.datepicker._getFormatConfig(inst));
-					}
-					catch (e) {
+					} catch (e) {
 						// Ignore
 					}
 
 					var date = (offset.toLowerCase().match(/^c/) ?
-						$.datepicker._getDate(inst) : null) || new Date(),
+							$.datepicker._getDate(inst) : null) || new Date(),
 						year = date.getFullYear(),
 						month = date.getMonth(),
 						day = date.getDate(),
@@ -5224,15 +5320,21 @@
 
 					while (matches) {
 						switch (matches[2] || "d") {
-							case "d": case "D":
-								day += parseInt(matches[1], 10); break;
-							case "w": case "W":
-								day += parseInt(matches[1], 10) * 7; break;
-							case "m": case "M":
+							case "d":
+							case "D":
+								day += parseInt(matches[1], 10);
+								break;
+							case "w":
+							case "W":
+								day += parseInt(matches[1], 10) * 7;
+								break;
+							case "m":
+							case "M":
 								month += parseInt(matches[1], 10);
 								day = Math.min(day, $.datepicker._getDaysInMonth(year, month));
 								break;
-							case "y": case "Y":
+							case "y":
+							case "Y":
 								year += parseInt(matches[1], 10);
 								day = Math.min(day, $.datepicker._getDaysInMonth(year, month));
 								break;
@@ -5435,11 +5537,18 @@
 						calender += "<div class='ui-datepicker-group";
 						if (numMonths[1] > 1) {
 							switch (col) {
-								case 0: calender += " ui-datepicker-group-first";
-									cornerClass = " ui-corner-" + (isRTL ? "right" : "left"); break;
-								case numMonths[1] - 1: calender += " ui-datepicker-group-last";
-									cornerClass = " ui-corner-" + (isRTL ? "left" : "right"); break;
-								default: calender += " ui-datepicker-group-middle"; cornerClass = ""; break;
+								case 0:
+									calender += " ui-datepicker-group-first";
+									cornerClass = " ui-corner-" + (isRTL ? "right" : "left");
+									break;
+								case numMonths[1] - 1:
+									calender += " ui-datepicker-group-last";
+									cornerClass = " ui-corner-" + (isRTL ? "left" : "right");
+									break;
+								default:
+									calender += " ui-datepicker-group-middle";
+									cornerClass = "";
+									break;
 							}
 						}
 						calender += "'>";
@@ -5484,7 +5593,7 @@
 									(defaultDate.getTime() === printDate.getTime() && defaultDate.getTime() === selectedDate.getTime()) ?
 									// or defaultDate is current printedDate and defaultDate is selectedDate
 									" " + this._dayOverClass : "") + // highlight selected day
-								(unselectable ? " " + this._unselectableClass + " ui-state-disabled" : "") +  // highlight unselectable days
+								(unselectable ? " " + this._unselectableClass + " ui-state-disabled" : "") + // highlight unselectable days
 								(otherMonth && !showOtherMonths ? "" : " " + daySettings[1] + // highlight custom dates
 									(printDate.getTime() === currentDate.getTime() ? " " + this._currentClass : "") + // highlight selected day
 									(printDate.getTime() === today.getTime() ? " ui-datepicker-today" : "")) + "'" + // highlight today (if different)
@@ -5616,8 +5725,7 @@
 		_notifyChange: function (inst) {
 			var onChange = this._get(inst, "onChangeMonthYear");
 			if (onChange) {
-				onChange.apply((inst.input ? inst.input[0] : null),
-					[inst.selectedYear, inst.selectedMonth + 1, inst]);
+				onChange.apply((inst.input ? inst.input[0] : null), [inst.selectedYear, inst.selectedMonth + 1, inst]);
 			}
 		},
 
@@ -5688,8 +5796,10 @@
 				new Date().getFullYear() % 100 + parseInt(shortYearCutoff, 10));
 			return {
 				shortYearCutoff: shortYearCutoff,
-				dayNamesShort: this._get(inst, "dayNamesShort"), dayNames: this._get(inst, "dayNames"),
-				monthNamesShort: this._get(inst, "monthNamesShort"), monthNames: this._get(inst, "monthNames")
+				dayNamesShort: this._get(inst, "dayNamesShort"),
+				dayNames: this._get(inst, "dayNames"),
+				monthNamesShort: this._get(inst, "monthNamesShort"),
+				monthNames: this._get(inst, "monthNames")
 			};
 		},
 
@@ -5701,7 +5811,7 @@
 				inst.currentYear = inst.selectedYear;
 			}
 			var date = (day ? (typeof day === "object" ? day :
-				this._daylightSavingAdjust(new Date(year, month, day))) :
+					this._daylightSavingAdjust(new Date(year, month, day))) :
 				this._daylightSavingAdjust(new Date(inst.currentYear, inst.currentMonth, inst.currentDay)));
 			return this.formatDate(this._get(inst, "dateFormat"), date, this._getFormatConfig(inst));
 		}
@@ -5715,14 +5825,14 @@
 	function datepicker_bindHover(dpDiv) {
 		var selector = "button, .ui-datepicker-prev, .ui-datepicker-next, .ui-datepicker-calendar td a";
 		return dpDiv.delegate(selector, "mouseout", function () {
-			$(this).removeClass("ui-state-hover");
-			if (this.className.indexOf("ui-datepicker-prev") !== -1) {
-				$(this).removeClass("ui-datepicker-prev-hover");
-			}
-			if (this.className.indexOf("ui-datepicker-next") !== -1) {
-				$(this).removeClass("ui-datepicker-next-hover");
-			}
-		})
+				$(this).removeClass("ui-state-hover");
+				if (this.className.indexOf("ui-datepicker-prev") !== -1) {
+					$(this).removeClass("ui-datepicker-prev-hover");
+				}
+				if (this.className.indexOf("ui-datepicker-next") !== -1) {
+					$(this).removeClass("ui-datepicker-next-hover");
+				}
+			})
 			.delegate(selector, "mouseover", datepicker_handleMouseover);
 	}
 
@@ -5775,16 +5885,16 @@
 		var otherArgs = Array.prototype.slice.call(arguments, 1);
 		if (typeof options === "string" && (options === "isDisabled" || options === "getDate" || options === "widget")) {
 			return $.datepicker["_" + options + "Datepicker"].
-				apply($.datepicker, [this[0]].concat(otherArgs));
+			apply($.datepicker, [this[0]].concat(otherArgs));
 		}
 		if (options === "option" && arguments.length === 2 && typeof arguments[1] === "string") {
 			return $.datepicker["_" + options + "Datepicker"].
-				apply($.datepicker, [this[0]].concat(otherArgs));
+			apply($.datepicker, [this[0]].concat(otherArgs));
 		}
 		return this.each(function () {
 			typeof options === "string" ?
 				$.datepicker["_" + options + "Datepicker"].
-					apply($.datepicker, [this].concat(otherArgs)) :
+			apply($.datepicker, [this].concat(otherArgs)):
 				$.datepicker._attachDatepicker(this, options);
 		});
 	};
@@ -5891,7 +6001,7 @@
 					// Blur any element that currently has focus, see #4261
 					$(document.activeElement).blur();
 				}
-			} catch (error) { }
+			} catch (error) {}
 
 			// among others, prevent a drag on a resizable-handle
 			if (this.helper || o.disabled || $(event.target).closest(".ui-resizable-handle").length > 0) {
@@ -5907,8 +6017,11 @@
 			$(o.iframeFix === true ? "iframe" : o.iframeFix).each(function () {
 				$("<div class='ui-draggable-iframeFix' style='background: #fff;'></div>")
 					.css({
-						width: this.offsetWidth + "px", height: this.offsetHeight + "px",
-						position: "absolute", opacity: "0.001", zIndex: 1000
+						width: this.offsetWidth + "px",
+						height: this.offsetHeight + "px",
+						position: "absolute",
+						opacity: "0.001",
+						zIndex: 1000
 					})
 					.css($(this).offset())
 					.appendTo("body");
@@ -6130,7 +6243,10 @@
 				obj = obj.split(" ");
 			}
 			if ($.isArray(obj)) {
-				obj = { left: +obj[0], top: +obj[1] || 0 };
+				obj = {
+					left: +obj[0],
+					top: +obj[1] || 0
+				};
 			}
 			if ("left" in obj) {
 				this.offset.click.left = obj.left + this.margins.left;
@@ -6166,7 +6282,10 @@
 			}
 
 			if (this._isRootNode(this.offsetParent[0])) {
-				po = { top: 0, left: 0 };
+				po = {
+					top: 0,
+					left: 0
+				};
 			}
 
 			return {
@@ -6178,7 +6297,10 @@
 
 		_getRelativeOffset: function () {
 			if (this.cssPosition !== "relative") {
-				return { top: 0, left: 0 };
+				return {
+					top: 0,
+					left: 0
+				};
 			}
 
 			var p = this.element.position(),
@@ -6278,15 +6400,15 @@
 
 			return {
 				top: (
-					pos.top +																// The absolute mouse position
-					this.offset.relative.top * mod +										// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.top * mod -										// The offsetParent's offset without borders (offset + border)
+					pos.top + // The absolute mouse position
+					this.offset.relative.top * mod + // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.top * mod - // The offsetParent's offset without borders (offset + border)
 					((this.cssPosition === "fixed" ? -this.offset.scroll.top : (scrollIsRootNode ? 0 : this.offset.scroll.top)) * mod)
 				),
 				left: (
-					pos.left +																// The absolute mouse position
-					this.offset.relative.left * mod +										// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.left * mod -										// The offsetParent's offset without borders (offset + border)
+					pos.left + // The absolute mouse position
+					this.offset.relative.left * mod + // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.left * mod - // The offsetParent's offset without borders (offset + border)
 					((this.cssPosition === "fixed" ? -this.offset.scroll.left : (scrollIsRootNode ? 0 : this.offset.scroll.left)) * mod)
 				)
 			};
@@ -6363,17 +6485,17 @@
 
 			return {
 				top: (
-					pageY -																	// The absolute mouse position
-					this.offset.click.top -												// Click offset (relative to the element)
-					this.offset.relative.top -												// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.top +												// The offsetParent's offset without borders (offset + border)
+					pageY - // The absolute mouse position
+					this.offset.click.top - // Click offset (relative to the element)
+					this.offset.relative.top - // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.top + // The offsetParent's offset without borders (offset + border)
 					(this.cssPosition === "fixed" ? -this.offset.scroll.top : (scrollIsRootNode ? 0 : this.offset.scroll.top))
 				),
 				left: (
-					pageX -																	// The absolute mouse position
-					this.offset.click.left -												// Click offset (relative to the element)
-					this.offset.relative.left -												// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.left +												// The offsetParent's offset without borders (offset + border)
+					pageX - // The absolute mouse position
+					this.offset.click.left - // Click offset (relative to the element)
+					this.offset.relative.left - // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.left + // The offsetParent's offset without borders (offset + border)
 					(this.cssPosition === "fixed" ? -this.offset.scroll.left : (scrollIsRootNode ? 0 : this.offset.scroll.left))
 				)
 			};
@@ -6421,7 +6543,9 @@
 		start: function (event, ui, inst) {
 
 			var o = inst.options,
-				uiSortable = $.extend({}, ui, { item: inst.element });
+				uiSortable = $.extend({}, ui, {
+					item: inst.element
+				});
 			inst.sortables = [];
 			$(o.connectToSortable).each(function () {
 				var sortable = $(this).sortable("instance");
@@ -6430,7 +6554,7 @@
 						instance: sortable,
 						shouldRevert: sortable.options.revert
 					});
-					sortable.refreshPositions();	// Call the sortable's refreshPositions at drag start to refresh the containerCache since the sortable container cache is used in drag and needs to be up to date (this will ensure it's initialised as well as being kept in step with any changes that might have happened on the page).
+					sortable.refreshPositions(); // Call the sortable's refreshPositions at drag start to refresh the containerCache since the sortable container cache is used in drag and needs to be up to date (this will ensure it's initialised as well as being kept in step with any changes that might have happened on the page).
 					sortable._trigger("activate", event, uiSortable);
 				}
 			});
@@ -6463,7 +6587,10 @@
 
 					//If the helper has been the original item, restore properties in the sortable
 					if (inst.options.helper === "original") {
-						this.instance.currentItem.css({ top: "auto", left: "auto" });
+						this.instance.currentItem.css({
+							top: "auto",
+							left: "auto"
+						});
 					}
 
 				} else {
@@ -6514,7 +6641,9 @@
 						//We can then fire the start event of the sortable with our passed browser event, and our own helper (so it doesn't create a new one)
 						this.instance.currentItem = $(that).clone().removeAttr("id").appendTo(this.instance.element).data("ui-sortable-item", true);
 						this.instance.options._helper = this.instance.options.helper; //Store helper option to later restore it
-						this.instance.options.helper = function () { return ui.helper[0]; };
+						this.instance.options.helper = function () {
+							return ui.helper[0];
+						};
 
 						event.target = this.instance.currentItem[0];
 						this.instance._mouseCapture(event, true);
@@ -6683,8 +6812,10 @@
 				if (this !== i.element[0]) {
 					i.snapElements.push({
 						item: this,
-						width: $t.outerWidth(), height: $t.outerHeight(),
-						top: $o.top, left: $o.left
+						width: $t.outerWidth(),
+						height: $t.outerHeight(),
+						top: $o.top,
+						left: $o.left
 					});
 				}
 			});
@@ -6695,8 +6826,10 @@
 			var ts, bs, ls, rs, l, r, t, b, i, first,
 				o = inst.options,
 				d = o.snapTolerance,
-				x1 = ui.offset.left, x2 = x1 + inst.helperProportions.width,
-				y1 = ui.offset.top, y2 = y1 + inst.helperProportions.height;
+				x1 = ui.offset.left,
+				x2 = x1 + inst.helperProportions.width,
+				y1 = ui.offset.top,
+				y2 = y1 + inst.helperProportions.height;
 
 			for (i = inst.snapElements.length - 1; i >= 0; i--) {
 
@@ -6707,7 +6840,9 @@
 
 				if (x2 < l - d || x1 > r + d || y2 < t - d || y1 > b + d || !$.contains(inst.snapElements[i].item.ownerDocument, inst.snapElements[i].item)) {
 					if (inst.snapElements[i].snapping) {
-						(inst.options.snap.release && inst.options.snap.release.call(inst.element, event, $.extend(inst._uiHash(), { snapItem: inst.snapElements[i].item })));
+						(inst.options.snap.release && inst.options.snap.release.call(inst.element, event, $.extend(inst._uiHash(), {
+							snapItem: inst.snapElements[i].item
+						})));
 					}
 					inst.snapElements[i].snapping = false;
 					continue;
@@ -6719,16 +6854,28 @@
 					ls = Math.abs(l - x2) <= d;
 					rs = Math.abs(r - x1) <= d;
 					if (ts) {
-						ui.position.top = inst._convertPositionTo("relative", { top: t - inst.helperProportions.height, left: 0 }).top - inst.margins.top;
+						ui.position.top = inst._convertPositionTo("relative", {
+							top: t - inst.helperProportions.height,
+							left: 0
+						}).top - inst.margins.top;
 					}
 					if (bs) {
-						ui.position.top = inst._convertPositionTo("relative", { top: b, left: 0 }).top - inst.margins.top;
+						ui.position.top = inst._convertPositionTo("relative", {
+							top: b,
+							left: 0
+						}).top - inst.margins.top;
 					}
 					if (ls) {
-						ui.position.left = inst._convertPositionTo("relative", { top: 0, left: l - inst.helperProportions.width }).left - inst.margins.left;
+						ui.position.left = inst._convertPositionTo("relative", {
+							top: 0,
+							left: l - inst.helperProportions.width
+						}).left - inst.margins.left;
 					}
 					if (rs) {
-						ui.position.left = inst._convertPositionTo("relative", { top: 0, left: r }).left - inst.margins.left;
+						ui.position.left = inst._convertPositionTo("relative", {
+							top: 0,
+							left: r
+						}).left - inst.margins.left;
 					}
 				}
 
@@ -6740,21 +6887,35 @@
 					ls = Math.abs(l - x1) <= d;
 					rs = Math.abs(r - x2) <= d;
 					if (ts) {
-						ui.position.top = inst._convertPositionTo("relative", { top: t, left: 0 }).top - inst.margins.top;
+						ui.position.top = inst._convertPositionTo("relative", {
+							top: t,
+							left: 0
+						}).top - inst.margins.top;
 					}
 					if (bs) {
-						ui.position.top = inst._convertPositionTo("relative", { top: b - inst.helperProportions.height, left: 0 }).top - inst.margins.top;
+						ui.position.top = inst._convertPositionTo("relative", {
+							top: b - inst.helperProportions.height,
+							left: 0
+						}).top - inst.margins.top;
 					}
 					if (ls) {
-						ui.position.left = inst._convertPositionTo("relative", { top: 0, left: l }).left - inst.margins.left;
+						ui.position.left = inst._convertPositionTo("relative", {
+							top: 0,
+							left: l
+						}).left - inst.margins.left;
 					}
 					if (rs) {
-						ui.position.left = inst._convertPositionTo("relative", { top: 0, left: r - inst.helperProportions.width }).left - inst.margins.left;
+						ui.position.left = inst._convertPositionTo("relative", {
+							top: 0,
+							left: r - inst.helperProportions.width
+						}).left - inst.margins.left;
 					}
 				}
 
 				if (!inst.snapElements[i].snapping && (ts || bs || ls || rs || first)) {
-					(inst.options.snap.snap && inst.options.snap.snap.call(inst.element, event, $.extend(inst._uiHash(), { snapItem: inst.snapElements[i].item })));
+					(inst.options.snap.snap && inst.options.snap.snap.call(inst.element, event, $.extend(inst._uiHash(), {
+						snapItem: inst.snapElements[i].item
+					})));
 				}
 				inst.snapElements[i].snapping = (ts || bs || ls || rs || first);
 
@@ -6771,7 +6932,9 @@
 					return (parseInt($(a).css("zIndex"), 10) || 0) - (parseInt($(b).css("zIndex"), 10) || 0);
 				});
 
-			if (!group.length) { return; }
+			if (!group.length) {
+				return;
+			}
 
 			min = parseInt($(group[0]).css("zIndex"), 10) || 0;
 			$(group).each(function (i) {
@@ -6932,7 +7095,9 @@
 
 				// support: IE9
 				// avoid IE jump (hard set the margin)
-				this.originalElement.css({ margin: this.originalElement.css("margin") });
+				this.originalElement.css({
+					margin: this.originalElement.css("margin")
+				});
 
 				this._proportionallyResize();
 			}
@@ -6965,7 +7130,9 @@
 					hname = "ui-resizable-" + handle;
 					axis = $("<div class='ui-resizable-handle " + hname + "'></div>");
 
-					axis.css({ zIndex: o.zIndex });
+					axis.css({
+						zIndex: o.zIndex
+					});
 
 					// TODO : What's going on here?
 					if ("se" === handle) {
@@ -6998,8 +7165,9 @@
 
 						padPos = ["padding",
 							/ne|nw|n/.test(i) ? "Top" :
-								/se|sw|s/.test(i) ? "Bottom" :
-									/^e$/.test(i) ? "Right" : "Left"].join("");
+							/se|sw|s/.test(i) ? "Bottom" :
+							/^e$/.test(i) ? "Right" : "Left"
+						].join("");
 
 						target.css(padPos, padWrapper);
 
@@ -7123,31 +7291,40 @@
 			}
 
 			this.offset = this.helper.offset();
-			this.position = { left: curleft, top: curtop };
+			this.position = {
+				left: curleft,
+				top: curtop
+			};
 
 			this.size = this._helper ? {
 				width: this.helper.width(),
 				height: this.helper.height()
 			} : {
-					width: el.width(),
-					height: el.height()
-				};
+				width: el.width(),
+				height: el.height()
+			};
 
 			this.originalSize = this._helper ? {
 				width: el.outerWidth(),
 				height: el.outerHeight()
 			} : {
-					width: el.width(),
-					height: el.height()
-				};
+				width: el.width(),
+				height: el.height()
+			};
 
 			this.sizeDiff = {
 				width: el.outerWidth() - el.width(),
 				height: el.outerHeight() - el.height()
 			};
 
-			this.originalPosition = { left: curleft, top: curtop };
-			this.originalMousePosition = { left: event.pageX, top: event.pageY };
+			this.originalPosition = {
+				left: curleft,
+				top: curtop
+			};
+			this.originalMousePosition = {
+				left: event.pageX,
+				top: event.pageY
+			};
 
 			this.aspectRatio = (typeof o.aspectRatio === "number") ?
 				o.aspectRatio :
@@ -7208,7 +7385,8 @@
 
 			this.resizing = false;
 			var pr, ista, soffseth, soffsetw, s, left, top,
-				o = this.options, that = this;
+				o = this.options,
+				that = this;
 
 			if (this._helper) {
 
@@ -7227,7 +7405,10 @@
 					(that.position.top - that.originalPosition.top)) || null;
 
 				if (!o.animate) {
-					this.element.css($.extend(s, { top: top, left: left }));
+					this.element.css($.extend(s, {
+						top: top,
+						left: left
+					}));
 				}
 
 				that.helper.height(that.size.height);
@@ -7367,7 +7548,8 @@
 				isminh = this._isNumber(data.height) && o.minHeight && (o.minHeight > data.height),
 				dw = this.originalPosition.left + this.originalSize.width,
 				dh = this.position.top + this.size.height,
-				cw = /sw|nw|w/.test(a), ch = /nw|ne|n/.test(a);
+				cw = /sw|nw|w/.test(a),
+				ch = /nw|ne|n/.test(a);
 			if (isminw) {
 				data.width = o.minWidth;
 			}
@@ -7462,7 +7644,8 @@
 
 		_renderProxy: function () {
 
-			var el = this.element, o = this.options;
+			var el = this.element,
+				o = this.options;
 			this.elementOffset = el.offset();
 
 			if (this._helper) {
@@ -7490,18 +7673,30 @@
 
 		_change: {
 			e: function (event, dx) {
-				return { width: this.originalSize.width + dx };
+				return {
+					width: this.originalSize.width + dx
+				};
 			},
 			w: function (event, dx) {
-				var cs = this.originalSize, sp = this.originalPosition;
-				return { left: sp.left + dx, width: cs.width - dx };
+				var cs = this.originalSize,
+					sp = this.originalPosition;
+				return {
+					left: sp.left + dx,
+					width: cs.width - dx
+				};
 			},
 			n: function (event, dx, dy) {
-				var cs = this.originalSize, sp = this.originalPosition;
-				return { top: sp.top + dy, height: cs.height - dy };
+				var cs = this.originalSize,
+					sp = this.originalPosition;
+				return {
+					top: sp.top + dy,
+					height: cs.height - dy
+				};
 			},
 			s: function (event, dx, dy) {
-				return { height: this.originalSize.height + dy };
+				return {
+					height: this.originalSize.height + dy
+				};
 			},
 			se: function (event, dx, dy) {
 				return $.extend(this._change.s.apply(this, arguments),
@@ -7555,14 +7750,20 @@
 				ista = pr.length && (/textarea/i).test(pr[0].nodeName),
 				soffseth = ista && that._hasScroll(pr[0], "left") ? 0 : that.sizeDiff.height,
 				soffsetw = ista ? 0 : that.sizeDiff.width,
-				style = { width: (that.size.width - soffsetw), height: (that.size.height - soffseth) },
+				style = {
+					width: (that.size.width - soffsetw),
+					height: (that.size.height - soffseth)
+				},
 				left = (parseInt(that.element.css("left"), 10) +
 					(that.position.left - that.originalPosition.left)) || null,
 				top = (parseInt(that.element.css("top"), 10) +
 					(that.position.top - that.originalPosition.top)) || null;
 
 			that.element.animate(
-				$.extend(style, top && left ? { top: top, left: left } : {}), {
+				$.extend(style, top && left ? {
+					top: top,
+					left: left
+				} : {}), {
 					duration: o.animateDuration,
 					easing: o.animateEasing,
 					step: function () {
@@ -7575,7 +7776,10 @@
 						};
 
 						if (pr && pr.length) {
-							$(pr[0]).css({ width: data.width, height: data.height });
+							$(pr[0]).css({
+								width: data.width,
+								height: data.height
+							});
 						}
 
 						// propagating resize, and updating values for each animation step
@@ -7779,8 +7983,10 @@
 					$(exp).each(function () {
 						var el = $(this);
 						el.data("ui-resizable-alsoresize", {
-							width: parseInt(el.width(), 10), height: parseInt(el.height(), 10),
-							left: parseInt(el.css("left"), 10), top: parseInt(el.css("top"), 10)
+							width: parseInt(el.width(), 10),
+							height: parseInt(el.height(), 10),
+							left: parseInt(el.css("left"), 10),
+							top: parseInt(el.css("top"), 10)
 						});
 					});
 				};
@@ -7813,12 +8019,12 @@
 
 				_alsoResize = function (exp, c) {
 					$(exp).each(function () {
-						var el = $(this), start = $(this).data("ui-resizable-alsoresize"), style = {},
+						var el = $(this),
+							start = $(this).data("ui-resizable-alsoresize"),
+							style = {},
 							css = c && c.length ?
-								c :
-								el.parents(ui.originalElement[0]).length ?
-									["width", "height"] :
-									["width", "height", "top", "left"];
+							c :
+							el.parents(ui.originalElement[0]).length ? ["width", "height"] : ["width", "height", "top", "left"];
 
 						$.each(css, function (i, prop) {
 							var sum = (start[prop] || 0) + (delta[prop] || 0);
@@ -7849,7 +8055,9 @@
 
 		start: function () {
 
-			var that = $(this).resizable("instance"), o = that.options, cs = that.size;
+			var that = $(this).resizable("instance"),
+				o = that.options,
+				cs = that.size;
 
 			that.ghost = that.originalElement.clone();
 			that.ghost
@@ -8160,7 +8368,7 @@
 						// https://bugs.webkit.org/show_bug.cgi?id=47182
 						$(activeElement).blur();
 					}
-				} catch (error) { }
+				} catch (error) {}
 			}
 
 			this._hide(this.uiDialog, this.options.hide, function () {
@@ -8262,7 +8470,7 @@
 			function checkFocus() {
 				var activeElement = this.document[0].activeElement,
 					isActive = this.uiDialog[0] === activeElement ||
-						$.contains(this.uiDialog[0], activeElement);
+					$.contains(this.uiDialog[0], activeElement);
 				if (!isActive) {
 					this._focusTabbable();
 				}
@@ -8415,11 +8623,15 @@
 
 			$.each(buttons, function (name, props) {
 				var click, buttonOptions;
-				props = $.isFunction(props) ?
-					{ click: props, text: name } :
+				props = $.isFunction(props) ? {
+						click: props,
+						text: name
+					} :
 					props;
 				// Default to a non-submitting button
-				props = $.extend({ type: "button" }, props);
+				props = $.extend({
+					type: "button"
+				}, props);
 				// Change the context for the click callback to be the main element
 				click = props.click;
 				props.click = function () {
@@ -8487,8 +8699,8 @@
 				// but dialogs have to use absolute or fixed positioning
 				position = this.uiDialog.css("position"),
 				resizeHandles = typeof handles === "string" ?
-					handles :
-					"n,e,s,w,se,sw,ne,nw";
+				handles :
+				"n,e,s,w,se,sw,ne,nw";
 
 			function filteredUi(ui) {
 				return {
@@ -8500,40 +8712,40 @@
 			}
 
 			this.uiDialog.resizable({
-				cancel: ".ui-dialog-content",
-				containment: "document",
-				alsoResize: this.element,
-				maxWidth: options.maxWidth,
-				maxHeight: options.maxHeight,
-				minWidth: options.minWidth,
-				minHeight: this._minHeight(),
-				handles: resizeHandles,
-				start: function (event, ui) {
-					$(this).addClass("ui-dialog-resizing");
-					that._blockFrames();
-					that._trigger("resizeStart", event, filteredUi(ui));
-				},
-				resize: function (event, ui) {
-					that._trigger("resize", event, filteredUi(ui));
-				},
-				stop: function (event, ui) {
-					var offset = that.uiDialog.offset(),
-						left = offset.left - that.document.scrollLeft(),
-						top = offset.top - that.document.scrollTop();
+					cancel: ".ui-dialog-content",
+					containment: "document",
+					alsoResize: this.element,
+					maxWidth: options.maxWidth,
+					maxHeight: options.maxHeight,
+					minWidth: options.minWidth,
+					minHeight: this._minHeight(),
+					handles: resizeHandles,
+					start: function (event, ui) {
+						$(this).addClass("ui-dialog-resizing");
+						that._blockFrames();
+						that._trigger("resizeStart", event, filteredUi(ui));
+					},
+					resize: function (event, ui) {
+						that._trigger("resize", event, filteredUi(ui));
+					},
+					stop: function (event, ui) {
+						var offset = that.uiDialog.offset(),
+							left = offset.left - that.document.scrollLeft(),
+							top = offset.top - that.document.scrollTop();
 
-					options.height = that.uiDialog.height();
-					options.width = that.uiDialog.width();
-					options.position = {
-						my: "left top",
-						at: "left" + (left >= 0 ? "+" : "") + left + " " +
-							"top" + (top >= 0 ? "+" : "") + top,
-						of: that.window
-					};
-					$(this).removeClass("ui-dialog-resizing");
-					that._unblockFrames();
-					that._trigger("resizeStop", event, filteredUi(ui));
-				}
-			})
+						options.height = that.uiDialog.height();
+						options.width = that.uiDialog.width();
+						options.position = {
+							my: "left top",
+							at: "left" + (left >= 0 ? "+" : "") + left + " " +
+								"top" + (top >= 0 ? "+" : "") + top,
+							of: that.window
+						};
+						$(this).removeClass("ui-dialog-resizing");
+						that._unblockFrames();
+						that._trigger("resizeStop", event, filteredUi(ui));
+					}
+				})
 				.css("position", position);
 		},
 
@@ -8703,9 +8915,9 @@
 			// reset wrapper sizing
 			// determine the height of all the non-content elements
 			nonContentHeight = this.uiDialog.css({
-				height: "auto",
-				width: options.width
-			})
+					height: "auto",
+					width: options.width
+				})
 				.outerHeight();
 			minContentHeight = Math.max(0, options.minHeight - nonContentHeight);
 			maxContentHeight = typeof options.maxHeight === "number" ?
@@ -8867,7 +9079,7 @@
 				return d.is(accept);
 			};
 
-			this.proportions = function ( /* valueToWrite */) {
+			this.proportions = function ( /* valueToWrite */ ) {
 				if (arguments.length) {
 					// Store the droppable's proportions
 					proportions = arguments[0];
@@ -9000,8 +9212,13 @@
 					!inst.options.disabled &&
 					inst.options.scope === draggable.options.scope &&
 					inst.accept.call(inst.element[0], (draggable.currentItem || draggable.element)) &&
-					$.ui.intersect(draggable, $.extend(inst, { offset: inst.element.offset() }), inst.options.tolerance, event)
-				) { childrenIntersection = true; return false; }
+					$.ui.intersect(draggable, $.extend(inst, {
+						offset: inst.element.offset()
+					}), inst.options.tolerance, event)
+				) {
+					childrenIntersection = true;
+					return false;
+				}
 			});
 			if (childrenIntersection) {
 				return false;
@@ -9069,10 +9286,10 @@
 						(y2 >= t && y2 <= b) || // Bottom edge touching
 						(y1 < t && y2 > b) // Surrounded vertically
 					) && (
-							(x1 >= l && x1 <= r) || // Left edge touching
-							(x2 >= l && x2 <= r) || // Right edge touching
-							(x1 < l && x2 > r) // Surrounded horizontally
-						);
+						(x1 >= l && x1 <= r) || // Left edge touching
+						(x2 >= l && x2 <= r) || // Right edge touching
+						(x1 < l && x2 > r) // Surrounded horizontally
+					);
 				default:
 					return false;
 			}
@@ -9084,7 +9301,9 @@
 	*/
 	$.ui.ddmanager = {
 		current: null,
-		droppables: { "default": [] },
+		droppables: {
+			"default": []
+		},
 		prepareOffsets: function (t, event) {
 
 			var i, j,
@@ -9118,7 +9337,10 @@
 				}
 
 				m[i].offset = m[i].element.offset();
-				m[i].proportions({ width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight });
+				m[i].proportions({
+					width: m[i].element[0].offsetWidth,
+					height: m[i].element[0].offsetHeight
+				});
 
 			}
 
@@ -9832,8 +10054,7 @@
 									try {
 										backgroundColor = jQuery.css(curElem, "backgroundColor");
 										curElem = curElem.parentNode;
-									} catch (e) {
-									}
+									} catch (e) {}
 								}
 
 								value = value.blend(backgroundColor && backgroundColor !== "transparent" ?
@@ -9935,8 +10156,8 @@
 		function getElementStyles(elem) {
 			var key, len,
 				style = elem.ownerDocument.defaultView ?
-					elem.ownerDocument.defaultView.getComputedStyle(elem, null) :
-					elem.currentStyle,
+				elem.ownerDocument.defaultView.getComputedStyle(elem, null) :
+				elem.currentStyle,
 				styles = {};
 
 			if (style && style.length && style[0] && style[style[0]]) {
@@ -10065,8 +10286,9 @@
 			addClass: (function (orig) {
 				return function (classNames, speed, easing, callback) {
 					return speed ?
-						$.effects.animateClass.call(this,
-							{ add: classNames }, speed, easing, callback) :
+						$.effects.animateClass.call(this, {
+							add: classNames
+						}, speed, easing, callback) :
 						orig.apply(this, arguments);
 				};
 			})($.fn.addClass),
@@ -10074,8 +10296,9 @@
 			removeClass: (function (orig) {
 				return function (classNames, speed, easing, callback) {
 					return arguments.length > 1 ?
-						$.effects.animateClass.call(this,
-							{ remove: classNames }, speed, easing, callback) :
+						$.effects.animateClass.call(this, {
+							remove: classNames
+						}, speed, easing, callback) :
 						orig.apply(this, arguments);
 				};
 			})($.fn.removeClass),
@@ -10088,13 +10311,18 @@
 							return orig.apply(this, arguments);
 						} else {
 							return $.effects.animateClass.call(this,
-								(force ? { add: classNames } : { remove: classNames }),
+								(force ? {
+									add: classNames
+								} : {
+									remove: classNames
+								}),
 								speed, easing, callback);
 						}
 					} else {
 						// without force parameter
-						return $.effects.animateClass.call(this,
-							{ toggle: classNames }, force, speed, easing);
+						return $.effects.animateClass.call(this, {
+							toggle: classNames
+						}, force, speed, easing);
 					}
 				};
 			})($.fn.toggleClass),
@@ -10158,16 +10386,30 @@
 			getBaseline: function (origin, original) {
 				var y, x;
 				switch (origin[0]) {
-					case "top": y = 0; break;
-					case "middle": y = 0.5; break;
-					case "bottom": y = 1; break;
-					default: y = origin[0] / original.height;
+					case "top":
+						y = 0;
+						break;
+					case "middle":
+						y = 0.5;
+						break;
+					case "bottom":
+						y = 1;
+						break;
+					default:
+						y = origin[0] / original.height;
 				}
 				switch (origin[1]) {
-					case "left": x = 0; break;
-					case "center": x = 0.5; break;
-					case "right": x = 1; break;
-					default: x = origin[1] / original.width;
+					case "left":
+						x = 0;
+						break;
+					case "center":
+						x = 0.5;
+						break;
+					case "right":
+						x = 1;
+						break;
+					default:
+						x = origin[1] / original.width;
 				}
 				return {
 					x: x,
@@ -10185,19 +10427,19 @@
 
 				// wrap the element
 				var props = {
-					width: element.outerWidth(true),
-					height: element.outerHeight(true),
-					"float": element.css("float")
-				},
+						width: element.outerWidth(true),
+						height: element.outerHeight(true),
+						"float": element.css("float")
+					},
 					wrapper = $("<div></div>")
-						.addClass("ui-effects-wrapper")
-						.css({
-							fontSize: "100%",
-							background: "transparent",
-							border: "none",
-							margin: 0,
-							padding: 0
-						}),
+					.addClass("ui-effects-wrapper")
+					.css({
+						fontSize: "100%",
+						background: "transparent",
+						border: "none",
+						margin: 0,
+						padding: 0
+					}),
 					// Store the size in case width/height are defined in % - Fixes #5245
 					size = {
 						width: element.width(),
@@ -10225,8 +10467,12 @@
 
 				// transfer positioning properties to the wrapper
 				if (element.css("position") === "static") {
-					wrapper.css({ position: "relative" });
-					element.css({ position: "relative" });
+					wrapper.css({
+						position: "relative"
+					});
+					element.css({
+						position: "relative"
+					});
 				} else {
 					$.extend(props, {
 						position: element.css("position"),
@@ -10288,7 +10534,9 @@
 			}
 
 			// convert to an object
-			effect = { effect: effect };
+			effect = {
+				effect: effect
+			};
 
 			// catch (effect, null, ...)
 			if (options == null) {
@@ -10323,8 +10571,8 @@
 			speed = speed || options.duration;
 			effect.duration = $.fx.off ? 0 :
 				typeof speed === "number" ? speed :
-					speed in $.fx.speeds ? $.fx.speeds[speed] :
-						$.fx.speeds._default;
+				speed in $.fx.speeds ? $.fx.speeds[speed] :
+				$.fx.speeds._default;
 
 			effect.complete = callback || options.complete;
 
@@ -10357,7 +10605,7 @@
 		}
 
 		$.fn.extend({
-			effect: function ( /* effect, options, speed, callback */) {
+			effect: function ( /* effect, options, speed, callback */ ) {
 				var args = _normalizeArguments.apply(this, arguments),
 					mode = args.mode,
 					queue = args.queue,
@@ -10489,7 +10737,7 @@
 				var pow2,
 					bounce = 4;
 
-				while (p < ((pow2 = Math.pow(2, --bounce)) - 1) / 11) { }
+				while (p < ((pow2 = Math.pow(2, --bounce)) - 1) / 11) {}
 				return 1 / Math.pow(4, 3 - bounce) - 7.5625 * Math.pow((pow2 * 3 - 2) / 22 - p, 2);
 			}
 		});
@@ -10558,7 +10806,9 @@
 			el
 				.css(vertical ? "bottom" : "right", 0)
 				.css(vertical ? "top" : "left", "auto")
-				.css({ position: "absolute" });
+				.css({
+					position: "absolute"
+				});
 
 			animation[ref2] = show ? margin : distance + margin;
 		}
@@ -10643,7 +10893,9 @@
 		}
 
 		if (show) {
-			downAnim = { opacity: 1 };
+			downAnim = {
+				opacity: 1
+			};
 			downAnim[ref] = 0;
 
 			// if we are showing, force opacity 0 and set the initial position
@@ -10673,7 +10925,9 @@
 
 		// Last Bounce when Hiding
 		if (hide) {
-			upAnim = { opacity: 0 };
+			upAnim = {
+				opacity: 0
+			};
 			upAnim[ref] = (motion ? "-=" : "+=") + distance;
 
 			el.animate(upAnim, speed, easing);
@@ -10690,8 +10944,7 @@
 
 		// inject all the animations we just queued to be first in line (after "inprogress")
 		if (queuelen > 1) {
-			queue.splice.apply(queue,
-				[1, 0].concat(queue.splice(queuelen, anims + 1)));
+			queue.splice.apply(queue, [1, 0].concat(queue.splice(queuelen, anims + 1)));
 		}
 		el.dequeue();
 
@@ -10803,8 +11056,8 @@
 
 		// Animation
 		animation[ref] = (show ?
-			(motion === "pos" ? "+=" : "-=") :
-			(motion === "pos" ? "-=" : "+=")) +
+				(motion === "pos" ? "+=" : "-=") :
+				(motion === "pos" ? "-=" : "+=")) +
 			distance;
 
 		// Animate
@@ -10937,11 +11190,11 @@
 		el.animate({
 			opacity: mode
 		}, {
-				queue: false,
-				duration: o.duration,
-				easing: o.easing,
-				complete: done
-			});
+			queue: false,
+			duration: o.duration,
+			easing: o.easing,
+			complete: done
+		});
 	};
 
 
@@ -10982,9 +11235,7 @@
 		wrapper = $.effects.createWrapper(el).css({
 			overflow: "hidden"
 		});
-		distance = widthFirst ?
-			[wrapper.width(), wrapper.height()] :
-			[wrapper.height(), wrapper.width()];
+		distance = widthFirst ? [wrapper.width(), wrapper.height()] : [wrapper.height(), wrapper.width()];
 
 		if (percent) {
 			size = parseInt(percent[1], 10) / 100 * distance[hide ? 0 : 1];
@@ -10994,9 +11245,9 @@
 				height: 0,
 				width: size
 			} : {
-					height: size,
-					width: 0
-				});
+				height: size,
+				width: 0
+			});
 		}
 
 		// Animation
@@ -11304,7 +11555,7 @@
 			options = $.extend(true, {}, o),
 			mode = $.effects.setMode(el, o.mode || "effect"),
 			percent = parseInt(o.percent, 10) ||
-				(parseInt(o.percent, 10) === 0 ? 0 : (mode === "hide" ? 0 : 100)),
+			(parseInt(o.percent, 10) === 0 ? 0 : (mode === "hide" ? 0 : 100)),
 			direction = o.direction || "both",
 			origin = o.origin,
 			original = {
@@ -11393,8 +11644,7 @@
 			complete: done,
 			percent: hide ? percent : 100,
 			from: hide ?
-				original :
-				{
+				original : {
 					height: original.height * factor,
 					width: original.width * factor,
 					outerHeight: original.outerHeight * factor,
@@ -11459,8 +11709,7 @@
 
 		// We just queued up "anims" animations, we need to put them next in the queue
 		if (queuelen > 1) {
-			queue.splice.apply(queue,
-				[1, 0].concat(queue.splice(queuelen, anims + 1)));
+			queue.splice.apply(queue, [1, 0].concat(queue.splice(queuelen, anims + 1)));
 		}
 		elem.dequeue();
 	};
@@ -11529,8 +11778,7 @@
 
 		// inject all the animations we just queued to be first in line (after "inprogress")
 		if (queuelen > 1) {
-			queue.splice.apply(queue,
-				[1, 0].concat(queue.splice(queuelen, anims + 1)));
+			queue.splice.apply(queue, [1, 0].concat(queue.splice(queuelen, anims + 1)));
 		}
 		el.dequeue();
 
@@ -11577,8 +11825,8 @@
 
 		// Animation
 		animation[ref] = (show ?
-			(positiveMotion ? "+=" : "-=") :
-			(positiveMotion ? "-=" : "+=")) +
+				(positiveMotion ? "+=" : "-=") :
+				(positiveMotion ? "-=" : "+=")) +
 			distance;
 
 		// Animate
@@ -11626,19 +11874,19 @@
 			},
 			startPosition = elem.offset(),
 			transfer = $("<div class='ui-effects-transfer'></div>")
-				.appendTo(document.body)
-				.addClass(o.className)
-				.css({
-					top: startPosition.top - fixTop,
-					left: startPosition.left - fixLeft,
-					height: elem.innerHeight(),
-					width: elem.innerWidth(),
-					position: targetFixed ? "fixed" : "absolute"
-				})
-				.animate(animation, o.duration, o.easing, function () {
-					transfer.remove();
-					done();
-				});
+			.appendTo(document.body)
+			.addClass(o.className)
+			.css({
+				top: startPosition.top - fixTop,
+				left: startPosition.left - fixLeft,
+				height: elem.innerHeight(),
+				width: elem.innerWidth(),
+				position: targetFixed ? "fixed" : "absolute"
+			})
+			.animate(animation, o.duration, o.easing, function () {
+				transfer.remove();
+				done();
+			});
 	};
 
 
@@ -11948,9 +12196,22 @@
 				x2 = event.pageX,
 				y2 = event.pageY;
 
-			if (x1 > x2) { tmp = x2; x2 = x1; x1 = tmp; }
-			if (y1 > y2) { tmp = y2; y2 = y1; y1 = tmp; }
-			this.helper.css({ left: x1, top: y1, width: x2 - x1, height: y2 - y1 });
+			if (x1 > x2) {
+				tmp = x2;
+				x2 = x1;
+				x1 = tmp;
+			}
+			if (y1 > y2) {
+				tmp = y2;
+				y2 = y1;
+				y1 = tmp;
+			}
+			this.helper.css({
+				left: x1,
+				top: y1,
+				width: x2 - x1,
+				height: y2 - y1
+			});
 
 			this.selectees.each(function () {
 				var selectee = $.data(this, "selectable-item"),
@@ -12129,25 +12390,25 @@
 
 			// Create button
 			this.button = $("<span>", {
-				"class": "ui-selectmenu-button ui-widget ui-state-default ui-corner-all",
-				tabindex: tabindex || this.options.disabled ? -1 : 0,
-				id: this.ids.button,
-				role: "combobox",
-				"aria-expanded": "false",
-				"aria-autocomplete": "list",
-				"aria-owns": this.ids.menu,
-				"aria-haspopup": "true"
-			})
+					"class": "ui-selectmenu-button ui-widget ui-state-default ui-corner-all",
+					tabindex: tabindex || this.options.disabled ? -1 : 0,
+					id: this.ids.button,
+					role: "combobox",
+					"aria-expanded": "false",
+					"aria-autocomplete": "list",
+					"aria-owns": this.ids.menu,
+					"aria-haspopup": "true"
+				})
 				.insertAfter(this.element);
 
 			$("<span>", {
-				"class": "ui-icon " + this.options.icons.button
-			})
+					"class": "ui-icon " + this.options.icons.button
+				})
 				.prependTo(this.button);
 
 			this.buttonText = $("<span>", {
-				"class": "ui-selectmenu-text"
-			})
+					"class": "ui-selectmenu-text"
+				})
 				.appendTo(this.button);
 
 			this._setText(this.buttonText, this.element.find("option:selected").text());
@@ -12178,8 +12439,8 @@
 
 			// Wrap menu
 			this.menuWrap = $("<div>", {
-				"class": "ui-selectmenu-menu ui-front"
-			})
+					"class": "ui-selectmenu-menu ui-front"
+				})
 				.append(this.menu)
 				.appendTo(this._appendTo());
 
@@ -12196,7 +12457,9 @@
 
 						// Prevent inital focus from firing and check if its a newly focused item
 						if (that.focusIndex != null && item.index !== that.focusIndex) {
-							that._trigger("focus", event, { item: item });
+							that._trigger("focus", event, {
+								item: item
+							});
 							if (!that.isOpen) {
 								that._select(item, event);
 							}
@@ -12288,7 +12551,8 @@
 		},
 
 		_position: function () {
-			this.menuWrap.position($.extend({ of: this.button }, this.options.position));
+			this.menuWrap.position($.extend({ of: this.button
+			}, this.options.position));
 		},
 
 		close: function (event) {
@@ -12319,12 +12583,12 @@
 			$.each(items, function (index, item) {
 				if (item.optgroup !== currentOptgroup) {
 					$("<li>", {
-						"class": "ui-selectmenu-optgroup ui-menu-divider" +
-							(item.element.parent("optgroup").prop("disabled") ?
-								" ui-state-disabled" :
-								""),
-						text: item.optgroup
-					})
+							"class": "ui-selectmenu-optgroup ui-menu-divider" +
+								(item.element.parent("optgroup").prop("disabled") ?
+									" ui-state-disabled" :
+									""),
+							text: item.optgroup
+						})
 						.appendTo(ul);
 
 					currentOptgroup = item.optgroup;
@@ -12481,10 +12745,14 @@
 			this.element[0].selectedIndex = item.index;
 			this._setText(this.buttonText, item.label);
 			this._setAria(item);
-			this._trigger("select", event, { item: item });
+			this._trigger("select", event, {
+				item: item
+			});
 
 			if (item.index !== oldIndex) {
-				this._trigger("change", event, { item: item });
+				this._trigger("change", event, {
+					item: item
+				});
 			}
 
 			this.close(event);
@@ -12585,7 +12853,9 @@
 		},
 
 		_getCreateOptions: function () {
-			return { disabled: this.element.prop("disabled") };
+			return {
+				disabled: this.element.prop("disabled")
+			};
 		},
 
 		_parseOptions: function (options) {
@@ -12789,7 +13059,10 @@
 			};
 			this.elementOffset = this.element.offset();
 
-			position = { x: event.pageX, y: event.pageY };
+			position = {
+				x: event.pageX,
+				y: event.pageY
+			};
 			normValue = this._normValueFromMouse(position);
 			distance = this._valueMax() - this._valueMin() + 1;
 			this.handles.each(function (i) {
@@ -12817,7 +13090,10 @@
 
 			offset = closestHandle.offset();
 			mouseOverHandle = !$(event.target).parents().addBack().is(".ui-slider-handle");
-			this._clickOffset = mouseOverHandle ? { left: 0, top: 0 } : {
+			this._clickOffset = mouseOverHandle ? {
+				left: 0,
+				top: 0
+			} : {
 				left: event.pageX - offset.left - (closestHandle.width() / 2),
 				top: event.pageY - offset.top -
 					(closestHandle.height() / 2) -
@@ -12838,7 +13114,10 @@
 		},
 
 		_mouseDrag: function (event) {
-			var position = { x: event.pageX, y: event.pageY },
+			var position = {
+					x: event.pageX,
+					y: event.pageY
+				},
 				normValue = this._normValueFromMouse(position);
 
 			this._slide(event, this._handleIndex, normValue);
@@ -13169,17 +13448,31 @@
 					if (that.options.range === true) {
 						if (that.orientation === "horizontal") {
 							if (i === 0) {
-								that.range.stop(1, 1)[animate ? "animate" : "css"]({ left: valPercent + "%" }, o.animate);
+								that.range.stop(1, 1)[animate ? "animate" : "css"]({
+									left: valPercent + "%"
+								}, o.animate);
 							}
 							if (i === 1) {
-								that.range[animate ? "animate" : "css"]({ width: (valPercent - lastValPercent) + "%" }, { queue: false, duration: o.animate });
+								that.range[animate ? "animate" : "css"]({
+									width: (valPercent - lastValPercent) + "%"
+								}, {
+									queue: false,
+									duration: o.animate
+								});
 							}
 						} else {
 							if (i === 0) {
-								that.range.stop(1, 1)[animate ? "animate" : "css"]({ bottom: (valPercent) + "%" }, o.animate);
+								that.range.stop(1, 1)[animate ? "animate" : "css"]({
+									bottom: (valPercent) + "%"
+								}, o.animate);
 							}
 							if (i === 1) {
-								that.range[animate ? "animate" : "css"]({ height: (valPercent - lastValPercent) + "%" }, { queue: false, duration: o.animate });
+								that.range[animate ? "animate" : "css"]({
+									height: (valPercent - lastValPercent) + "%"
+								}, {
+									queue: false,
+									duration: o.animate
+								});
 							}
 						}
 					}
@@ -13196,16 +13489,30 @@
 				this.handle.stop(1, 1)[animate ? "animate" : "css"](_set, o.animate);
 
 				if (oRange === "min" && this.orientation === "horizontal") {
-					this.range.stop(1, 1)[animate ? "animate" : "css"]({ width: valPercent + "%" }, o.animate);
+					this.range.stop(1, 1)[animate ? "animate" : "css"]({
+						width: valPercent + "%"
+					}, o.animate);
 				}
 				if (oRange === "max" && this.orientation === "horizontal") {
-					this.range[animate ? "animate" : "css"]({ width: (100 - valPercent) + "%" }, { queue: false, duration: o.animate });
+					this.range[animate ? "animate" : "css"]({
+						width: (100 - valPercent) + "%"
+					}, {
+						queue: false,
+						duration: o.animate
+					});
 				}
 				if (oRange === "min" && this.orientation === "vertical") {
-					this.range.stop(1, 1)[animate ? "animate" : "css"]({ height: valPercent + "%" }, o.animate);
+					this.range.stop(1, 1)[animate ? "animate" : "css"]({
+						height: valPercent + "%"
+					}, o.animate);
 				}
 				if (oRange === "max" && this.orientation === "vertical") {
-					this.range[animate ? "animate" : "css"]({ height: (100 - valPercent) + "%" }, { queue: false, duration: o.animate });
+					this.range[animate ? "animate" : "css"]({
+						height: (100 - valPercent) + "%"
+					}, {
+						queue: false,
+						duration: o.animate
+					});
 				}
 			}
 		},
@@ -13392,7 +13699,7 @@
 			$.each(this.items, function () {
 				(this.instance.options.handle ?
 					this.item.find(this.instance.options.handle) : this.item)
-					.addClass("ui-sortable-handle");
+				.addClass("ui-sortable-handle");
 			});
 		},
 
@@ -13514,7 +13821,10 @@
 			(o.cursorAt && this._adjustOffsetFromHelper(o.cursorAt));
 
 			//Cache the former DOM position
-			this.domPosition = { prev: this.currentItem.prev()[0], parent: this.currentItem.parent()[0] };
+			this.domPosition = {
+				prev: this.currentItem.prev()[0],
+				parent: this.currentItem.parent()[0]
+			};
 
 			//If the helper is not the original, hide the original so it's not playing any role during the drag, won't cause anything bad this way
 			if (this.helper[0] !== this.currentItem[0]) {
@@ -13751,7 +14061,9 @@
 
 			if (this.dragging) {
 
-				this._mouseUp({ target: null });
+				this._mouseUp({
+					target: null
+				});
 
 				if (this.options.helper === "original") {
 					this.currentItem.css(this._storedCSS).removeClass("ui-sortable-helper");
@@ -13825,7 +14137,9 @@
 
 			o = o || {};
 
-			items.each(function () { ret.push($(o.item || this).attr(o.attribute || "id") || ""); });
+			items.each(function () {
+				ret.push($(o.item || this).attr(o.attribute || "id") || "");
+			});
 			return ret;
 
 		},
@@ -13875,8 +14189,8 @@
 			}
 
 			return this.floating ?
-				(((horizontalDirection && horizontalDirection === "right") || verticalDirection === "down") ? 2 : 1)
-				: (verticalDirection && (verticalDirection === "down" ? 2 : 1));
+				(((horizontalDirection && horizontalDirection === "right") || verticalDirection === "down") ? 2 : 1) :
+				(verticalDirection && (verticalDirection === "down" ? 2 : 1));
 
 		},
 
@@ -13936,7 +14250,10 @@
 				}
 			}
 
-			queries.push([$.isFunction(this.options.items) ? this.options.items.call(this.element, null, { options: this.options, item: this.currentItem }) : $(this.options.items, this.element).not(".ui-sortable-helper").not(".ui-sortable-placeholder"), this]);
+			queries.push([$.isFunction(this.options.items) ? this.options.items.call(this.element, null, {
+				options: this.options,
+				item: this.currentItem
+			}) : $(this.options.items, this.element).not(".ui-sortable-helper").not(".ui-sortable-placeholder"), this]);
 
 			function addItems() {
 				items.push(this);
@@ -13971,7 +14288,11 @@
 
 			var i, j, cur, inst, targetData, _queries, item, queriesLength,
 				items = this.items,
-				queries = [[$.isFunction(this.options.items) ? this.options.items.call(this.element[0], event, { item: this.currentItem }) : $(this.options.items, this.element), this]],
+				queries = [
+					[$.isFunction(this.options.items) ? this.options.items.call(this.element[0], event, {
+						item: this.currentItem
+					}) : $(this.options.items, this.element), this]
+				],
 				connectWith = this._connectWith();
 
 			if (connectWith && this.ready) { //Shouldn't be run the first time through due to massive slow-down
@@ -13980,7 +14301,9 @@
 					for (j = cur.length - 1; j >= 0; j--) {
 						inst = $.data(cur[j], this.widgetFullName);
 						if (inst && inst !== this && !inst.options.disabled) {
-							queries.push([$.isFunction(inst.options.items) ? inst.options.items.call(inst.element[0], event, { item: this.currentItem }) : $(inst.options.items, inst.element), inst]);
+							queries.push([$.isFunction(inst.options.items) ? inst.options.items.call(inst.element[0], event, {
+								item: this.currentItem
+							}) : $(inst.options.items, inst.element), inst]);
 							this.containers.push(inst);
 						}
 					}
@@ -13999,8 +14322,10 @@
 					items.push({
 						item: item,
 						instance: targetData,
-						width: 0, height: 0,
-						left: 0, top: 0
+						width: 0,
+						height: 0,
+						left: 0,
+						top: 0
 					});
 				}
 			}
@@ -14063,8 +14388,8 @@
 
 						var nodeName = that.currentItem[0].nodeName.toLowerCase(),
 							element = $("<" + nodeName + ">", that.document[0])
-								.addClass(className || that.currentItem[0].className + " ui-sortable-placeholder")
-								.removeClass("ui-sortable-helper");
+							.addClass(className || that.currentItem[0].className + " ui-sortable-placeholder")
+							.removeClass("ui-sortable-helper");
 
 						if (nodeName === "tr") {
 							that.currentItem.children().each(function () {
@@ -14091,8 +14416,12 @@
 						}
 
 						//If the element doesn't have a actual height by itself (without styles coming from a stylesheet), it receives the inline height from the dragged item
-						if (!p.height()) { p.height(that.currentItem.innerHeight() - parseInt(that.currentItem.css("paddingTop") || 0, 10) - parseInt(that.currentItem.css("paddingBottom") || 0, 10)); }
-						if (!p.width()) { p.width(that.currentItem.innerWidth() - parseInt(that.currentItem.css("paddingLeft") || 0, 10) - parseInt(that.currentItem.css("paddingRight") || 0, 10)); }
+						if (!p.height()) {
+							p.height(that.currentItem.innerHeight() - parseInt(that.currentItem.css("paddingTop") || 0, 10) - parseInt(that.currentItem.css("paddingBottom") || 0, 10));
+						}
+						if (!p.width()) {
+							p.width(that.currentItem.innerWidth() - parseInt(that.currentItem.css("paddingLeft") || 0, 10) - parseInt(that.currentItem.css("paddingRight") || 0, 10));
+						}
 					}
 				};
 			}
@@ -14218,7 +14547,13 @@
 			}
 
 			if (helper[0] === this.currentItem[0]) {
-				this._storedCSS = { width: this.currentItem[0].style.width, height: this.currentItem[0].style.height, position: this.currentItem.css("position"), top: this.currentItem.css("top"), left: this.currentItem.css("left") };
+				this._storedCSS = {
+					width: this.currentItem[0].style.width,
+					height: this.currentItem[0].style.height,
+					position: this.currentItem.css("position"),
+					top: this.currentItem.css("top"),
+					left: this.currentItem.css("left")
+				};
 			}
 
 			if (!helper[0].style.width || o.forceHelperSize) {
@@ -14237,7 +14572,10 @@
 				obj = obj.split(" ");
 			}
 			if ($.isArray(obj)) {
-				obj = { left: +obj[0], top: +obj[1] || 0 };
+				obj = {
+					left: +obj[0],
+					top: +obj[1] || 0
+				};
 			}
 			if ("left" in obj) {
 				this.offset.click.left = obj.left + this.margins.left;
@@ -14272,7 +14610,10 @@
 			// This needs to be actually done for all browsers, since pageX/pageY includes this information
 			// with an ugly IE fix
 			if (this.offsetParent[0] === document.body || (this.offsetParent[0].tagName && this.offsetParent[0].tagName.toLowerCase() === "html" && $.ui.ie)) {
-				po = { top: 0, left: 0 };
+				po = {
+					top: 0,
+					left: 0
+				};
 			}
 
 			return {
@@ -14291,7 +14632,10 @@
 					left: p.left - (parseInt(this.helper.css("left"), 10) || 0) + this.scrollParent.scrollLeft()
 				};
 			} else {
-				return { top: 0, left: 0 };
+				return {
+					top: 0,
+					left: 0
+				};
 			}
 
 		},
@@ -14352,15 +14696,15 @@
 
 			return {
 				top: (
-					pos.top +																// The absolute mouse position
-					this.offset.relative.top * mod +										// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.top * mod -											// The offsetParent's offset without borders (offset + border)
+					pos.top + // The absolute mouse position
+					this.offset.relative.top * mod + // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.top * mod - // The offsetParent's offset without borders (offset + border)
 					((this.cssPosition === "fixed" ? -this.scrollParent.scrollTop() : (scrollIsRootNode ? 0 : scroll.scrollTop())) * mod)
 				),
 				left: (
-					pos.left +																// The absolute mouse position
-					this.offset.relative.left * mod +										// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.left * mod -										// The offsetParent's offset without borders (offset + border)
+					pos.left + // The absolute mouse position
+					this.offset.relative.left * mod + // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.left * mod - // The offsetParent's offset without borders (offset + border)
 					((this.cssPosition === "fixed" ? -this.scrollParent.scrollLeft() : scrollIsRootNode ? 0 : scroll.scrollLeft()) * mod)
 				)
 			};
@@ -14373,7 +14717,8 @@
 				o = this.options,
 				pageX = event.pageX,
 				pageY = event.pageY,
-				scroll = this.cssPosition === "absolute" && !(this.scrollParent[0] !== document && $.contains(this.scrollParent[0], this.offsetParent[0])) ? this.offsetParent : this.scrollParent, scrollIsRootNode = (/(html|body)/i).test(scroll[0].tagName);
+				scroll = this.cssPosition === "absolute" && !(this.scrollParent[0] !== document && $.contains(this.scrollParent[0], this.offsetParent[0])) ? this.offsetParent : this.scrollParent,
+				scrollIsRootNode = (/(html|body)/i).test(scroll[0].tagName);
 
 			// This is another very weird special case that only happens for relative elements:
 			// 1. If the css position is relative
@@ -14417,17 +14762,17 @@
 
 			return {
 				top: (
-					pageY -																// The absolute mouse position
-					this.offset.click.top -													// Click offset (relative to the element)
-					this.offset.relative.top -											// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.top +												// The offsetParent's offset without borders (offset + border)
+					pageY - // The absolute mouse position
+					this.offset.click.top - // Click offset (relative to the element)
+					this.offset.relative.top - // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.top + // The offsetParent's offset without borders (offset + border)
 					((this.cssPosition === "fixed" ? -this.scrollParent.scrollTop() : (scrollIsRootNode ? 0 : scroll.scrollTop())))
 				),
 				left: (
-					pageX -																// The absolute mouse position
-					this.offset.click.left -												// Click offset (relative to the element)
-					this.offset.relative.left -											// Only for relative positioned nodes: Relative offset from element to offset parent
-					this.offset.parent.left +												// The offsetParent's offset without borders (offset + border)
+					pageX - // The absolute mouse position
+					this.offset.click.left - // Click offset (relative to the element)
+					this.offset.relative.left - // Only for relative positioned nodes: Relative offset from element to offset parent
+					this.offset.parent.left + // The offsetParent's offset without borders (offset + border)
 					((this.cssPosition === "fixed" ? -this.scrollParent.scrollLeft() : scrollIsRootNode ? 0 : scroll.scrollLeft()))
 				)
 			};
@@ -14481,19 +14826,33 @@
 			}
 
 			if (this.fromOutside && !noPropagation) {
-				delayedTriggers.push(function (event) { this._trigger("receive", event, this._uiHash(this.fromOutside)); });
+				delayedTriggers.push(function (event) {
+					this._trigger("receive", event, this._uiHash(this.fromOutside));
+				});
 			}
 			if ((this.fromOutside || this.domPosition.prev !== this.currentItem.prev().not(".ui-sortable-helper")[0] || this.domPosition.parent !== this.currentItem.parent()[0]) && !noPropagation) {
-				delayedTriggers.push(function (event) { this._trigger("update", event, this._uiHash()); }); //Trigger update callback if the DOM position has changed
+				delayedTriggers.push(function (event) {
+					this._trigger("update", event, this._uiHash());
+				}); //Trigger update callback if the DOM position has changed
 			}
 
 			// Check if the items Container has Changed and trigger appropriate
 			// events.
 			if (this !== this.currentContainer) {
 				if (!noPropagation) {
-					delayedTriggers.push(function (event) { this._trigger("remove", event, this._uiHash()); });
-					delayedTriggers.push((function (c) { return function (event) { c._trigger("receive", event, this._uiHash(this)); }; }).call(this, this.currentContainer));
-					delayedTriggers.push((function (c) { return function (event) { c._trigger("update", event, this._uiHash(this)); }; }).call(this, this.currentContainer));
+					delayedTriggers.push(function (event) {
+						this._trigger("remove", event, this._uiHash());
+					});
+					delayedTriggers.push((function (c) {
+						return function (event) {
+							c._trigger("receive", event, this._uiHash(this));
+						};
+					}).call(this, this.currentContainer));
+					delayedTriggers.push((function (c) {
+						return function (event) {
+							c._trigger("update", event, this._uiHash(this));
+						};
+					}).call(this, this.currentContainer));
 				}
 			}
 
@@ -14722,6 +15081,7 @@
 				// then we need to set this.previous based on the value before spinning.
 				previous = this.element[0] === this.document[0].activeElement ?
 					this.previous : this.element.val();
+
 				function checkFocus() {
 					var isActive = this.element[0] === this.document[0].activeElement;
 					if (!isActive) {
@@ -14872,7 +15232,9 @@
 
 			value = this._adjustValue(value + step * this._increment(this.counter));
 
-			if (!this.spinning || this._trigger("spin", event, { value: value }) !== false) {
+			if (!this.spinning || this._trigger("spin", event, {
+					value: value
+				}) !== false) {
 				this._value(value);
 				this.counter++;
 			}
@@ -15131,10 +15493,10 @@
 				// decoding may throw an error if the URL isn't UTF-8 (#9518)
 				try {
 					anchorUrl = decodeURIComponent(anchorUrl);
-				} catch (error) { }
+				} catch (error) {}
 				try {
 					locationUrl = decodeURIComponent(locationUrl);
-				} catch (error) { }
+				} catch (error) {}
 
 				return anchor.hash.length > 1 && anchorUrl === locationUrl;
 			};
@@ -15478,8 +15840,8 @@
 				});
 
 			this.anchors = this.tabs.map(function () {
-				return $("a", this)[0];
-			})
+					return $("a", this)[0];
+				})
 				.addClass("ui-tabs-anchor")
 				.attr({
 					role: "presentation",
@@ -15553,7 +15915,8 @@
 			}
 
 			// disable tabs
-			for (var i = 0, li; (li = this.tabs[i]); i++) {
+			for (var i = 0, li;
+				(li = this.tabs[i]); i++) {
 				if (disabled === true || $.inArray(i, disabled) !== -1) {
 					$(li)
 						.addClass("ui-state-disabled")
@@ -15584,8 +15947,12 @@
 				}
 			});
 			this._on(this.anchors, events);
-			this._on(this.tabs, { keydown: "_tabKeydown" });
-			this._on(this.panels, { keydown: "_panelKeydown" });
+			this._on(this.tabs, {
+				keydown: "_tabKeydown"
+			});
+			this._on(this.panels, {
+				keydown: "_panelKeydown"
+			});
 
 			this._focusable(this.tabs);
 			this._hoverable(this.tabs);
@@ -15614,9 +15981,9 @@
 				});
 
 				this.panels.each(function () {
-					$(this).height(Math.max(0, maxHeight -
-						$(this).innerHeight() + $(this).height()));
-				})
+						$(this).height(Math.max(0, maxHeight -
+							$(this).innerHeight() + $(this).height()));
+					})
 					.css("overflow", "auto");
 			} else if (heightStyle === "auto") {
 				maxHeight = 0;
@@ -15721,8 +16088,8 @@
 				eventData.oldTab.attr("tabIndex", -1);
 			} else if (toShow.length) {
 				this.tabs.filter(function () {
-					return $(this).attr("tabIndex") === 0;
-				})
+						return $(this).attr("tabIndex") === 0;
+					})
 					.attr("tabIndex", -1);
 			}
 
@@ -15929,7 +16296,10 @@
 				url: anchor.attr("href"),
 				beforeSend: function (jqXHR, settings) {
 					return that._trigger("beforeLoad", event,
-						$.extend({ jqXHR: jqXHR, ajaxSettings: settings }, eventData));
+						$.extend({
+							jqXHR: jqXHR,
+							ajaxSettings: settings
+						}, eventData));
 				}
 			};
 		},
@@ -16085,9 +16455,9 @@
 		open: function (event) {
 			var that = this,
 				target = $(event ? event.target : this.element)
-					// we need closest here due to mouseover bubbling,
-					// but always pointing at the same event target
-					.closest(this.options.items);
+				// we need closest here due to mouseover bubbling,
+				// but always pointing at the same event target
+				.closest(this.options.items);
 
 			// No element to show a tooltip for or the tooltip is already open
 			if (!target.length || target.data("ui-tooltip-id")) {
@@ -16219,8 +16589,7 @@
 				// trigger once to override element-relative positioning
 				position(event);
 			} else {
-				tooltip.position($.extend({
-					of: target
+				tooltip.position($.extend({ of: target
 				}, this.options.position));
 			}
 
@@ -16241,7 +16610,9 @@
 				}, $.fx.interval);
 			}
 
-			this._trigger("open", event, { tooltip: tooltip });
+			this._trigger("open", event, {
+				tooltip: tooltip
+			});
 
 			events = {
 				keyup: function (event) {
@@ -16317,7 +16688,9 @@
 			}
 
 			this.closing = true;
-			this._trigger("close", event, { tooltip: tooltip });
+			this._trigger("close", event, {
+				tooltip: tooltip
+			});
 			if (!this.hiding) {
 				this.closing = false;
 			}
