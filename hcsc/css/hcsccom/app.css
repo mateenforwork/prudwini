@@ -158,13 +158,14 @@ header {
 
 
 #content-hero {
-/*	background-image: url(../../images/hcsccom/who-are-we-hero.jpg);*/
+/*	background-image: url(../../images/hcsccom/who-are-we-hero.jpg); */
 	background-size: cover;
 	background-position: center;
 	min-height: 400px;
 	color: #000;
 	position: relative;
 	background-color: #000;
+	
 }
 
 #what-we-do-hero {
