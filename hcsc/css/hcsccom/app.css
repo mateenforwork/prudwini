@@ -147,7 +147,7 @@ header {
 }
 
 #hero-image {
-	background-image: url(../../images/hcsccom/hompage-hero.jpg);
+/*	background-image: url(../../images/hcsccom/hompage-hero.jpg);*/
 	background-size: cover;
 	background-position: center;
 	min-height: 400px;
@@ -156,8 +156,9 @@ header {
 	background-color: #000;
 }
 
+
 #content-hero {
-	background-image: url(../../images/hcsccom/who-are-we-hero.jpg);
+/*	background-image: url(../../images/hcsccom/who-are-we-hero.jpg);*/
 	background-size: cover;
 	background-position: center;
 	min-height: 400px;
