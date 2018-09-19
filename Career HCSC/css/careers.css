@@ -1,0 +1,943 @@
+@charset "UTF-8";
+/*************************************************
+* HCSC CAREERS SITE CSS
+* V. 1.0
+* AUTHORS: THOMAS KNAPP/DAN WITKUS
+* 02/16
+*************************************************/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+body {font-family: 'Open Sans', sans-serif;}
+
+
+/*************************************************
+*GLOBAL STYLES
+*
+*************************************************/
+
+h1 {
+	font-family: 'Open Sans', sans-serif;
+	font-style:italic;
+	color:#fff;
+	font-size: 3.5em;
+	text-shadow:0 0 10px rgba(8,60,93,.9);
+	font-weight:600;
+	letter-spacing:normal;
+	line-height:1em;
+	margin-bottom: 1.5rem;
+	}
+	
+span.sm_h1 {display:block; font-size:.5em; margin-bottom:-10px;font-style:normal;}
+
+#content h1{
+	font-family: 'Open Sans', sans-serif;
+	font-style:italic;
+	color:#fff;
+	font-size: 2.9em;
+	text-shadow:0 0 10px rgba(8,60,93,.9);
+	font-weight:lighter;
+	letter-spacing:normal;
+	line-height:1.2em;
+	}
+	
+#content span.sm_h1 {display:block; font-size:.5em; margin-bottom:-10px;font-style:normal;}
+
+@media (min-width: 1024px) and (max-width: 1100px) {
+	
+	#content h1{
+		font-size: 2.5em;
+		line-height:1.4em;
+	}
+	
+}
+
+@media only screen and (max-width: 810px) {
+	
+	#content h1{
+		font-size: 1.9em;
+		line-height:1.4em;
+	}
+	
+}
+
+		
+h2 {
+	color: #a06d22;
+	font-family: "Open Sans",sans-serif;
+	font-weight: bold;
+	font-size: 2em;
+	font-style: italic;
+	line-height: 1.5em;
+	}	
+		
+h3 {
+	color: #006bc3;
+	font-family: "Open Sans",sans-serif;
+	font-weight: bold;
+	font-size: 1.2em;
+	line-height: 1em;
+	padding: 0.5em 0 0;
+	}
+	
+h4{
+	font-size: 1em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:bold;
+	color: #666666;
+	line-height: 1.5em;
+	}
+	
+a {
+	font-size: inherit;
+	font-family: "Open Sans", sans-serif;
+	color:#006bc3;
+	padding:0 0 1.1em;
+	margin:-0.65em 0 0;
+	}
+	a:hover {color:#1a848a;}
+
+p {
+	font-size: 1em;
+	font-family: "Open Sans", sans-serif;
+	color: #242424;
+	line-height: 1.7em;
+	padding:0 0 1.1em;
+	margin:0;
+	}
+	
+ul {font-size: 1em; font-family: "Open Sans", sans-serif;  color: rgb(99, 99, 99);  line-height: 1.5em;}
+
+.button {color: #fff; font-size: 1.0em; padding: 15px 50px; background-color: transparent; border: solid 1px #fff;}
+.button:hover {color: #006bc3; background-color: #fff;}
+
+.bannerButton{color: #005487; font-size: 1.0em; font-weight: bold; padding: 15px 50px; background-color: #fff; border: solid 1px #fff; transition: all 0.4s;}
+.bannerButton:hover{color: #fff; background-color: transparent;}
+
+
+.title {font-size: 1em; padding-bottom: 2em;}
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 0;
+	height: 0;
+	margin-bottom: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+blockquote {
+	border-left: 3px solid #a06d22;
+  margin: 0 1em 2rem;
+  padding: 0.5625rem 2rem 0;
+}
+	blockquote p {color:#666666;}
+	blockquote p.title {color:#888888;text-align:right;}
+	blockquote p.title span {display:block;}
+	blockquote p.title strong {color:#a06d22;}
+	
+@media only screen and (max-width: 723px) {
+    blockquote {
+		margin: 0 0 2rem;
+		padding: 0.5625rem 0 0 1rem;
+	}
+}
+
+
+/*************************************************
+*HEADER STYLES
+*
+*************************************************/
+header {margin-top:1em;}
+
+
+#header {z-index:9999; position: relative;}
+#header {z-index:9999; position: relative;}
+#header_logo {max-width:420px;}
+#menu-desktop { margin-top:2em; margin-bottom:2em; width: 100%;}
+#menu-desktop a {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: 1em;
+    text-transform: uppercase;
+    border-left: solid 1px #cae1ef;
+    transition: color 0.3s;
+    font-weight: 400;
+}
+#menu-desktop a:hover {color:#1a848a;}
+#menu-desktop a.active {color:#006bc3;}
+
+#menu-desktop a:first-child {border-left: none;}
+
+@media only screen and (max-width: 1023px) {
+    #menu-desktop a {font-size:0.95em;}
+}
+
+/*Drop Down Menu Start*/
+#menu-button {
+	padding-top: 18px;
+	padding-bottom: 2em;
+	padding-left: 0.9375em;
+	cursor: pointer;
+	}
+
+#drop-down-menu {}
+	#drop-down-menu a {
+		font-family: Arial, sans-serif;
+		display: block;
+		color: #242424;
+		font-size: 0.95em;
+		padding: 0 0.625em;
+		border-bottom: 1px solid #e5e5e5;
+		line-height: 44px;
+		background-color: #fff;
+		transition: all 0.3s;
+		margin: 0;
+		}
+		
+		#drop-down-menu a:first-child {
+			border-top: 1px solid #e5e5e5;
+		}
+
+
+		#drop-down-menu a:hover {background:#1a848a; color:#fff;}
+
+
+/*SUB NAV START*/
+.site-nav {padding-left:1em;}
+.site-nav ul {list-style:none; margin-left:0; padding-right:0;}
+	.site-nav ul strong {
+		font-family: 'Open Sans', sans-serif;
+		display:block;
+		color:#242424;
+		font-size: 1.1em;
+		margin:0 0 0.25em 0.25em;
+		}
+	.site-nav ul strong:hover {
+		color:#666;
+		}	
+		
+	.site-nav ul li {padding:3px 0;border-bottom:1px solid #e5e5e5;}
+	.site-nav ul li:last-child {border-bottom:none;}
+	.site-nav li a {margin:0; padding:4px 5px; display:block; width:100%; font-size:.95em;line-height:1.15em; transition: all 0.3s;}
+		.site-nav .active {background:#1a848a; color:#fff;}
+		.site-nav li a:hover {background:#1a848a; color:#fff;}
+
+
+
+@media only screen and (max-width: 639px) {
+
+.site-nav {padding-left:0;}
+.site-nav ul {list-style:none; margin-left:0; padding-right:0;}
+	
+}   
+
+
+
+/*************************************************
+*FOOTER STYLES
+*
+*************************************************/
+
+footer {background-color:#00558a; color:#fff; padding:2em 0 1em;}
+footer .footer_logo{max-width:250px;}
+footer .social_icons a {display: inline-block; height: 40px; margin-left: 0.8em; padding: 8px; width: 40px;}
+	footer .social_icons a:hover {background:#1a848a;}
+footer .site-nav {padding:2em 0 1em;}
+
+
+footer .foot-nav {display:block; width:20%; float:left;margin:2em 0 2em;}
+footer .foot-nav a strong:hover {color:#1a848a;}
+footer ul {border-left:solid 1px #80aac5;list-style:none; margin-left:0;}
+footer ul:first-child {border-left: none;padding-left:1.5em;}
+footer ul li {margin-left:0; padding:0; color: #a5fdfa;}
+	footer ul li a {color: #fff; display: block; font-size: 0.9em; line-height: 1.25em; margin-bottom: 2px;}
+	footer ul strong {font-family: "Open Sans", sans-serif; display:block; color:#fff; font-size: 0.95em; margin:0 0 1em 0;}
+
+footer .copyright p {font-size: 0.7em; margin-bottom: 0; color:#fff;}
+
+footer p a{color:#fff; text-decoration:underline;}
+
+@media (min-width:640px) and (max-width: 1023px) {
+
+footer .foot-nav {width:100%; margin:1em 0 0;}
+	
+}  
+
+@media only screen and (max-width: 639px) {
+
+footer .foot-nav {width:100%; margin:1em 0 0;}
+footer .social_icons {text-align:left; padding-top:1em;}
+	
+}   
+
+
+
+/*************************************************
+*RIGHT RAIL/CALLOUT BOX STYLES
+*
+*************************************************/
+#right-rail {margin-bottom:2em;}
+
+#right-rail .box { padding:2.5em 1em 1em; margin: 0 0 1em 0; background-color:#00558a; border:1px solid #00558a;}
+	#right-rail .box img {width:60px;}
+
+
+	#right-rail #job-search.box, #right-rail .twitterfeed.box {padding:1em !important;}
+		#right-rail #job-search.box img, #right-rail .twitterfeed.box img {position: relative;top: -5px;width: 40px;}
+		
+		
+#right-rail h2 {
+	color: #fff;
+	font-size: 1.2em;
+	font-style: normal;
+	font-weight: bold;
+	text-transform:uppercase;
+	margin-top:.25em;
+	}  
+	
+	#right-rail #job-search h2{
+		font-size:1.5em;
+		font-style:italic;
+	}
+
+#right-rail p {color: #fff; font-size: 1em; line-height: 1.4em;}
+	
+#right-rail .button {width:100%;}
+
+#right-rail #getting-hired,
+#right-rail #commitment-to-diversity,
+#right-rail #our-hiring-process,
+#right-rail #wellness,
+#right-rail #careers-faqs {background-color: #1a848a; border:1px solid #1a848a;}
+
+
+#right-rail #did-you-know,
+#right-rail #total-rewards,
+#right-rail #about-us,
+#right-rail #locations {background-color:#fff; border:1px solid #CECECE;}
+		
+		#right-rail #did-you-know h2,
+		#right-rail #total-rewards h2,
+		#right-rail #about-us h2,
+		#right-rail #locations h2,
+		#right-rail .twitterfeed h2 a {color:#a06d22;}
+		
+		#right-rail #did-you-know p,
+		#right-rail #total-rewards p,
+		#right-rail #about-us p,
+		#right-rail #locations p {color:#242424;}
+		
+		#right-rail #did-you-know .button,
+		#right-rail #total-rewards .button,
+		#right-rail #about-us .button,
+		#right-rail #locations .button {color: #242424; font-size: 1.0em; padding: 15px 50px; background-color: transparent; border: solid 1px #CECECE;}
+		
+		
+		#right-rail #did-you-know .button:hover,
+		#right-rail #total-rewards .button:hover,
+		#right-rail #about-us .button:hover,
+		#right-rail #locations .button:hover {color: #FFF; background-color: #00558a;}
+		
+#right-rail .box.twitterfeed {
+	border: 1px solid #CECECE;
+	margin-bottom: 1em;
+  padding: 1em;
+	background:#FFF;
+	}
+
+
+
+
+#getting-hired { background-repeat:no-repeat; background-position:bottom right; background-size:fixed; }
+#getting-hired img {width: 36px; padding-bottom: 0.5em;}
+
+#latest-news {background-color:#1a79bc;}
+#latest-news img {width: 36px; padding-bottom: 0.5em;}
+
+
+
+
+
+
+#careers-areas{background-image: url(http://www.hcsc.com/careers/img/home-left.jpg); background-color: #00558a; height: 310px; background-repeat: no-repeat; background-size: cover; padding: 5em 3em 6em; margin-bottom: 1em;}
+#careers-areas h2 {color: #fff; font-style:normal;}
+#careers-areas p {color: #fff;}
+
+
+#highlights{background-image: url(http://www.hcsc.com/careers/img/home-right.jpg); height: 310px; background-repeat: no-repeat; background-size: cover; padding: 5em 3em 6em; margin:0; background-color:#00558a;}
+#highlights-video{padding:0; max-height: 400px; background-image: url(http://www.hcsc.com/careers/img/home-right.jpg); background-repeat: no-repeat; background-size: cover;}
+#highlights img{width: 57px;}
+#highlights h2 {color: #fff; font-style:normal;}
+#highlights p {color: #fff; font-size: 1.0em; line-height: 1.6em;}
+
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	/*padding-top: 25px; */
+	height: 0;
+	margin-bottom: 1em;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+/*************************************************
+*PAGE SPECIFIC STYLES
+*
+*************************************************/
+
+.banner {
+	position:relative;
+	height:400px;
+	background-size:cover;
+	background-position: center;
+	background-repeat:no-repeat;
+	margin-bottom:3em;
+	padding-top:240px;
+	background-color: #00558a;
+	}
+	
+	.main_banner_text {padding-left:18%;}
+	
+	@media only screen and (max-width: 639px) {
+
+		.banner {
+			height:200px;
+			padding-top:100px;
+			margin-bottom:1.5em;
+		}
+		
+		h1 {
+			font-size: 2em;
+		}
+		
+		.main_banner_text {padding-left:5%;}
+		
+	}   
+
+.sub_banner {
+	height:220px; 
+	width:100%;
+	margin-bottom:20px;
+	background-position: right top;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: #00558a;
+	}
+	
+	.sub_banner_text {
+		background-color: rgba(26, 121, 188, 0.75);
+		font-size: 0.65em;
+		height: 65px;
+		padding: 0 15px;
+		position: relative;
+		top: 155px;
+		width: 100%;
+		}		
+		
+		#home-banner {background-image:url("http://www.hcsc.com/careers/img/banners/banner-bg.jpg"); background-color: #00558a;}
+			#banner-fg {position: absolute; top: 50%; left: 50%; width: 447px; height: 411px; margin-top: -236px; margin-left: -270px;}
+			
+			@media only screen and (max-width: 767px) {
+				
+				#home-banner {    
+				height: 252px;
+				padding-top: 80px;
+				}
+				
+				#home-banner h1 {
+					font-family: 'Open SansLight', sans-serif;
+					font-style:italic;
+					color:#fff;
+					font-size: 2.25em;
+					text-shadow:0 0 15px rgba(8,60,93,.9);
+					font-weight:lighter;
+					letter-spacing:normal;
+					line-height:1em;
+				}
+				
+				#banner-fg {
+					top: 64%;
+					left: 69%;
+					width: 290px;
+					/* height: 411px; */
+					margin-top: -176px;
+					margin-left: -206px;
+				}
+			}
+			
+		#about-main-banner					{background-image:url("http://www.hcsc.com/careers/img/banners/banner_about_main.jpg");}
+			#banner_purpose-values							{background-image:url("http://www.hcsc.com/careers/img/banners/purpose.jpg");}
+			#banner_commitment-to-diversity		{background-image:url("http://www.hcsc.com/careers/img/banners/diversity.jpg");}
+			#banner_commitment-to-community		{background-image:url("http://www.hcsc.com/careers/img/banners/community.jpg");}
+			#banner_culture											{background-image:url("http://www.hcsc.com/careers/img/banners/culture.jpg");}
+			#banner_opportunities-for-veterans	 {background-image:url("http://www.hcsc.com/careers/img/banners/veterans.jpg");}
+			
+		#totalrewards-main-banner	{background-image:url("http://www.hcsc.com/careers/img/banners/banner_totalrewards_main.jpg");}
+			#banner_benefits										{background-image:url("http://www.hcsc.com/careers/img/banners/benefits.jpg");}
+			#banner_professional-development		{background-image:url("http://www.hcsc.com/careers/img/banners/prodev.jpg");}
+			#banner_wellness										{background-image:url("http://www.hcsc.com/careers/img/banners/wellness.jpg");}
+		
+		#careerareas-main-banner 	{background-image:url("http://www.hcsc.com/careers/img/banners/banner_careerareas_main.jpg");}
+			#banner_accounting 				{background-image:url("http://www.hcsc.com/careers/img/banners/accounting.jpg");}
+			#banner_actuarial 				{background-image:url("http://www.hcsc.com/careers/img/banners/actuary.jpg");}
+			#banner_customersvc 			{background-image:url("http://www.hcsc.com/careers/img/banners/customersvc.jpg");}
+			#banner_data							{background-image:url("http://www.hcsc.com/careers/img/banners/data.jpg");}
+			#banner_internships 			{background-image:url("http://www.hcsc.com/careers/img/banners/interns.jpg");}
+			#banner_marketing 				{background-image:url("http://www.hcsc.com/careers/img/banners/marketing.jpg");}
+			#banner_medicare 					{background-image:url("http://www.hcsc.com/careers/img/banners/medicare.jpg");}
+			#banner_network 					{background-image:url("http://www.hcsc.com/careers/img/banners/network.jpg");}
+			#banner_nurses 						{background-image:url("http://www.hcsc.com/careers/img/banners/nurses.jpg");}
+			#banner_sales 						{background-image:url("http://www.hcsc.com/careers/img/banners/sales.jpg");}
+			#banner_technology 				{background-image:url("http://www.hcsc.com/careers/img/banners/tech.jpg");}
+			
+		#gettinghired-main-banner	{background-image:url("http://www.hcsc.com/careers/img/banners/banner_gettinghired_main.jpg");}
+			#banner_campus		{background-image:url("http://www.hcsc.com/careers/img/banners/campus.jpg");}
+			#banner_career-event-calendar		{background-image:url("http://www.hcsc.com/careers/img/banners/accounting.jpg");}
+			#banner_career-FAQs		{background-image:url("http://www.hcsc.com/careers/img/banners/faqs.jpg");}
+			#banner_news-blog		{background-image:url("http://www.hcsc.com/careers/img/banners/accounting.jpg");}
+			#banner_our-hiring-process		{background-image:url("http://www.hcsc.com/careers/img/banners/hiringprocess.jpg");}
+		
+		#locations-main-banner 		{background-image:url("http://www.hcsc.com/careers/img/banners/banner_locations_main.jpg");}
+			#state-IL 								{background-image:url("http://www.hcsc.com/careers/img/banners/location-IL.jpg");}
+			#state-MT 								{background-image:url("http://www.hcsc.com/careers/img/banners/location-MT.jpg");}
+			#state-NM 								{background-image:url("http://www.hcsc.com/careers/img/banners/location-NM.jpg");}
+			#state-OK 								{background-image:url("http://www.hcsc.com/careers/img/banners/location-OK.jpg");}
+			#state-TX 								{background-image:url("http://www.hcsc.com/careers/img/banners/location-TX.jpg");}
+		
+		#jobsearch-main-banner 	{background-image:url("http://www.hcsc.com/careers/img/banners/banner_jobsearch_main.jpg");}		
+
+/*HOMEPAGE*/
+
+#home-imagine-container {
+  font-family: "Open Sans", sans-serif;
+  padding: 0 0 2.5em;
+}
+
+#home-imagine-container h2 {
+  font-family: "Open Sans", sans-serif;
+  color: #006bc3;
+}
+
+#home-imagine-container p {
+  font-size: 1em;
+  line-height: 1.7em;
+	padding:1em 16% 0;
+}
+
+@media screen and (max-width:639px){
+
+#home-imagine-container p {
+	padding:1em 1em 0;
+}
+
+}
+
+#home-values-container {
+  font-family: "Open Sans", sans-serif;
+  padding: 0 0 3em;
+}
+
+#home-values-container div{
+	padding-bottom: 2em;  
+}
+
+#home-values-container h3 {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 70px;
+  text-align: left;
+}
+
+#home-values-container h3 img{
+	max-width: 63px;
+	height: 42px;
+	display: inline-block;
+	margin-right: 8px;
+
+}
+
+#home-values-container h3.one {color: #464645;}  
+#home-values-container h3.two {color: #464645;}  
+#home-values-container h3.three {color: #464645;}  
+
+#eoeaa {padding-bottom:1em;}
+#eoeaa h1 {
+	color: #a06d22;
+	font-family: "Open Sans",sans-serif;
+	font-size: 1.65em;
+	font-style: italic;
+	line-height: 1.5em;
+	text-shadow:0 0 0 rgba(8,60,93,.9);
+	}
+
+/*LOCATIONS LANDING PAGE*/
+
+.location_boxes {text-align:center; margin-top:1%;}
+.location_boxes a {display:inline-block; margin:1% 0; vertical-align:top;}
+.location_box {border:1px solid #006bc3; margin:0 auto; padding-top:10%; padding-bottom:10%; transition: background-color 0.25s ease-out, color 0.5s ease-out;}
+		
+	.location_box img {max-width:100px;height:100px;}
+	.location_box h3 {font-family:'Open Sans', sans-serif; font-size:.75em; line-height:1.5em; color:#1a848a; margin:2% 0;}
+	.location_box h3 .state_name {font-size:1.75em;}
+
+		.location_box:hover {background:#1a848a;}
+		.location_box:hover h3 {color:#fff;}
+
+
+/*SINGLE AND DOUBLE SUB BANNERS*/
+
+.sub-banner {margin-top:1em;}
+.sub-banner .box {color:#fff; padding:3em; background-color:#ecedee;}
+.sub-banner p {font-size:.85em; color: #666666;}
+.sub-banner h3 {font-family:"Open Sans",sans-serif; font-size:1.35em; color: #1a848a;margin-bottom:1em;text-transform:uppercase;}
+.sub-banner .left {background-color:#1a848a; font-size:0.9em; color: #fff; border:none; text-transform:uppercase; font-style: italic; margin-right:3em;}
+.sub-banner .left:hover {background-color:#fff; color: #1a848a; border:none;}
+.sub-banner .right {background-color:#fff; font-size:0.9em;  color: #666666; border:none; text-transform:uppercase; font-style: italic;}
+.sub-banner .right:hover {background-color:#666666; color: #fff; border:none;}
+
+@media only screen and (max-width: 767px) {
+	
+	.sub-banner .left {display:block; margin-right:0;}
+	.sub-banner .right {display:block;}
+	
+}
+
+.dual-banner {margin-top: 1em;}
+.dual-banner h3 {font-family:"Open Sans",sans-serif; font-size:23px; color: #fff;}
+.dual-banner p {display:block; min-height:6.5em; color:#FFF;}
+.dual-banner .box {color:#fff; padding:3em 5em;}
+.dual-banner img {width:60px;}
+.dual-banner .left {background-color:#1a848a;}
+.dual-banner .right {background-color:#137abd;}
+
+
+
+
+
+/*************************************************
+* 	Owl Carousel Owl Demo Theme 
+*	v1.23
+*************************************************/
+
+/* OWL CAROSEL */
+
+
+
+
+
+               
+										
+
+.owl-theme .owl-controls{
+	margin-top: 0;
+	text-align: center;
+}
+                      
+.owl-pagination {display: none;}
+
+/* Styling Next and Prev buttons */
+
+.owl-theme .owl-controls .owl-buttons div{
+	/*color: #FFF;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	margin: 5px;
+	padding: 3px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	background: #869791;
+	filter: Alpha(Opacity=50);
+	opacity: 0.5;*/
+}
+/* Clickable class fix problem with hover on touch devices */
+/* Use it for non-touch hover action */
+.owl-theme .owl-controls.clickable .owl-buttons div:hover{
+	filter: Alpha(Opacity=100);/*IE7 fix*/
+	opacity: 1;
+	text-decoration: none;
+}
+
+/* Styling Pagination*/
+
+.owl-theme .owl-controls .owl-page{
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+}
+.owl-theme .owl-controls .owl-page span{
+	display: none;
+	width: 12px;
+	height: 12px;
+	margin: 5px 7px;
+	filter: Alpha(Opacity=50);/*IE7 fix*/
+	opacity: 0.5;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background: #869791;
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+	filter: Alpha(Opacity=100);/*IE7 fix*/
+	opacity: 1;
+}
+
+/* If PaginationNumbers is true */
+
+.owl-theme .owl-controls .owl-page span.owl-numbers{
+	height: auto;
+	width: auto;
+	color: #FFF;
+	padding: 2px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+}
+
+/* preloading images */
+.owl-item.loading{
+	min-height: 150px;
+	background: url(AjaxLoader.gif) no-repeat center center
+}
+
+#owl-demo .owl-item > div img {
+    display: block;
+    width: 100%;
+    height: auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom:4px;
+}
+
+#owl-demo .owl-item > div{
+  background : #42bdc2;
+  text-align: center;
+  padding:50px 0px;
+  margin:3px;
+  color: white;
+  font-size:32px;
+  border:1px white;
+}
+
+.wrapper-with-margin{
+  margin:0px 50px;
+}
+
+ 
+.owl-theme .owl-controls .owl-buttons div {
+  position: absolute;
+}
+ 
+.owl-theme .owl-controls .owl-buttons .owl-prev {
+    left: 1em;
+    top: 175px;
+}
+ 
+.owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 1em;
+    top: 175px;
+
+}
+
+
+#bottom-banner {margin-bottom:-10px;}
+#bottom-banner .text-container {float: right; width: 55%; padding: 4.5em 60px 0 0;}
+#bottom-banner .slide {height:400px; background-repeat: no-repeat; background-size: cover;}
+#bottom-banner .slide h2 {font-size: 2em; line-height: 1em; color: #a06d22; margin-bottom: 1em;}
+#bottom-banner .slide p.title {color: #242424; line-height: 1.3em;}
+#bottom-banner .img-container{float:left; width:33%; left:10%; position:absolute; bottom:0; }
+
+/* HOME PAGE TESTIMONIALS */
+/* #careers-home #bottom-banner .slide.one {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-1.jpg);} */
+/* #careers-home #bottom-banner .slide.two {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-4.jpg);} */
+/* #careers-home #bottom-banner .slide.three {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-3.jpg);} */
+
+/* LOCATIONS PAGE TESTIMONIALS */ 
+/* #locations_landing #bottom-banner .slide.one {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-2.jpg);} */
+/* #locations_landing #bottom-banner .slide.two {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-5.jpg);} */
+/* #locations_landing #bottom-banner .slide.three {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-6.jpg);} */
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+	/* OWL CAROSEL */
+	#bottom-banner {}
+	#bottom-banner .text-container {float: right; width: 45%; padding: 4.5em 60px 0 0;}
+	#bottom-banner .slide { background-repeat: no-repeat; background-size: cover;}
+	#bottom-banner .slide h2 {font-size: 2em; line-height: 1em; color: #a06d22; margin-bottom: 1em;}
+	#bottom-banner .slide p.title {color: #a06d22; line-height: 1.3em;}
+
+
+	/* HOME PAGE TESTIMONIALS */
+	#careers-home #bottom-banner .slide.one {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-1.jpg);}
+	#careers-home #bottom-banner .slide.two {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-4.jpg);}
+	#careers-home #bottom-banner .slide.three {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-3.jpg);}
+
+	/* LOCATIONS PAGE TESTIMONIALS */
+	#locations_landing #bottom-banner .slide.one {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-2.jpg);}
+	#locations_landing #bottom-banner .slide.two {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-5.jpg);}
+	#locations_landing #bottom-banner .slide.three {background-image: url(http://www.hcsc.com/careers/img/oc_img/home-banner2-6.jpg);}
+
+	.owl-theme .owl-controls .owl-buttons .owl-prev {
+		left: 1em;
+		top: 130px;
+	}
+	 
+	.owl-theme .owl-controls .owl-buttons .owl-next {
+		right: 1em;
+		top: 130px;
+	}
+	
+}    
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+	/* OWL CAROSEL */
+	#bottom-banner {}
+	#bottom-banner .text-container {float: right; width: 100%; padding: 2em 60px 0;}
+	#bottom-banner .slide {height:300px; background-repeat: no-repeat; background-size: cover;}
+	#bottom-banner .slide h2 {font-size: 2em; line-height: 1em; color: #a06d22; margin-bottom: 1em; margin-top:1em;}
+	#bottom-banner .slide p.title {color: #a06d22; line-height: 1.3em;}
+
+
+	/* HOME PAGE TESTIMONIALS */
+	#careers-home #bottom-banner .slide.one {background-image: none;}
+	#careers-home #bottom-banner .slide.two {background-image: none;}
+	#careers-home #bottom-banner .slide.three {background-image: none;}
+
+	/* LOCATIONS PAGE TESTIMONIALS */
+	#locations_landing #bottom-banner .slide.one {background-image: none;}
+	#locations_landing #bottom-banner .slide.two {background-image: none;}
+	#locations_landing #bottom-banner .slide.three {background-image: none;}
+
+	.owl-theme .owl-controls .owl-buttons .owl-prev {
+		left: 1em;
+		top: 130px;
+	}
+	 
+	.owl-theme .owl-controls .owl-buttons .owl-next {
+		right: 1em;
+		top: 130px;
+	}
+	
+}    
+
+@media only screen and (max-width: 480px) {
+
+	/* OWL CAROSEL */
+	#bottom-banner {}
+	#bottom-banner .text-container {float: right; width: 100%; padding: 2em 60px 0;}
+	#bottom-banner .slide {height:250px; background-repeat: no-repeat; background-size: cover;}
+	#bottom-banner .slide h2 {font-size: 1.5em; line-height: 1em; color: #a06d22; margin-bottom: 1em; margin-top:1em;}
+	#bottom-banner .slide p.title {color: #a06d22; line-height: 1.3em;}
+
+
+	/* HOME PAGE TESTIMONIALS */
+	#careers-home #bottom-banner .slide.one {background-image: none;}
+	#careers-home #bottom-banner .slide.two {background-image: none;}
+	#careers-home #bottom-banner .slide.three {background-image: none;}
+
+	/* LOCATIONS PAGE TESTIMONIALS */
+	#locations_landing #bottom-banner .slide.one {background-image: none;}
+	#locations_landing #bottom-banner .slide.two {background-image: none;}
+	#locations_landing #bottom-banner .slide.three {background-image: none;}
+
+	.owl-theme .owl-controls .owl-buttons .owl-prev {
+		left: 1em;
+		top: 130px;
+	}
+	 
+	.owl-theme .owl-controls .owl-buttons .owl-next {
+		right: 1em;
+		top: 130px;
+	}
+	
+}   
+
+ul.accordion {
+  list-style-type: none;
+  background: #fefefe;
+  border: 1px solid #e6e6e6;
+  border-radius: 0;
+  margin-left: 0;
+	font-size: 1em; }
+
+.accordion-title {
+  display: block;
+  position: relative;
+  border-bottom: 1px solid #e6e6e6;
+	font-size:1em;
+	margin:0;
+	padding:.75rem 1rem;}
+	
+  .accordion-title:hover, .accordion-title:focus {
+    background-color: #ecedee; }
+  :last-child > .accordion-title {
+    border-bottom-width: 0; }
+  .accordion-title::before {
+    content: url('../img/down.png');
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    margin-top: -0.5rem; }
+  .is-active > .accordion-title::before {
+    content: url(../img/up.png); }
+
+
+
+.accordion-content {
+  padding: 1.1em;
+  display: none;
+  border-bottom: 1px solid #e6e6e6;
+  background-color: #fefefe; 
+
+}
+.is-accordion-submenu-parent > a {
+  position: relative; }
+  .is-accordion-submenu-parent > a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: inset 6px;
+    border-color: #2199e8 transparent transparent;
+    border-top-style: solid;
+    position: absolute;
+    top: 50%;
+    margin-top: -4px;
+    right: 1rem; }
+
+.is-accordion-submenu-parent[aria-expanded='true'] > a::after {
+  -webkit-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 50% 50%;
+  -webkit-transform: scaleY(-1);
+      -ms-transform: scaleY(-1);
+          transform: scaleY(-1); }
+          

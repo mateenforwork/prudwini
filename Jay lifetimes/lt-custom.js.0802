@@ -1,0 +1,188 @@
+(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+	fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  
+  /*
+  document.getElementsByClassName('fb-share-button').onclick = function() {
+	  console.log("clicked");
+	  
+	FB.ui({
+	  method: 'share',
+	  display: 'popup',
+	  href: 'window.location.href',
+	}, function(response){});
+  }
+  */
+  
+  
+  //Old Navigation highlight
+  /*
+  var url = window.location.href;
+  var type = $('meta[name=category]').attr("content");	
+  
+	  
+  if(type == 'health_and_wellness'){
+	  $('#header-healthandwellness').addClass('active');
+  } 
+  
+  else if(url.indexOf('category=health_and_wellness') > 0){
+	  $('#header-healthandwellness').addClass('active');
+  } 
+	  
+  else if(url.indexOf('subcategory=') > 0){
+	  $('#header-healthandwellness').addClass('active');
+  } 
+	  
+  else if(type == 'benefits_and_coverage'){
+	  $('#header-benefitsandcoverage').addClass('active');
+  }
+	  
+  else if(url.indexOf('category=benefits_and_coverage') > 0){
+	  $('#header-benefitsandcoverage').addClass('active');
+  }
+	  
+  else {
+	  $('#header-home').addClass('active');
+  }
+  */
+	  
+  //New Navigation Highlight
+  $(document).ready(function(){
+	  var current = window.location.href;
+	  $('#header1 ul li a').each(function(){
+		  var $this = $(this);
+		  
+		  
+		  // if the current path is like this link, make it active
+		  if($this.attr('href').indexOf(current) !== -1){
+			  $this.addClass('active');
+		  } 
+		  
+		  else if(current.indexOf("healthandwellness") > -1){
+			  $this.removeClass('active');
+			  $('#header-health---wellness, #header-healthandwellness, #left-nav-health a').addClass('active');
+  
+		  } 
+		  //Search page top and left nav
+		  else if(current.indexOf('category=health_and_wellness') > 0){
+			  $this.removeClass('active');
+			  $(".left-nav ul li").removeClass('active');
+			  $('#header-health---wellness, #header-healthandwellness, #left-nav-health').addClass('active');
+		  } 
+		  
+		  else if(current.indexOf('benefitsandcoverage') > -1){
+			  $this.removeClass('active');
+			  $('#header-benefits---coverage, #header-benefitsandcoverage,  #left-nav-benefits a').addClass('active');
+  
+		  }
+		  //Search page top and left nav
+		  else if(current.indexOf('category=benefits_and_coverage') > 0){
+			  $this.removeClass('active');
+			  $(".left-nav ul li").removeClass('active');
+			  $('#header-benefits---coverage, #header-benefitsandcoverage, #left-nav-benefits').addClass('active');
+		  }
+		  
+		  else {
+			  $this.removeClass('active');
+			  $(".left-nav ul li").removeClass('active');
+			  $('#header-home, #left-nav-home').addClass('active');
+		  }
+	  });
+	  
+  });
+  
+  
+  var menuOn = false;
+  
+  $(document).ready(function(){
+  
+	  $("#drop-down-menu").hide();
+	  
+	  $("#menu-button").click(function(){
+	  
+	  if (menuOn == false){
+		  $("#drop-down-menu").slideDown();
+		  menuOn = true;
+	  }
+	  else {
+		  $("#drop-down-menu").slideUp(); 
+		  menuOn = false;
+		  }
+	});
+	  
+  });
+  
+  $(".preview a img").hover(function(){
+	  $(this).attr("src","new-image.jpg")
+  });
+  
+  $('.language-toggle').hover(function(){
+	
+	 $('.language-toggle img').attr("src","/content/dam/bcbs/bcbsil/lifetimes/lt-spanish-button-over.png")
+	
+	},function(){
+	 
+	 $('.language-toggle img').attr("src","/content/dam/bcbs/bcbsil/lifetimes/lt-spanish-button-up.png") 
+	 
+	});
+  
+  
+  $('.search-input').focus(
+	  function(){
+		  $(".search-button").addClass('focus-class');
+  
+	  }).blur(
+	  function(){
+		  $(".search-button").addClass('focus-class');
+	  });
+  
+	  
+	  
+  $('.search-input').focusout(
+	  function(){
+		  $(".search-button").removeClass('focus-class');
+  
+	  }).blur(
+	  function(){
+		  $(".search-button").removeClass('focus-class');
+	  });
+  
+  
+  // Opera 8.0+
+  var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+  
+  // Firefox 1.0+
+  var isFirefox = typeof InstallTrigger !== 'undefined';
+  
+  // Safari 3.0+ "[object HTMLElementConstructor]" 
+  var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+  
+  // Internet Explorer 6-11
+  var isIE = /*@cc_on!@*/false || !!document.documentMode;
+  
+  // Edge 20+
+  var isEdge = !isIE && !!window.StyleMedia;
+  
+  // Chrome 1+
+  var isChrome = !!window.chrome && !!window.chrome.webstore;
+  
+  // Blink engine detection
+  var isBlink = (isChrome || isOpera) && !!window.CSS;
+  
+  //ios
+  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  
+	  if(isIE === true || isEdge === true){
+  
+	  } else {
+  
+		  $('.fb-share-button span').css('top','-5px');
+  
+	  }
+  
+  
+  
