@@ -1,120 +1,178 @@
 <html>
+
 <head>
-<link type="text/css" href="https://lifetimes.bcbsil.com/css/lifetimes/googleFonts.css" rel="stylesheet">
-<link type="text/css" href="https://lifetimes.bcbsil.com/css/lifetimes/foundation.css" rel="stylesheet">
-<link type="text/css" href="https://lifetimes.bcbsil.com/css/lifetimes/lifetimes.css" rel="stylesheet">
-<script type="text/javascript" src="https://lifetimes.bcbsil.com/js/lifetimes/vendor/jquery.js"></script>
-<script type="text/javascript" src="https://lifetimes.bcbsil.com/js/lifetimes/vendor/modernizr.js"></script>
-<script type="text/javascript" src="https://lifetimes.bcbsil.com/js/lifetimes/foundation.min.js"></script>
+    <link type="text/css" href="https://lifetimes.bcbsil.com/css/lifetimes/googleFonts.css" rel="stylesheet">
+    <link type="text/css" href="https://lifetimes.bcbsil.com/css/lifetimes/foundation.css" rel="stylesheet">
+    <link type="text/css" href="https://lifetimes.bcbsil.com/css/lifetimes/lifetimes.css" rel="stylesheet">
+    <script type="text/javascript" src="https://lifetimes.bcbsil.com/js/lifetimes/vendor/jquery.js"></script>
+    <script type="text/javascript" src="https://lifetimes.bcbsil.com/js/lifetimes/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="https://lifetimes.bcbsil.com/js/lifetimes/foundation.min.js"></script>
 </head>
+
 <body>
 
-        <style>
-                .error-container{
-                    height: 400px;
-                     background: #efefef;
-                }
-                .error-span{
-                    font-size: 42px;
-                    color: black;
-                }
-                
-                </style>
-            
+    <style>
+        .error-container{
+            height: 400px;
+            background: #efefef;
+        }
+        .error-span{
+        font-size: 42px;
+        color: black;
+        }
+        .footer{
+            /* position:fixed; */
+            bottom:0; z-index:100000; width: 100%;
+            background-color: #00558a;
+            color: #fff;
+            padding: 2em 0 1em;
+        }
+        #pageFooter, .footer-content, .footer-social{
+            background-color: #00558a;
+        }
+        h1 {
+            font-family: 'Open Sans', sans-serif;
+            font-style: italic;
+            color: #fff;
+            font-size: 4.5em;
+            text-shadow: 0 0 10px rgba(8,60,93,.9);
+            font-weight: 600;
+            letter-spacing: normal;
+            line-height: 1em;
+            margin-bottom: 1.5rem;
+        }
+        p {
+            font-size: 1.2em;
+            font-family: "Open Sans", sans-serif;
+            color: #242424;
+            line-height: 1.7em;
+            padding: 0 0 1.1em;
+            margin: 0;
+        }
+        ul {
+            font-size: 1em;
+            font-family: "Open Sans", sans-serif;
+            color: rgb(99, 99, 99);
+            line-height: 1.5em;
+            list-style-type: disc;
+            margin-left: 1.25rem;
+            margin-bottom: 1rem;
+            list-style-position: outside;
+            font-weight:normal;
+        }
+        li {
+            font-size: 16px;
+        }
+    </style>
 
 
 
-<div id="header2" style="background-color:#fff;">
-            <div class="row  align-middle"
-			style="">
-                <div class="medium-6 small-7 columns medium-text-left small-only-text-center">
-                	<a href="/"><img class="lt-logo" src="https://lifetimes.bcbsil.com/images/lifetimes/lifetimes-logo.png" alt="" title="Return to Home"></a> 
-                </div>
-                <div class="medium-6 small-5 columns medium-text-right small-only-text-center">
-                	<a href="http://www.bcbsil.com" target="_blank"><img class="bcbs-logo" src="https://lifetimes.bcbsil.com/images/lifetimes/bcbsil-logo.png" alt="" title="Visit Blue Cross Blue Shield of Illinois Website"></a>
-                </div>
+
+    <div id="header2" style="background-color:#fff;">
+        <div class="row  align-middle" style="">
+            <div class="medium-6 small-7 columns medium-text-left small-only-text-center">
+                <a href="/"><img class="lt-logo" src="https://lifetimes.bcbsil.com/images/lifetimes/lifetimes-logo.png"
+                        alt="" title="Return to Home"></a>
             </div>
-            <div class="row">
+            <div class="medium-6 small-5 columns medium-text-right small-only-text-center">
+                <a href="http://www.bcbsil.com" target="_blank"><img class="bcbs-logo" src="https://lifetimes.bcbsil.com/images/lifetimes/bcbsil-logo.png"
+                        alt="" title="Visit Blue Cross Blue Shield of Illinois Website"></a>
+            </div>
+        </div>
+        <div class="row">
             <div class="search-dd show-for-small-only" style="float:left; width:100%; padding-bottom:1em; padding-top:0.5em;">
-                    	<div class="search-container">
-                                     <script type="text/javascript">
-					function get_action(form) {
-						form.action = "/search.page";
-					 }
-				      </script>
-                                <form class="noEMA" onsubmit="get_action(this);" method="get" action="/lifetimes/index.page?submit=true&amp;componentID=1469963220100">
-								<input class="fsrVisible  search-input" aria-label="Search" value="Search" onfocus="if(this.value=='Search')this.value='';" onblur="if(this.value=='')this.value='Search';" name="keywords" type="text">
-                                <input class="search-button" title="Search" src="https://lifetimes.bcbsil.com/images/lifetimes/placeholder.png" alt="Search Button" type="image">
-                            </form>
-                        </div>
+                <div class="search-container">
+                    <script type="text/javascript">
+                        function get_action(form) {
+                            form.action = "/search.page";
+                        }
+                    </script>
+                    <form class="noEMA" onsubmit="get_action(this);" method="get" action="/lifetimes/index.page?submit=true&amp;componentID=1469963220100">
+                        <input class="fsrVisible  search-input" aria-label="Search" value="Search" onfocus="if(this.value=='Search')this.value='';"
+                            onblur="if(this.value=='')this.value='Search';" name="keywords" type="text">
+                        <input class="search-button" title="Search" src="https://lifetimes.bcbsil.com/images/lifetimes/placeholder.png"
+                            alt="Search Button" type="image">
+                    </form>
                 </div>
             </div>
         </div>
-
-<script src="https://lifetimes.bcbsil.com/js/lifetimes/foundation.js" type="text/javascript"></script>
-<script src="https://lifetimes.bcbsil.com/js/lifetimes/lt-custom.js" type="text/javascript"></script>
-<script>
-		$(document).foundation();
-
-</script>
-	
-<script src="https://lifetimes.bcbsil.com/js/lifetimes/foundation.js" type="text/javascript"></script>
-<script src="https://lifetimes.bcbsil.com/js/lifetimes/lt-custom.js" type="text/javascript"></script>
-<script>
-		$(document).foundation();
-</script>
-
-
-
-<div class="container error-container" >
-    <div class="row ">
-           <h1 class="text-left">Oops, this page wasn't found.</h1>
-           <p class="small-12 columns">The page you requested doesn't exist. Please check the URL and try again, or: </p>      
-           <ul class="small-12 columns">
-                   <li>Try to find the page through the navigation</li>
-                   <li>Go back by clicking on the BACK button of your browser</li>
-           </ul>
-           <p class="small-12 columns"><a href="/">Return to the Home Page</a></p>
-           
-           
-
     </div>
 
-</body>
-</html>
-<div id="pageFooter" class="fullWidth_row">
-	<div class="footer">
-            <div class="row align-center" style="background-color:transparent; padding-bottom:0;">
-                <div class="footer-social small-12 columns">
-                    <!-- ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank" ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="http://www.facebook.com/bluecrossblueshieldofillinois">
-                        <img alt="Blue Cross Blue Shield on Facebook" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-facebook.png">
-                    </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank" ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="http://twitter.com/bcbsil">
-                        <img alt="Blue Cross Blue Shield on Twitter" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-twitter.png">
-                    </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank" ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="http://www.youtube.com/bcbsil">
-                        <img alt="Blue Cross Blue Shield on YouTube" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-youtube.png">
-                    </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank" ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="https://plus.google.com/+bcbsil">
-                        <img alt="Blue Cross Blue Shield on Google+" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-gplus.png">
-                    </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank" ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="https://connect.bcbsil.com/">
-                        <img alt="Connect with Blue Cross Blue Shield" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-connect.png">
-                    </a><!-- end ngRepeat: socialLink in controller.state.socialLinks -->
-                </div>
-                <div class="footer-content small-12 columns text-center">
-					<p class="legal"><a href="http://www.bcbsil.com/important-info" target="_blank">IMPORTANT INFORMATION</a><a></a></p>
-					<a>
+    <script src="https://lifetimes.bcbsil.com/js/lifetimes/foundation.js" type="text/javascript"></script>
+    <script src="https://lifetimes.bcbsil.com/js/lifetimes/lt-custom.js" type="text/javascript"></script>
+    <script>
+        $(document).foundation();
+    </script>
+
+    <script src="https://lifetimes.bcbsil.com/js/lifetimes/foundation.js" type="text/javascript"></script>
+    <script src="https://lifetimes.bcbsil.com/js/lifetimes/lt-custom.js" type="text/javascript"></script>
+    <script>
+        $(document).foundation();
+    </script>
+
+
+
+    <div class="container error-container">
+        <div class="row ">
+            <h1 class="text-left">Oops, this page wasn't found.</h1>
+            <p class="small-12 columns">The page you requested doesn't exist. Please check the URL and try again, or:
+            </p>
+            <ul class="small-12 columns">
+                <li>Try to find the page through the navigation</li>
+                <li>Go back by clicking on the BACK button of your browser</li>
+            </ul>
+            <p class="small-12 columns"><a href="/">Return to the Home Page</a></p>
+
+
+
+        </div>
+    </div>
+    <div id="pageFooter" class="footer">
+        <div class="row align-center" style="background-color:transparent; padding-bottom:0;">
+            <div class="footer-social small-12 columns">
+                <!-- ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank"
+                    ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="http://www.facebook.com/bluecrossblueshieldofillinois">
+                    <img alt="Blue Cross Blue Shield on Facebook" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-facebook.png">
+                </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank"
+                    ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="http://twitter.com/bcbsil">
+                    <img alt="Blue Cross Blue Shield on Twitter" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-twitter.png">
+                </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank"
+                    ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="http://www.youtube.com/bcbsil">
+                    <img alt="Blue Cross Blue Shield on YouTube" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-youtube.png">
+                </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank"
+                    ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="https://plus.google.com/+bcbsil">
+                    <img alt="Blue Cross Blue Shield on Google+" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-gplus.png">
+                </a><!-- end ngRepeat: socialLink in controller.state.socialLinks --><a class="ng-scope" target="_blank"
+                    ng-repeat="socialLink in controller.state.socialLinks" ng-show="true" href="https://connect.bcbsil.com/">
+                    <img alt="Connect with Blue Cross Blue Shield" src="https://lifetimes.bcbsil.com/images/lifetimes/icon-social-connect.png">
+                </a><!-- end ngRepeat: socialLink in controller.state.socialLinks -->
+            </div>
+            <div class="footer-content small-12 columns text-center">
+                <p class="legal"><a href="http://www.bcbsil.com/important-info" target="_blank">IMPORTANT
+                        INFORMATION</a><a></a></p>
+                <a>
                     <p class="legal">
-                        A Division of Health Care Service Corporation, a Mutual Legal Reserve Company, an Independent Licensee of the <nw>Blue Cross and Blue Shield Association.</nw> <br>© Copyright <span id="year">2018</span><script>$('#year').html(new Date().getFullYear())</script> Health Care Service Corporation. All Rights Reserved.
+                        A Division of Health Care Service Corporation, a Mutual Legal Reserve Company, an
+                        Independent Licensee of the <nw>Blue Cross and Blue Shield Association.</nw> <br>©
+                        Copyright <span id="year">2018</span>
+                        <script>
+                            $('#year').html(new Date().getFullYear())
+                        </script> Health Care Service Corporation. All Rights Reserved.
                     </p>
-                   </a>
-				</div>
-			</div>
-	</div>
-</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
 <script src="https://lifetimes.bcbsil.com/js/lifetimes/foundation.js" type="text/javascript"></script>
 <script src="https://lifetimes.bcbsil.com/js/lifetimes/lt-custom.js" type="text/javascript"></script>
 <script>
-		$(document).foundation();
-
-	</script>
+    $(document).foundation();
+</script>
 
 </body>
+
 </html>
